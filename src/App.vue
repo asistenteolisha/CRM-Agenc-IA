@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, nextTick } from 'vue'
 import Lenis from 'lenis'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -46,11 +46,13 @@ const process = [
 // ── Lenis + GSAP ──────────────────────────────────
 let lenis: Lenis | null = null
 
-onMounted(() => {
+onMounted(async () => {
   lenis = new Lenis({ duration: 1.05, smoothWheel: true })
   lenis.on('scroll', ScrollTrigger.update)
   gsap.ticker.add((time) => lenis?.raf(time * 1000))
   gsap.ticker.lagSmoothing(0)
+
+  await nextTick()
 
   // Global reveal
   gsap.from('[data-reveal]', {
@@ -120,6 +122,8 @@ onMounted(() => {
     stagger: 0.03,
     scrollTrigger: { trigger: '.integrations-grid', start: 'top 82%' }
   })
+
+  ScrollTrigger.refresh()
 })
 
 onUnmounted(() => {
