@@ -1,12 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { services } from '../../data/services'
 
 type FormState = 'idle' | 'sending' | 'sent' | 'error'
 const formState = ref<FormState>('idle')
 const form = ref({
   name: '', business_type: '', phone: '', email: '',
-  service_interest: services[0]?.title ?? '', need: ''
+  service_interest: services[0]?.title ?? '', need: '',
+  utm_source: '', utm_campaign: '', utm_medium: ''
+})
+
+// Auto-fill UTM from URL
+onMounted(() => {
+  const params = new URLSearchParams(window.location.search)
+  form.value.utm_source = params.get('utm_source') || ''
+  form.value.utm_campaign = params.get('utm_campaign') || ''
+  form.value.utm_medium = params.get('utm_medium') || ''
 })
 
 const submitLead = async () => {
@@ -21,7 +30,8 @@ const submitLead = async () => {
     if (response.ok) {
       form.value = {
         name: '', business_type: '', phone: '', email: '',
-        service_interest: form.value.service_interest, need: ''
+        service_interest: form.value.service_interest, need: '',
+        utm_source: form.value.utm_source, utm_campaign: form.value.utm_campaign, utm_medium: form.value.utm_medium
       }
     }
   } catch {
@@ -57,6 +67,10 @@ const submitLead = async () => {
                 placeholder="¿Qué problema querés resolver o qué proceso querés automatizar?" required></textarea>
       <!-- honeypot -->
       <input type="text" name="company_website" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" />
+      <!-- UTM tracking -->
+      <input type="hidden" v-model="form.utm_source" name="utm_source" />
+      <input type="hidden" v-model="form.utm_campaign" name="utm_campaign" />
+      <input type="hidden" v-model="form.utm_medium" name="utm_medium" />
       <button class="btn btn--primary" type="submit" :disabled="formState === 'sending' || formState === 'sent'">
         <span v-if="formState === 'idle'">Enviar diagnóstico</span>
         <span v-else-if="formState === 'sending'">Enviando...</span>
