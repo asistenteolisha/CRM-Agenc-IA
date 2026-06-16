@@ -6,17 +6,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import HeroSection from './components/sections/HeroSection.vue'
 import TrustBar from './components/sections/TrustBar.vue'
 import ServicesSection from './components/sections/ServicesSection.vue'
+import UseCasesSection from './components/sections/UseCasesSection.vue'
+import InteractiveDemoSection from './components/sections/InteractiveDemoSection.vue'
 import CaseStudiesSection from './components/sections/CaseStudiesSection.vue'
 import RoiCalculatorSection from './components/sections/RoiCalculatorSection.vue'
 import PricingSection from './components/sections/PricingSection.vue'
+import ComparisonSection from './components/sections/ComparisonSection.vue'
 import FaqSection from './components/sections/FaqSection.vue'
 import ContactSection from './components/sections/ContactSection.vue'
+import { integrationGroups } from './data/integrations'
 
 gsap.registerPlugin(ScrollTrigger)
-
-// ── Mobile menu ────────────────────────────────
-const mobileMenuOpen = { value: false }
-;(window as any).__toggleMobileMenu = () => mobileMenuOpen.value = !mobileMenuOpen.value
 
 // ── Copy ────────────────────────────────────────
 const copy = {
@@ -42,30 +42,7 @@ const process = [
   { number: '05', title: 'Operación', description: 'Monitoreamos, medimos y mejoramos el sistema cada mes.' }
 ]
 
-const useCases = [
-  { title: 'Concesionarios', desc: 'Califica compradores, presupuesto y urgencia por WhatsApp. Avisa al vendedor cuando hay lead caliente.' },
-  { title: 'Restaurantes', desc: 'Responde menú, horarios y toma reservas por Instagram DM y WhatsApp 24/7.' },
-  { title: 'Clínicas', desc: 'Agenda citas, confirma asistencia y reduce no-shows con recordatorios automáticos.' },
-  { title: 'Inmobiliarias', desc: 'Lead Ads de Facebook → WhatsApp con catálogo de inmuebles y agenda de visitas.' },
-  { title: 'E-commerce', desc: 'Catálogo WhatsApp, pedidos y seguimiento de envío sin sacar al cliente del chat.' },
-  { title: 'Servicios profesionales', desc: 'Recibe documentos, resume, clasifica y prepara para revisión del profesional.' }
-]
-
-import { integrationGroups } from './data/integrations'
-
-const comparison = [
-  ['', 'Agenc-IA', 'Chatbot genérico', 'Agencia web'],
-  ['Canales Meta', 'WhatsApp + FB + IG', 'Solo WhatsApp', 'Solo formulario web'],
-  ['CRM integrado', 'Sí (HubSpot, Sheets, etc.)', 'No', 'No'],
-  ['Seguimiento post-venta', 'Automatizado', 'No', 'Manual'],
-  ['Handoff a humano', 'Incluido', 'No', 'No aplica'],
-  ['Medición de ROI', 'Dashboard mensual', 'No', 'No'],
-  ['Moderación comentarios', 'FB + IG incluido', 'No', 'No'],
-  ['E-commerce conversacional', 'WhatsApp Catalog', 'No', 'Requiere tienda aparte'],
-  ['Soporte incluido', 'Todos los planes', 'Limitado', 'Cotización aparte']
-]
-
-// ── Lenis ─────────────────────────────────────────
+// ── Lenis + GSAP ──────────────────────────────────
 let lenis: Lenis | null = null
 
 onMounted(() => {
@@ -74,10 +51,18 @@ onMounted(() => {
   gsap.ticker.add((time) => lenis?.raf(time * 1000))
   gsap.ticker.lagSmoothing(0)
 
+  // Scroll reveals for sections
   gsap.from('[data-reveal]', {
     y: 28, autoAlpha: 0, duration: 0.72, ease: 'power3.out',
     stagger: 0.06,
     scrollTrigger: { trigger: '.site-main', start: 'top 72%' }
+  })
+
+  // Comparison table rows stagger from left
+  gsap.from('.comparison-row:not(.header)', {
+    x: -30, autoAlpha: 0, duration: 0.5, ease: 'power2.out',
+    stagger: 0.08,
+    scrollTrigger: { trigger: '.comparison-table', start: 'top 78%' }
   })
 })
 
@@ -97,18 +82,18 @@ onUnmounted(() => {
       <nav class="nav__links" aria-label="Navegación principal">
         <a href="#servicios">Servicios</a>
         <a href="#casos">Casos</a>
+        <a href="#demo">Demo</a>
         <a href="#roi">ROI</a>
         <a href="#precios">Precios</a>
         <a href="#faq">FAQ</a>
         <a href="#contacto">Contacto</a>
       </nav>
-      <button class="nav__hamburger" aria-label="Menú" @click="mobileMenuOpen.value = !mobileMenuOpen.value">
-        <span :class="{ open: mobileMenuOpen.value }"></span>
+      <button class="nav__hamburger" aria-label="Menú">
+        <span></span>
       </button>
     </header>
 
     <main class="site-main">
-      <!-- ── Hero ─────────────────────────────── -->
       <HeroSection v-bind="copy" />
       <TrustBar />
 
@@ -121,7 +106,7 @@ onUnmounted(() => {
         <div class="signal-list" data-reveal>
           <p>El 60% de los mensajes de WhatsApp e Instagram se responden tarde o nunca.</p>
           <p>Cada conversación vive en un canal distinto y el equipo no tiene contexto unificado.</p>
-          <p>Los leads de Facebook Ads llegan a un Excel que nadie revisa.</p>
+          <p>Los leads de Facebook Ads llegan a un Excel que nadie revisa a tiempo.</p>
         </div>
       </section>
       <div class="problem-grid">
@@ -139,48 +124,15 @@ onUnmounted(() => {
           <div class="meta-card wa"><strong>WhatsApp</strong><p>Mensajes, catálogo, pedidos, Flows, templates HSM, QR codes y webhooks.</p></div>
           <div class="meta-card ig"><strong>Instagram</strong><p>DMs, comentarios en posts y reels, story replies, publicación y métricas.</p></div>
           <div class="meta-card fb"><strong>Facebook</strong><p>Lead Ads, Messenger, comentarios, moderación, publicación, insights y webhooks.</p></div>
-          <div class="meta-card"><strong>n8n + CRM</strong><p>Orquestador central: conecta Meta, CRM, hojas de cálculo, email y 400+ apps.</p></div>
+          <div class="meta-card"><strong>n8n + CRM</strong><p>Orquestador central: conecta Meta, CRM, hojas de cálculo, email y 400+ apps con manejo de errores.</p></div>
         </div>
       </section>
 
-      <!-- ── Services ─────────────────────────── -->
       <ServicesSection />
-
-      <!-- ── Use Cases ────────────────────────── -->
-      <section id="casos" class="section">
-        <div class="section__head" data-reveal>
-          <p class="eyebrow">Casos de uso</p>
-          <h2>Agentes IA para cada tipo de negocio en Colombia.</h2>
-        </div>
-        <div class="usecase-grid">
-          <article v-for="uc in useCases" :key="uc.title" class="usecase-card" data-reveal>
-            <h3>{{ uc.title }}</h3><p>{{ uc.desc }}</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- ── Demo ─────────────────────────────── -->
-      <section id="demo" class="demo" data-reveal>
-        <div class="demo__content">
-          <p class="eyebrow">Demo</p>
-          <h2>Así se ve un agente Agenc-IA en acción.</h2>
-          <p>Mensajes reales de ventas, soporte y e-commerce atendidos automáticamente, con resumen listo para el equipo humano.</p>
-        </div>
-        <div class="chat-demo" aria-label="Demo de conversación">
-          <p class="bubble bubble--client">Hola, busco un carro automático de hasta 45 millones.</p>
-          <p class="bubble bubble--agent">Perfecto. Para ayudarte mejor: ¿ciudad, uso principal y si necesitas financiación?</p>
-          <p class="bubble bubble--client">Bucaramanga, familiar, podría financiar una parte.</p>
-          <p class="bubble bubble--summary">Lead caliente: automático familiar, 45M, B/manga, financiación parcial. → CRM.</p>
-        </div>
-      </section>
-
-      <!-- ── Case Studies ──────────────────────── -->
+      <UseCasesSection />
+      <InteractiveDemoSection />
       <CaseStudiesSection />
-
-      <!-- ── ROI Calculator ────────────────────── -->
       <RoiCalculatorSection />
-
-      <!-- ── Pricing ───────────────────────────── -->
       <PricingSection />
 
       <!-- ── Process ───────────────────────────── -->
@@ -212,23 +164,8 @@ onUnmounted(() => {
         </div>
       </section>
 
-      <!-- ── Comparison ────────────────────────── -->
-      <section class="section">
-        <div class="section__head" data-reveal>
-          <p class="eyebrow">Comparativa</p>
-          <h2>¿Por qué Agenc-IA?</h2>
-        </div>
-        <div class="comparison-table" data-reveal>
-          <div v-for="(row, ri) in comparison" :key="ri" class="comparison-row" :class="{ header: ri === 0 }">
-            <span v-for="(cell, ci) in row" :key="ci" :class="{ 'col-agenc': ci === 1 }">{{ cell }}</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── FAQ ───────────────────────────────── -->
+      <ComparisonSection />
       <FaqSection />
-
-      <!-- ── Contact ───────────────────────────── -->
       <ContactSection />
     </main>
 
@@ -242,7 +179,8 @@ onUnmounted(() => {
         <div class="app-footer__links">
           <strong>Secciones</strong>
           <a href="#servicios">Servicios</a><a href="#casos">Casos</a>
-          <a href="#roi">ROI</a><a href="#precios">Precios</a><a href="#faq">FAQ</a>
+          <a href="#demo">Demo</a><a href="#roi">ROI</a>
+          <a href="#precios">Precios</a><a href="#faq">FAQ</a>
         </div>
         <div class="app-footer__links">
           <strong>Contacto</strong>

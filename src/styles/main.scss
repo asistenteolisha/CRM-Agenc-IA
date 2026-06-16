@@ -377,6 +377,9 @@ h3 { margin: 0; letter-spacing: 0; }
 .dot-n8n { background: var(--coral); box-shadow: 0 0 8px var(--coral); }
 .dot-crm { background: var(--amber); box-shadow: 0 0 8px var(--amber); }
 
+.usecase-emoji { font-size: 1.6rem; line-height: 1; margin-bottom: 6px; display: block; }
+.col-first { font-weight: 700; color: var(--text); }
+
 /* ── Responsive ─────────────────────────────── */
 @media (max-width: 980px) {
   .nav__links { display: none; }
