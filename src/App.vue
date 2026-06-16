@@ -98,11 +98,14 @@ onMounted(() => {
   })
 
   // Trust bar parallax
-  gsap.to('.trust-bar', {
-    backgroundPosition: '0% 50%',
-    ease: 'none',
-    scrollTrigger: { trigger: '.trust-bar', start: 'top bottom', end: 'bottom top', scrub: 0.6 }
-  })
+  const trustBar = document.querySelector('.trust-bar')
+  if (trustBar) {
+    gsap.to(trustBar, {
+      backgroundPosition: '0% 50%',
+      ease: 'none',
+      scrollTrigger: { trigger: trustBar, start: 'top bottom', end: 'bottom top', scrub: 0.6 }
+    })
+  }
 
   // Process cards sequential reveal
   gsap.from('.process-card', {
