@@ -10,6 +10,7 @@ import UseCasesSection from './components/sections/UseCasesSection.vue'
 import InteractiveDemoSection from './components/sections/InteractiveDemoSection.vue'
 import CaseStudiesSection from './components/sections/CaseStudiesSection.vue'
 import RoiCalculatorSection from './components/sections/RoiCalculatorSection.vue'
+import StatsSection from './components/sections/StatsSection.vue'
 import PricingSection from './components/sections/PricingSection.vue'
 import ComparisonSection from './components/sections/ComparisonSection.vue'
 import FaqSection from './components/sections/FaqSection.vue'
@@ -51,11 +52,42 @@ onMounted(() => {
   gsap.ticker.add((time) => lenis?.raf(time * 1000))
   gsap.ticker.lagSmoothing(0)
 
-  // Scroll reveals for sections
+  // Global reveal
   gsap.from('[data-reveal]', {
     y: 28, autoAlpha: 0, duration: 0.72, ease: 'power3.out',
     stagger: 0.06,
     scrollTrigger: { trigger: '.site-main', start: 'top 72%' }
+  })
+
+  // Pricing cards scale in
+  gsap.from('.pricing-card', {
+    scale: 0.92, autoAlpha: 0, duration: 0.7, ease: 'back.out(1.4)',
+    stagger: 0.12,
+    scrollTrigger: { trigger: '.pricing-grid', start: 'top 78%' }
+  })
+
+  // Case cards slide from alternating sides
+  gsap.from('.case-card:nth-child(odd)', {
+    x: -40, autoAlpha: 0, duration: 0.65, ease: 'power3.out',
+    scrollTrigger: { trigger: '.case-grid', start: 'top 78%' }
+  })
+  gsap.from('.case-card:nth-child(even)', {
+    x: 40, autoAlpha: 0, duration: 0.65, ease: 'power3.out',
+    scrollTrigger: { trigger: '.case-grid', start: 'top 78%' }
+  })
+
+  // Meta cards pop in
+  gsap.from('.meta-card', {
+    y: 50, autoAlpha: 0, scale: 0.9, duration: 0.6, ease: 'power4.out',
+    stagger: 0.1,
+    scrollTrigger: { trigger: '.meta-grid', start: 'top 80%' }
+  })
+
+  // Service cards with staggered scale
+  gsap.from('.service-card', {
+    scale: 0.85, autoAlpha: 0, y: 30, duration: 0.55, ease: 'back.out(1.2)',
+    stagger: { each: 0.06, from: 'start' },
+    scrollTrigger: { trigger: '.service-grid', start: 'top 80%' }
   })
 
   // Comparison table rows stagger from left
@@ -63,6 +95,27 @@ onMounted(() => {
     x: -30, autoAlpha: 0, duration: 0.5, ease: 'power2.out',
     stagger: 0.08,
     scrollTrigger: { trigger: '.comparison-table', start: 'top 78%' }
+  })
+
+  // Trust bar parallax
+  gsap.to('.trust-bar', {
+    backgroundPosition: '0% 50%',
+    ease: 'none',
+    scrollTrigger: { trigger: '.trust-bar', start: 'top bottom', end: 'bottom top', scrub: 0.6 }
+  })
+
+  // Process cards sequential reveal
+  gsap.from('.process-card', {
+    y: 40, autoAlpha: 0, duration: 0.5, ease: 'power3.out',
+    stagger: 0.12,
+    scrollTrigger: { trigger: '.process-grid', start: 'top 82%' }
+  })
+
+  // Integration chips cascade
+  gsap.from('.integration-chip', {
+    scale: 0, autoAlpha: 0, duration: 0.35, ease: 'back.out(1.7)',
+    stagger: 0.03,
+    scrollTrigger: { trigger: '.integrations-grid', start: 'top 82%' }
   })
 })
 
@@ -132,6 +185,7 @@ onUnmounted(() => {
       <UseCasesSection />
       <InteractiveDemoSection />
       <CaseStudiesSection />
+      <StatsSection />
       <RoiCalculatorSection />
       <PricingSection />
 

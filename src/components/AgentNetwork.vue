@@ -6,10 +6,12 @@ const canvasRef = ref<HTMLCanvasElement | null>(null)
 let renderer: import('three').WebGLRenderer | null = null
 let frameId = 0
 let observer: IntersectionObserver | null = null
-const muted = ref(window.matchMedia('(prefers-reduced-motion: reduce)').matches)
 
 interface ChannelNode { x: number; y: number; z: number; channel: 'wa' | 'ig' | 'fb' | 'crm' }
 interface ColorSet { particles: number; lines: number }
+interface PulsePacket {
+  from: ChannelNode; to: ChannelNode; progress: number; speed: number; color: number
+}
 
 const channelColors: Record<ChannelNode['channel'], ColorSet> = {
   wa:  { particles: 0x25D366, lines: 0x1a8c44 },
@@ -18,14 +20,16 @@ const channelColors: Record<ChannelNode['channel'], ColorSet> = {
   crm: { particles: 0x4fffb0, lines: 0x38d8ff }
 }
 
+let packets: PulsePacket[] = []
+
 onMounted(async () => {
   const canvas = canvasRef.value
   if (!canvas) return
 
   const {
     BufferGeometry, Float32BufferAttribute, Group, LineBasicMaterial,
-    LineSegments, PerspectiveCamera, Points, PointsMaterial, Scene, SphereGeometry,
-    Mesh, MeshBasicMaterial, WebGLRenderer
+    LineSegments, PerspectiveCamera, Points, PointsMaterial, Scene,
+    SphereGeometry, Mesh, MeshBasicMaterial, WebGLRenderer
   } = await import('three')
 
   const scene = new Scene()
@@ -36,12 +40,12 @@ onMounted(async () => {
   renderer = new WebGLRenderer({ canvas, alpha: true, antialias: true })
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8))
   renderer.setSize(window.innerWidth, window.innerHeight)
-
   camera.position.z = 10
 
-  // ── Build channel nodes ─────────────────────
+  // ── Channel nodes ──────────────────────────
   const channelNodes: ChannelNode[] = []
   const channels: ChannelNode['channel'][] = ['wa', 'ig', 'fb', 'crm']
+  const nodePairs: { from: ChannelNode; to: ChannelNode }[] = []
 
   for (let i = 0; i < 64; i++) {
     const angle = i * 0.62
@@ -55,40 +59,42 @@ onMounted(async () => {
     })
   }
 
-  // ── Lines between nodes ─────────────────────
-  const linePositions: number[] = []
+  // Build same-channel pairs for packets
   for (let i = 0; i < channelNodes.length; i++) {
     const next = (i + 3) % channelNodes.length
-    const skip = (i + 11) % channelNodes.length
-    const a = channelNodes[i], b = channelNodes[next], c = channelNodes[skip]
-
-    if (a.channel === b.channel) {
-      linePositions.push(a.x, a.y, a.z, b.x, b.y, b.z)
+    if (channelNodes[i].channel === channelNodes[next].channel) {
+      nodePairs.push({ from: channelNodes[i], to: channelNodes[next] })
     }
+  }
+
+  // ── Lines ──────────────────────────────────
+  const linePositions: number[] = []
+  for (let i = 0; i < channelNodes.length; i++) {
+    const skip = (i + 11) % channelNodes.length
+    const a = channelNodes[i], c = channelNodes[skip]
     linePositions.push(a.x, a.y, a.z, c.x, c.y, c.z)
   }
 
   const lineGeometry = new BufferGeometry()
   lineGeometry.setAttribute('position', new Float32BufferAttribute(linePositions, 3))
-
   const lines = new LineSegments(lineGeometry, new LineBasicMaterial({
-    color: 0x38d8ff, transparent: true, opacity: 0.14
+    color: 0x38d8ff, transparent: true, opacity: 0.12
   }))
   group.add(lines)
 
-  // ── Glow spheres at key positions ───────────
+  // ── Glow spheres ───────────────────────────
   const glowGeo = new SphereGeometry(0.06, 8, 8)
   channelNodes.forEach((n) => {
     const color = channelColors[n.channel]
     const mesh = new Mesh(glowGeo, new MeshBasicMaterial({
-      color: color.particles, transparent: true, opacity: 0.7
+      color: color.particles, transparent: true, opacity: 0.65
     }))
     mesh.position.set(n.x, n.y, n.z)
     group.add(mesh)
   })
 
-  // ── Small particle field behind ─────────────
-  const bgCount = 120
+  // ── Background particles ───────────────────
+  const bgCount = 100
   const bgPositions: number[] = []
   for (let i = 0; i < bgCount; i++) {
     bgPositions.push(
@@ -100,11 +106,36 @@ onMounted(async () => {
   const bgGeo = new BufferGeometry()
   bgGeo.setAttribute('position', new Float32BufferAttribute(bgPositions, 3))
   const bgPoints = new Points(bgGeo, new PointsMaterial({
-    color: 0x4fffb0, size: 0.025, transparent: true, opacity: 0.35
+    color: 0x4fffb0, size: 0.025, transparent: true, opacity: 0.3
   }))
   group.add(bgPoints)
 
-  // ── Resize ──────────────────────────────────
+  // ── Pulse packet meshes ────────────────────
+  const pulseGeo = new SphereGeometry(0.04, 6, 6)
+  const pulseGroup = new Group()
+  group.add(pulseGroup)
+
+  const activePulseCount = 8
+  const pulseMeshes: import('three').Mesh[] = []
+  for (let i = 0; i < activePulseCount; i++) {
+    const pair = nodePairs[Math.floor(Math.random() * nodePairs.length)]
+    const mat = new MeshBasicMaterial({
+      color: channelColors[pair.from.channel].particles,
+      transparent: true, opacity: 0.9
+    })
+    const mesh = new Mesh(pulseGeo, mat)
+    mesh.visible = false
+    pulseGroup.add(mesh)
+    pulseMeshes.push(mesh)
+
+    packets.push({
+      from: pair.from, to: pair.to,
+      progress: Math.random(), speed: 0.003 + Math.random() * 0.005,
+      color: channelColors[pair.from.channel].particles
+    })
+  }
+
+  // ── Resize ─────────────────────────────────
   const resize = () => {
     if (!renderer) return
     camera.aspect = window.innerWidth / window.innerHeight
@@ -113,40 +144,64 @@ onMounted(async () => {
   }
   window.addEventListener('resize', resize)
 
-  // ── Animate ─────────────────────────────────
+  // ── Animate ────────────────────────────────
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   let prevTime = Date.now()
+
   const animate = () => {
     const now = Date.now()
-    const dt = muted.value ? 0 : (now - prevTime) * 0.001
+    const dt = prefersReduced ? 0 : Math.min((now - prevTime) * 0.001, 0.05)
     prevTime = now
 
-    group.rotation.y += dt * 0.18
+    group.rotation.y += dt * 0.15
     group.rotation.x = Math.sin(now * 0.00016) * 0.1
+    bgPoints.rotation.y -= dt * 0.07
+    bgPoints.rotation.x += dt * 0.03
 
-    bgPoints.rotation.y -= dt * 0.08
-    bgPoints.rotation.x += dt * 0.04
+    // Animate pulse packets
+    if (activePulseCount > 0) {
+      packets.forEach((pkt, i) => {
+        pkt.progress += pkt.speed * (prefersReduced ? 0 : 1)
+        if (pkt.progress > 1) {
+          pkt.progress = 0
+          const newPair = nodePairs[Math.floor(Math.random() * nodePairs.length)]
+          pkt.from = newPair.from; pkt.to = newPair.to
+          pkt.speed = 0.003 + Math.random() * 0.005
+          pkt.color = channelColors[pkt.from.channel].particles
+        }
+
+        const mesh = pulseMeshes[i]
+        if (!mesh) return
+        const t = pkt.progress
+        mesh.position.set(
+          pkt.from.x + (pkt.to.x - pkt.from.x) * t,
+          pkt.from.y + (pkt.to.y - pkt.from.y) * t,
+          pkt.from.z + (pkt.to.z - pkt.from.z) * t
+        )
+        mesh.visible = true
+        ;(mesh.material as any).color.set(pkt.color)
+        ;(mesh.material as any).opacity = 0.5 + Math.sin(t * Math.PI) * 0.5
+      })
+    }
 
     renderer?.render(scene, camera)
     frameId = window.requestAnimationFrame(animate)
   }
   animate()
 
-  // ── Visibility observer ─────────────────────
-  observer = new IntersectionObserver(([entry]) => {
-    if (!entry.isIntersecting && !muted.value) {
-      // Canvas still renders but could be paused. Keep rendering for now.
-    }
+  observer = new IntersectionObserver(() => {
+    /* keep running for now */
   }, { threshold: 0.1 })
   observer.observe(canvas)
 
-  // ── Cleanup ─────────────────────────────────
   const cleanup = () => {
     window.removeEventListener('resize', resize)
     window.cancelAnimationFrame(frameId)
     observer?.disconnect()
-    bgGeo.dispose(); lineGeometry.dispose(); glowGeo.dispose()
+    bgGeo.dispose(); lineGeometry.dispose(); glowGeo.dispose(); pulseGeo.dispose()
     ;(bgPoints.material as import('three').PointsMaterial).dispose()
     ;(lines.material as import('three').LineBasicMaterial).dispose()
+    pulseMeshes.forEach(m => (m.material as any).dispose())
     renderer?.dispose(); renderer = null
   }
   ;(cleanup as any).__cleanup = cleanup
@@ -161,7 +216,7 @@ onUnmounted(() => {
   <canvas ref="canvasRef" class="agent-network" aria-hidden="true"></canvas>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .agent-network {
   position: absolute;
   inset: 0;
