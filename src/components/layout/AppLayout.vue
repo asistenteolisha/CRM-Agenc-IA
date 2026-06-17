@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import ChatWidget from '../chat/ChatWidget.vue'
 
 const mobileOpen = ref(false)
 const navLinks = [
@@ -59,5 +60,6 @@ const navLinks = [
         <span class="footer-badge">Hecho con IA + criterio humano 🇨🇴</span>
       </div>
     </footer>
+    <ChatWidget />
   </div>
 </template>

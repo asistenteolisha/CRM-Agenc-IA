@@ -5,6 +5,7 @@
 export interface SvgIcon { viewBox: string; w: number; h: number; d: string; stroke?: string; fill?: string }
 
 export const lucideIcons: Record<string, SvgIcon> = {
+  Send:             { viewBox: '0 0 24 24', w:24,h:24, d:'M22 2 11 13 M22 2l-7 20-4-9-9-4 20-7z' },
   MessageCircle:    { viewBox: '0 0 24 24', w:24,h:24, d:'M7.9 20A9 9 0 1 0 4 16.1L2 22Z' },
   Instagram:        { viewBox: '0 0 24 24', w:24,h:24, d:'M2 12c0-4.4 0-6.6 1.4-7.9C4.7 2.7 6.9 2.6 11.3 2.5h1.4c4.4.1 6.6.2 7.9 1.5C22 5.3 22 7.5 22 12s0 6.7-1.4 8-3.5 1.3-8 1.4h-1.4c-4.4-.1-6.6-.2-8-1.5S2 16.4 2 12Z M17.5 6.5h.01 M7 12a5 5 0 0 0 10 0 5 5 0 0 0-10 0 M16.5 17.5a8.5 8.5 0 0 1-9 0' },
   Facebook:         { viewBox: '0 0 24 24', w:24,h:24, d:'M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3Z' },
@@ -30,5 +31,4 @@ export const lucideIcons: Record<string, SvgIcon> = {
   Eye:              { viewBox: '0 0 24 24', w:24,h:24, d:'M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z' },
   Target:           { viewBox: '0 0 24 24', w:24,h:24, d:'M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z M2 12h3 M19 12h3' },
   Rocket:           { viewBox: '0 0 24 24', w:24,h:24, d:'M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09Z M12 15l-4-4a22 22 0 0 1 4-10.54A22 22 0 0 1 16 11l-4 4Z M9.5 6.5 14 2l8 10-5.5 2.5L12 10 7.5 5.5Z' },
-  Send:             { viewBox: '0 0 24 24', w:24,h:24, d:'M22 2 11 13 M22 2l-7 20-4-9-9-4 20-7z' },
 }
