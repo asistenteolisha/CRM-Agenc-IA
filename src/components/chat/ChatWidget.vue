@@ -53,6 +53,21 @@ function sendSystem(text: string) {
   messages.value.push({ role: 'system', text })
 }
 
+async function fetchAgentReply(message: string): Promise<string | null> {
+  try {
+    const resp = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message })
+    })
+    if (!resp.ok) return null
+    const data = await resp.json()
+    return data.reply || null
+  } catch {
+    return null
+  }
+}
+
 async function sendMessage(text?: string) {
   const msg = text || input.value.trim()
   if (!msg) return
@@ -60,11 +75,18 @@ async function sendMessage(text?: string) {
   input.value = ''
 
   isTyping.value = true
-  await new Promise(r => setTimeout(r, 800 + Math.random() * 600))
+
+  // Try AI agent first
+  const agentReply = await fetchAgentReply(msg)
   isTyping.value = false
 
-  const response = getResponse(msg)
-  messages.value.push({ role: 'agent', text: response })
+  if (agentReply) {
+    messages.value.push({ role: 'agent', text: agentReply })
+  } else {
+    // Fallback to keyword matching
+    const response = getResponse(msg)
+    messages.value.push({ role: 'agent', text: response })
+  }
   scrollDown()
 }
 
