@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
+import { gsap } from 'gsap'
+import IconInline from '../IconInline.vue'
+
 defineProps<{
   heroBadge: string
   heroTitle: string
@@ -6,6 +10,18 @@ defineProps<{
   primaryCta: string
   secondaryCta: string
 }>()
+
+const titleRef = ref<HTMLElement | null>(null)
+
+onMounted(() => {
+  if (!titleRef.value) return
+  // Split H1 into words and animate each
+  const words = titleRef.value.querySelectorAll('.word')
+  gsap.from(words, {
+    y: 80, autoAlpha: 0, duration: 1, ease: 'power4.out',
+    stagger: 0.06, delay: 0.2
+  })
+})
 </script>
 
 <template>
@@ -13,26 +29,43 @@ defineProps<{
     <div class="hero__inner">
       <div class="hero__copy">
         <p class="eyebrow">{{ heroBadge }}</p>
-        <h1>{{ heroTitle }}</h1>
+        <h1 ref="titleRef">
+          <span v-for="(word, i) in heroTitle.split(' ')" :key="i" class="word"
+                :style="{ display: 'inline-block', marginRight: '0.25em' }">{{ word }}</span>
+        </h1>
         <p class="hero__lead">{{ heroLead }}</p>
         <div class="hero__actions">
-          <RouterLink to="/contacto" class="btn btn--primary">{{ primaryCta }}</RouterLink>
-          <RouterLink to="/servicios" class="btn btn--secondary">{{ secondaryCta }}</RouterLink>
+          <RouterLink to="/contacto" class="btn btn--primary">
+            <IconInline name="Zap" :size="16" /> {{ primaryCta }}
+          </RouterLink>
+          <RouterLink to="/servicios" class="btn btn--secondary">
+            <IconInline name="Rocket" :size="16" /> {{ secondaryCta }}
+          </RouterLink>
         </div>
         <div class="hero__metrics">
-          <div class="hero__metric">✦ <strong>85%</strong> consultas atendidas 24/7</div>
-          <div class="hero__metric">✦ <strong>&lt;30s</strong> tiempo de respuesta</div>
-          <div class="hero__metric">✦ <strong>15</strong> agentes IA disponibles</div>
+          <div class="hero__metric">
+            <IconInline name="Check" :size="14" class="metric-check" /> <strong>85%</strong> consultas 24/7
+          </div>
+          <div class="hero__metric">
+            <IconInline name="Check" :size="14" class="metric-check" /> <strong>&lt;30s</strong> tiempo de respuesta
+          </div>
+          <div class="hero__metric">
+            <IconInline name="Check" :size="14" class="metric-check" /> <strong>15</strong> agentes IA listos
+          </div>
         </div>
       </div>
       <div class="hero__image">
         <div class="hero-mockup">
-          <div class="hero-mockup__header">WhatsApp Business</div>
+          <div class="hero-mockup__header">
+            <IconInline name="MessageCircle" :size="14" /> WhatsApp Business
+          </div>
           <div class="hero-mockup__body">
             <p class="mock-msg mock-msg--client">Hola, busco un carro automático de hasta 45 millones</p>
             <p class="mock-msg mock-msg--agent">¡Perfecto! Para ayudarte mejor: ¿ciudad, uso principal y necesitás financiación?</p>
             <p class="mock-msg mock-msg--client">Bucaramanga, familiar, podría financiar una parte</p>
-            <p class="mock-msg mock-msg--summary">✅ Lead caliente → CRM</p>
+            <p class="mock-msg mock-msg--summary">
+              <IconInline name="Check" :size="12" /> Lead caliente → CRM
+            </p>
           </div>
         </div>
       </div>

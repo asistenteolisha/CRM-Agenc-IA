@@ -32,16 +32,35 @@ onMounted(() => {
   gsap.ticker.add((time) => lenis?.raf(time * 1000))
   gsap.ticker.lagSmoothing(0)
 
-  gsap.from('[data-reveal]', {
-    y: 28, autoAlpha: 0, duration: 0.72, ease: 'power3.out',
-    stagger: 0.06,
-    scrollTrigger: { trigger: '.page-home', start: 'top 72%' }
+  // TrustBar chips — staggered fade in
+  gsap.from('.trust-chip', {
+    y: 16, autoAlpha: 0, duration: 0.4, ease: 'power2.out',
+    stagger: 0.04,
+    scrollTrigger: { trigger: '.trust-bar', start: 'top 90%' }
   })
 
+  // Problem cards — slide from alternating sides
+  gsap.from('.problem-card:nth-child(odd)', {
+    x: -30, autoAlpha: 0, duration: 0.55, ease: 'power3.out',
+    scrollTrigger: { trigger: '.problem-grid', start: 'top 82%' }
+  })
+  gsap.from('.problem-card:nth-child(even)', {
+    x: 30, autoAlpha: 0, duration: 0.55, ease: 'power3.out',
+    scrollTrigger: { trigger: '.problem-grid', start: 'top 82%' }
+  })
+
+  // Meta cards pop-in with spring
   gsap.from('.meta-card', {
-    y: 50, autoAlpha: 0, scale: 0.9, duration: 0.6, ease: 'power4.out',
+    y: 60, autoAlpha: 0, scale: 0.85, duration: 0.65, ease: 'back.out(1.3)',
     stagger: 0.1,
-    scrollTrigger: { trigger: '.meta-grid', start: 'top 80%' }
+    scrollTrigger: { trigger: '.meta-grid', start: 'top 82%' }
+  })
+
+  // Use case cards — gentle stagger
+  gsap.from('.usecase-card', {
+    y: 40, autoAlpha: 0, duration: 0.5, ease: 'power3.out',
+    stagger: { each: 0.08, from: 'start' },
+    scrollTrigger: { trigger: '.usecase-grid', start: 'top 82%' }
   })
 })
 
@@ -62,7 +81,6 @@ onUnmounted(() => {
     />
     <TrustBar />
 
-    <!-- Problem -->
     <section class="section section--split">
       <div data-reveal>
         <p class="eyebrow">El problema</p>
@@ -75,13 +93,12 @@ onUnmounted(() => {
       </div>
     </section>
     <div class="problem-grid">
-      <article v-for="p in pains" :key="p.title" class="problem-card" data-reveal>
+      <article v-for="p in pains" :key="p.title" class="problem-card">
         <span></span><h3>{{ p.title }}</h3><p>{{ p.text }}</p>
       </article>
     </div>
 
-    <!-- Meta ecosystem -->
-    <section class="section meta-eco" data-reveal>
+    <section class="section meta-eco">
       <p class="eyebrow">Ecosistema Meta Activo</p>
       <h2>Todos los canales que ya automatizamos para tu negocio.</h2>
       <p class="section-sub">No vendemos chatbots. Construimos sistemas que conectan WhatsApp, Instagram y Facebook en un solo flujo de venta y atención.</p>
@@ -93,27 +110,25 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <!-- Use cases preview -->
     <section class="section">
-      <div class="section__head" data-reveal>
+      <div class="section__head">
         <p class="eyebrow">Industrias</p>
         <h2>Agentes IA para cada tipo de negocio en Colombia.</h2>
       </div>
       <div class="usecase-grid">
-        <article v-for="uc in useCases" :key="uc.title" class="usecase-card" data-reveal>
+        <article v-for="uc in useCases" :key="uc.title" class="usecase-card">
           <span class="usecase-emoji">{{ uc.emoji }}</span>
           <div><h3>{{ uc.title }}</h3><p>{{ uc.desc }}</p></div>
         </article>
       </div>
-      <div class="section-cta" data-reveal>
+      <div class="section-cta">
         <RouterLink to="/servicios" class="btn btn--primary">Ver los 15 servicios →</RouterLink>
       </div>
     </section>
 
     <StatsSection />
 
-    <!-- Final CTA -->
-    <section class="section cta-section" data-reveal>
+    <section class="section cta-section">
       <h2>¿Listo para que tus redes trabajen 24/7?</h2>
       <p>Agendá un diagnóstico de 20 minutos. Sin costo, sin compromiso.</p>
       <div class="cta-actions">
