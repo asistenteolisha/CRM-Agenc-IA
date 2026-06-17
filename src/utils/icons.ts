@@ -12,6 +12,7 @@ export const lucideIcons: Record<string, SvgIcon> = {
   ShoppingCart:     { viewBox: '0 0 24 24', w:24,h:24, d:'M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6 M9 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2 M20 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2' },
   Workflow:         { viewBox: '0 0 24 24', w:24,h:24, d:'M14 2h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1 M4 16h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1 M14.5 8 14 15.5h-4 M10 8h8v4' },
   CalendarCheck:    { viewBox: '0 0 24 24', w:24,h:24, d:'M8 2v4 M16 2v4 M3 10h18 M9 16l2 2 4-4 M8 4h8a4 4 0 0 1 4 4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a4 4 0 0 1 4-4Z' },
+  Check:            { viewBox: '0 0 24 24', w:24,h:24, d:'M20 6 9 17l-5-5' },
   FileSearch:       { viewBox: '0 0 24 24', w:24,h:24, d:'M14 2v4a2 2 0 0 0 2 2h4 M15 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z M22 22l-1.5-1.5 M5 2H2v20l3-6 3 6V2Z' },
   ChartColumnIncreasing: { viewBox:'0 0 24 24',w:24,h:24, d:'M13 17V9 M18 17V5 M8 17v-3 M3 3v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3Z' },
   Users:            { viewBox: '0 0 24 24', w:24,h:24, d:'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2 M23 21v-2a4 4 0 0 0-3-3.87 M16 3.13a4 4 0 0 1 0 7.75 M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z' },

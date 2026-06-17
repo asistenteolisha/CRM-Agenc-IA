@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { pricingPlans } from '../../data/pricing'
+import IconInline from '../IconInline.vue'
 </script>
 
 <template>
@@ -23,12 +24,14 @@ import { pricingPlans } from '../../data/pricing'
           <div v-else class="pricing-setup">Setup: incluido en cotización</div>
         </div>
         <ul class="pricing-features">
-          <li v-for="inc in p.includes" :key="inc">✓ {{ inc }}</li>
+          <li v-for="inc in p.includes" :key="inc">
+            <IconInline name="Check" :size="14" class="check-icon" /> {{ inc }}
+          </li>
         </ul>
         <ul class="pricing-limits">
           <li v-for="lim in p.limits" :key="lim">• {{ lim }}</li>
         </ul>
-        <a :href="'#contacto'" class="btn btn--primary pricing-cta">
+        <a href="/#/contacto" class="btn btn--primary pricing-cta">
           {{ p.id === 'enterprise' ? 'Solicitar cotización' : 'Empezar diagnóstico' }}
         </a>
       </article>

@@ -377,7 +377,8 @@ h3 { margin: 0; color: var(--text-primary); font-weight: 700; }
 .pricing-monthly { strong { font-size: 2rem; color: var(--text-primary); } span { color: var(--text-muted); font-size: 0.88rem; margin-left: 4px; } }
 .pricing-setup { color: var(--text-muted); font-size: 0.8rem; margin-top: 4px; }
 .pricing-features, .pricing-limits { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
-.pricing-features li { font-size: 0.85rem; color: var(--text-primary); }
+.pricing-features li { font-size: 0.85rem; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
+.check-icon { color: var(--accent-teal); flex-shrink: 0; }
 .pricing-limits li { font-size: 0.76rem; color: var(--text-muted); }
 .pricing-cta { width: 100%; margin-top: auto; }
 .pricing-note { margin-top: 24px; color: var(--text-muted); font-size: 0.78rem; line-height: 1.6; text-align: center; }
