@@ -15,11 +15,22 @@ const titleRef = ref<HTMLElement | null>(null)
 
 onMounted(() => {
   if (!titleRef.value) return
-  // Split H1 into words and animate each
   const words = titleRef.value.querySelectorAll('.word')
   gsap.from(words, {
     y: 80, autoAlpha: 0, duration: 1, ease: 'power4.out',
     stagger: 0.06, delay: 0.2
+  })
+
+  // Mockup entrance animation
+  gsap.from('.hero-mockup', {
+    y: 60, opacity: 0, scale: 0.92, duration: 1.2,
+    ease: 'power3.out', delay: 0.6
+  })
+
+  // Animate chat messages appearing one by one
+  gsap.from('.mock-msg', {
+    y: 20, opacity: 0, duration: 0.5, ease: 'power2.out',
+    stagger: 0.3, delay: 1.0
   })
 })
 </script>

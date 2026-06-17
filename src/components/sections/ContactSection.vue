@@ -49,7 +49,7 @@ const submitLead = async () => {
       <p>WhatsApp, Instagram, Facebook, e-commerce o seguimiento comercial. Te devolvemos un diagnóstico corto con el primer flujo recomendado.</p>
       <a href="mailto:leinadgalaxy@gmail.com">leinadgalaxy@gmail.com</a>
       <div class="contact__whatsapp">
-        <a href="https://wa.me/573001234567" class="btn btn--secondary">Hablar por WhatsApp →</a>
+        <a href="https://wa.me/573012604061" class="btn btn--secondary">Hablar por WhatsApp →</a>
       </div>
     </div>
     <form class="lead-form" @submit.prevent="submitLead" data-reveal>

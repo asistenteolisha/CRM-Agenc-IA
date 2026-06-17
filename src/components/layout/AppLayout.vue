@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import ChatWidget from '../chat/ChatWidget.vue'
+import BackToTop from '../BackToTop.vue'
 
 const mobileOpen = ref(false)
 const navLinks = [
@@ -29,7 +30,7 @@ const navLinks = [
 
     <div class="mobile-menu" :class="{ open: mobileOpen }" @click.self="mobileOpen = false">
       <RouterLink v-for="l in navLinks" :key="l.to" :to="l.to" @click="mobileOpen = false">{{ l.label }}</RouterLink>
-      <a href="https://wa.me/573001234567" class="mobile-menu__cta">WhatsApp →</a>
+      <a href="https://wa.me/573012604061" class="mobile-menu__cta">WhatsApp →</a>
     </div>
 
     <slot />
@@ -51,15 +52,16 @@ const navLinks = [
         <div class="app-footer__links">
           <strong>Contacto</strong>
           <a href="mailto:leinadgalaxy@gmail.com">leinadgalaxy@gmail.com</a>
-          <a href="https://wa.me/573001234567">WhatsApp</a>
+          <a href="https://wa.me/573012604061">WhatsApp</a>
           <a href="https://github.com/rolito240/Agenc-IA">GitHub</a>
         </div>
       </div>
       <div class="app-footer__bottom">
-        <span>© 2026 Agenc-IA. Todos los derechos reservados.</span>
+        <span>© {{ new Date().getFullYear() }} Agenc-IA. Todos los derechos reservados.</span>
         <span class="footer-badge">Hecho con IA + criterio humano 🇨🇴</span>
       </div>
     </footer>
     <ChatWidget />
+    <BackToTop />
   </div>
 </template>

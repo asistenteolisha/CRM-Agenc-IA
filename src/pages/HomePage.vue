@@ -6,6 +6,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import HeroSection from '../components/sections/HeroSection.vue'
 import TrustBar from '../components/sections/TrustBar.vue'
 import StatsSection from '../components/sections/StatsSection.vue'
+import ProcessSection from '../components/sections/ProcessSection.vue'
+import TestimonialsSection from '../components/sections/TestimonialsSection.vue'
+import HomeFaqSection from '../components/sections/HomeFaqSection.vue'
+import IconInline from '../components/IconInline.vue'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -16,12 +20,12 @@ const pains = [
 ]
 
 const useCases = [
-  { emoji: '🚗', title: 'Concesionarios y compraventas', desc: 'Califica compradores por WhatsApp. El vendedor recibe el lead caliente listo para cerrar.' },
-  { emoji: '🍽️', title: 'Restaurantes y cafés', desc: 'Menú, horarios y reservas por Instagram DM y WhatsApp. Recordatorios automáticos.' },
-  { emoji: '🏥', title: 'Clínicas y consultorios', desc: 'Agenda citas, confirma asistencia y reduce ausentismo con WhatsApp Flows.' },
-  { emoji: '🏠', title: 'Inmobiliarias', desc: 'Lead Ads de Facebook → WhatsApp con catálogo de inmuebles y agenda de visitas.' },
-  { emoji: '🛍️', title: 'E-commerce y marcas', desc: 'Catálogo WhatsApp + pedidos + seguimiento de envío. Todo en el chat.' },
-  { emoji: '📋', title: 'Servicios profesionales', desc: 'Recibe documentos, resume, clasifica. Abogados, contadores, consultores.' }
+  { icon: 'Car', title: 'Concesionarios y compraventas', desc: 'Califica compradores por WhatsApp. El vendedor recibe el lead caliente listo para cerrar.' },
+  { icon: 'UtensilsCrossed', title: 'Restaurantes y cafés', desc: 'Menú, horarios y reservas por Instagram DM y WhatsApp. Recordatorios automáticos.' },
+  { icon: 'Stethoscope', title: 'Clínicas y consultorios', desc: 'Agenda citas, confirma asistencia y reduce ausentismo con WhatsApp Flows.' },
+  { icon: 'Home', title: 'Inmobiliarias', desc: 'Lead Ads de Facebook → WhatsApp con catálogo de inmuebles y agenda de visitas.' },
+  { icon: 'ShoppingBag', title: 'E-commerce y marcas', desc: 'Catálogo WhatsApp + pedidos + seguimiento de envío. Todo en el chat.' },
+  { icon: 'Briefcase', title: 'Servicios profesionales', desc: 'Recibe documentos, resume, clasifica. Abogados, contadores, consultores.' }
 ]
 
 let lenis: Lenis | null = null
@@ -117,7 +121,9 @@ onUnmounted(() => {
       </div>
       <div class="usecase-grid">
         <article v-for="uc in useCases" :key="uc.title" class="usecase-card">
-          <span class="usecase-emoji">{{ uc.emoji }}</span>
+          <div class="usecase-icon-wrap">
+            <IconInline :name="uc.icon" :size="24" class="usecase-icon" />
+          </div>
           <div><h3>{{ uc.title }}</h3><p>{{ uc.desc }}</p></div>
         </article>
       </div>
@@ -127,6 +133,12 @@ onUnmounted(() => {
     </section>
 
     <StatsSection />
+
+    <ProcessSection />
+
+    <TestimonialsSection />
+
+    <HomeFaqSection />
 
     <section class="section cta-section">
       <h2>¿Listo para que tus redes trabajen 24/7?</h2>

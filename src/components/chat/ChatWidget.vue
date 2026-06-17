@@ -37,13 +37,13 @@ function getResponse(msg: string): string {
   if (q.includes('cómo funciona') || q.includes('como funciona') || q.includes('funciona') || q.includes('proceso'))
     return '⚙️ Así trabajamos:\n\n1️⃣ **Diagnóstico** — Identificamos el canal de mayor impacto\n2️⃣ **Blueprint** — Diseñamos guion, integraciones y reglas\n3️⃣ **Build** — Construimos el agente y flujos n8n\n4️⃣ **Prueba** — Simulamos casos reales antes de lanzar\n5️⃣ **Operación** — Monitoreamos y mejoramos cada mes\n\n⏱️ Tiempo: 5-15 días según complejidad.'
   if (q.includes('whatsapp') || q.includes('humano'))
-    return '📱 Claro, hablá con nosotros directamente por WhatsApp:\n\n👉 https://wa.me/573001234567\n\nO dejame tus datos y te escribimos nosotros.'
+    return '📱 Claro, hablá con nosotros directamente por WhatsApp:\n\n👉 https://wa.me/573012604061\n\nO dejame tus datos y te escribimos nosotros.'
   if (q.includes('hola') || q.includes('buenas') || q.includes('buenos'))
     return '¡Hola! 👋 Soy el asistente IA de **Agenc-IA**. Puedo ayudarte con:\n\n• Nuestros servicios y precios\n• Cómo funciona todo\n• Agendar un diagnóstico gratis\n\n¿En qué te puedo ayudar?'
   if (q.includes('quiénes') || q.includes('quienes') || q.includes('son') || q.includes('agenc') || q.includes('nosotros'))
     return '🧠 **Agenc-IA** es una agencia colombiana de automatización conversacional para PYMES.\n\nConstruimos agentes IA que venden, atienden y crecen con tu negocio en WhatsApp, Instagram y Facebook. Sin contratar más equipo.\n\n📍 Colombia | ✉️ leinadgalaxy@gmail.com'
   // fallback
-  return 'Gracias por tu mensaje. Para darte la mejor respuesta, ¿podrías contarme un poco más sobre tu negocio y qué te gustaría automatizar? O si preferís, te paso con un humano por WhatsApp 👉 https://wa.me/573001234567'
+  return 'Gracias por tu mensaje. Para darte la mejor respuesta, ¿podrías contarme un poco más sobre tu negocio y qué te gustaría automatizar? O si preferís, te paso con un humano por WhatsApp 👉 https://wa.me/573012604061'
 }
 
 // ── Methods ────────────────────────────────────
@@ -92,7 +92,7 @@ async function sendMessage(text?: string) {
 
 function handleAction(action: string) {
   if (action === 'whatsapp') {
-    window.open('https://wa.me/573001234567', '_blank')
+    window.open('https://wa.me/573012604061', '_blank')
     sendSystem('📱 Abriendo WhatsApp...')
   } else if (action === 'diagnostico') {
     sendMessage('Quiero un diagnóstico gratis')
