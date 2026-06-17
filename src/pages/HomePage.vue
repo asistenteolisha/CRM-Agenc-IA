@@ -8,6 +8,7 @@ import TrustBar from '../components/sections/TrustBar.vue'
 import StatsSection from '../components/sections/StatsSection.vue'
 import ProcessSection from '../components/sections/ProcessSection.vue'
 import TestimonialsSection from '../components/sections/TestimonialsSection.vue'
+import TechStackSection from '../components/sections/TechStackSection.vue'
 import HomeFaqSection from '../components/sections/HomeFaqSection.vue'
 import IconInline from '../components/IconInline.vue'
 
@@ -137,6 +138,8 @@ onUnmounted(() => {
     <ProcessSection />
 
     <TestimonialsSection />
+
+    <TechStackSection />
 
     <HomeFaqSection />
 
