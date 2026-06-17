@@ -1,45 +1,41 @@
 <script setup lang="ts">
-import AgentNetwork from '../AgentNetwork.vue'
-
-defineProps<{ heroBadge: string; heroTitle: string; heroLead: string; primaryCta: string; secondaryCta: string }>()
+defineProps<{
+  heroBadge: string
+  heroTitle: string
+  heroLead: string
+  primaryCta: string
+  secondaryCta: string
+}>()
 </script>
 
 <template>
   <section class="hero">
-    <AgentNetwork />
-    <div class="hero__shade"></div>
     <div class="hero__inner">
       <div class="hero__copy">
         <p class="eyebrow">{{ heroBadge }}</p>
         <h1>{{ heroTitle }}</h1>
         <p class="hero__lead">{{ heroLead }}</p>
         <div class="hero__actions">
-          <a href="#contacto" class="btn btn--primary">{{ primaryCta }}</a>
-          <a href="#roi" class="btn btn--secondary">{{ secondaryCta }}</a>
+          <RouterLink to="/contacto" class="btn btn--primary">{{ primaryCta }}</RouterLink>
+          <RouterLink to="/servicios" class="btn btn--secondary">{{ secondaryCta }}</RouterLink>
+        </div>
+        <div class="hero__metrics">
+          <div class="hero__metric">✦ <strong>85%</strong> consultas atendidas 24/7</div>
+          <div class="hero__metric">✦ <strong>&lt;30s</strong> tiempo de respuesta</div>
+          <div class="hero__metric">✦ <strong>15</strong> agentes IA disponibles</div>
         </div>
       </div>
-      <aside class="hero-panel" aria-label="Estado del sistema">
-        <div class="hero-panel__top">
-          <span class="status-dot pulse"></span>
-          <span>Sistema de agentes activo</span>
+      <div class="hero__image">
+        <div class="hero-mockup">
+          <div class="hero-mockup__header">WhatsApp Business</div>
+          <div class="hero-mockup__body">
+            <p class="mock-msg mock-msg--client">Hola, busco un carro automático de hasta 45 millones</p>
+            <p class="mock-msg mock-msg--agent">¡Perfecto! Para ayudarte mejor: ¿ciudad, uso principal y necesitás financiación?</p>
+            <p class="mock-msg mock-msg--client">Bucaramanga, familiar, podría financiar una parte</p>
+            <p class="mock-msg mock-msg--summary">✅ Lead caliente → CRM</p>
+          </div>
         </div>
-        <div class="hero-panel__agent hero-panel__agent--active wa">
-          <span>WhatsApp</span><strong>Agente de ventas</strong>
-          <small>24/7 · Respuesta &lt;30s</small>
-        </div>
-        <div class="hero-panel__agent ig">
-          <span>Instagram</span><strong>DMs + Comentarios</strong>
-          <small>Posts, reels, stories</small>
-        </div>
-        <div class="hero-panel__agent fb">
-          <span>Facebook</span><strong>Lead Ads + Messenger</strong>
-          <small>Webhooks en tiempo real</small>
-        </div>
-        <div class="hero-panel__agent">
-          <span>n8n + CRM</span><strong>Orquestador y registro</strong>
-          <small>400+ integraciones</small>
-        </div>
-      </aside>
+      </div>
     </div>
   </section>
 </template>

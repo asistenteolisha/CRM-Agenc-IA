@@ -7,16 +7,16 @@ const navLinks = [
   { to: '/servicios', label: 'Servicios' },
   { to: '/casos', label: 'Casos' },
   { to: '/precios', label: 'Precios' },
+  { to: '/nosotros', label: 'Nosotros' },
   { to: '/contacto', label: 'Contacto' }
 ]
 </script>
 
 <template>
   <div class="site-shell">
-    <!-- Nav -->
     <header class="nav">
       <RouterLink class="nav__brand" to="/" aria-label="Agenc-IA inicio">
-        <span>Agenc</span><strong>-IA</strong>
+        <img src="/logo.svg" alt="Agenc-IA" style="height:28px" />
       </RouterLink>
       <nav class="nav__links" aria-label="Navegación principal">
         <RouterLink v-for="l in navLinks" :key="l.to" :to="l.to">{{ l.label }}</RouterLink>
@@ -26,20 +26,17 @@ const navLinks = [
       </button>
     </header>
 
-    <!-- Mobile menu -->
     <div class="mobile-menu" :class="{ open: mobileOpen }" @click.self="mobileOpen = false">
       <RouterLink v-for="l in navLinks" :key="l.to" :to="l.to" @click="mobileOpen = false">{{ l.label }}</RouterLink>
-      <a href="https://wa.me/573001234567" class="mobile-menu__cta">Hablar por WhatsApp →</a>
+      <a href="https://wa.me/573001234567" class="mobile-menu__cta">WhatsApp →</a>
     </div>
 
-    <!-- Page content -->
     <slot />
 
-    <!-- Footer -->
     <footer class="app-footer">
       <div class="app-footer__inner">
         <div class="app-footer__brand">
-          <span class="brand-name"><span>Agenc</span><strong>-IA</strong></span>
+          <span class="brand-name"><img src="/logo.svg" alt="Agenc-IA" style="height:24px" /></span>
           <p>Agentes IA para vender por WhatsApp, Instagram y Facebook. PYMES colombianas.</p>
         </div>
         <div class="app-footer__links">
@@ -47,6 +44,7 @@ const navLinks = [
           <RouterLink to="/servicios">Servicios</RouterLink>
           <RouterLink to="/casos">Casos</RouterLink>
           <RouterLink to="/precios">Precios</RouterLink>
+          <RouterLink to="/nosotros">Nosotros</RouterLink>
           <RouterLink to="/contacto">Contacto</RouterLink>
         </div>
         <div class="app-footer__links">
