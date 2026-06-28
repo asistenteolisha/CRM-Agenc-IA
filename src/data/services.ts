@@ -332,5 +332,97 @@ export const services: Service[] = [
       'Estimación de ROI proyectado'
     ],
     startingAt: '$290.000 COP (diagnóstico)'
+  },
+
+  // ─── DIFERENCIADORES PREMIUM ──────────────────────
+  {
+    id: 'managed-service',
+    category: 'premium',
+    title: 'Servicio gestionado 100%',
+    short:
+      'Tú no haces nada, nosotros todo. Configuramos, entrenamos, monitoreamos y optimizamos tu agente IA sin que muevas un dedo.',
+    outcome:
+      'Cero carga operativa para tu equipo. Nosotros nos encargamos de todo el ciclo de vida de tu agente.',
+    channels: ['whatsapp', 'instagram', 'facebook', 'crm', 'n8n'],
+    metaCapabilities: [],
+    deliverables: [
+      'Setup completo sin intervención del cliente',
+      'Entrenamiento inicial con tu tono de marca',
+      'Ajustes y mejoras continuas',
+      'Soporte humano dedicado'
+    ],
+    startingAt: 'Incluido en todos los planes'
+  },
+  {
+    id: 'trained-agents',
+    category: 'premium',
+    title: 'Agentes entrenados con tus datos',
+    short:
+      'Entrenamos cada agente con tu inventario real, precios, políticas y datos de negocio para respuestas precisas y contextualizadas.',
+    outcome:
+      'Tu agente IA responde como si conociera tu negocio de memoria, porque así es.',
+    channels: ['whatsapp', 'instagram', 'facebook'],
+    metaCapabilities: [],
+    deliverables: [
+      'RAG con datos propios del negocio',
+      'Inventario y precios integrados',
+      'Políticas y FAQ de tu empresa',
+      'Actualización periódica de conocimiento'
+    ],
+    startingAt: 'Incluido en Growth y Pro'
+  },
+  {
+    id: 'monitoring-247',
+    category: 'premium',
+    title: 'Monitoreo 24/7 con alertas',
+    short:
+      'Monitoreamos cada conversación en tiempo real. Si algo se sale del guion, recibes una alerta y nuestro equipo interviene.',
+    outcome:
+      'Tranquilidad total: tu agente nunca dice algo que no debe, y los problemas se detectan antes de que escalen.',
+    channels: ['whatsapp', 'instagram', 'facebook'],
+    metaCapabilities: [],
+    deliverables: [
+      'Monitoreo en tiempo real 24/7',
+      'Alertas automáticas por anomalías',
+      'Intervención humana cuando se necesita',
+      'Dashboard de estado en vivo'
+    ],
+    startingAt: 'Incluido en Growth y Pro'
+  },
+  {
+    id: 'weekly-reports',
+    category: 'premium',
+    title: 'Reportes de rendimiento semanales',
+    short:
+      'Cada semana recibes un reporte con leads capturados, conversaciones, tasa de respuesta, conversiones y recomendaciones de mejora.',
+    outcome:
+      'Visibilidad total del rendimiento de tu agente IA con datos accionables cada semana.',
+    channels: ['whatsapp', 'instagram', 'facebook', 'crm'],
+    metaCapabilities: [],
+    deliverables: [
+      'Reporte semanal automatizado',
+      'KPIs de conversación y conversión',
+      'Recomendaciones de optimización',
+      'Comparativa con semana anterior'
+    ],
+    startingAt: 'Incluido en Growth y Pro'
+  },
+  {
+    id: 'ai-optimization',
+    category: 'premium',
+    title: 'Optimización continua con IA',
+    short:
+      'Analizamos patrones de conversación, identificamos mejoras y optimizamos tu agente cada semana para que rinda más con el tiempo.',
+    outcome:
+      'Tu agente IA mejora semana tras semana. No es un software estático, es un sistema que aprende.',
+    channels: ['whatsapp', 'instagram', 'facebook', 'crm', 'n8n'],
+    metaCapabilities: [],
+    deliverables: [
+      'Análisis semanal de conversaciones',
+      'Ajuste de guiones y flujos',
+      'Pruebas A/B de respuestas',
+      'Mejora continua del puntaje de leads'
+    ],
+    startingAt: 'Incluido en Pro'
   }
 ]

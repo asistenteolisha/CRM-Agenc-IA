@@ -6,16 +6,17 @@ export const caseStudies: CaseStudy[] = [
     client: 'Concesionario en Bucaramanga',
     industry: 'Venta de vehículos',
     problem:
-      'El 60% de las consultas por WhatsApp no recibían respuesta en menos de 4 horas. Los vendedores estaban ocupados atendiendo clientes en sala y los mensajes se acumulaban sin clasificar.',
+      'Responder clientes 24/7 en WhatsApp, Facebook e Instagram. El concesionario perdía leads porque los vendedores no alcanzaban a responder fuera de horario y entre atención en sala.',
     solution:
-      'Agente de ventas por WhatsApp que recibe el mensaje, entiende intención, pregunta presupuesto, ciudad, tipo de carro, financiación y urgencia. Luego entrega un resumen con puntaje al vendedor asignado.',
+      'Agente IA con inventario integrado, captura de leads y seguimiento automático. Responde disponibilidad, precios y financiación en WhatsApp, Facebook e Instagram sin intervención manual.',
     results: [
-      { metric: 'Tiempo de primera respuesta', value: 'De 4 horas a <30 segundos' },
+      { metric: 'Respuesta en', value: '<30 segundos' },
+      { metric: 'Leads calificados', value: 'Automáticamente' },
+      { metric: 'Publicación en redes', value: 'Diaria en Facebook e Instagram' },
       { metric: 'Consultas atendidas 24/7', value: '85% del total' },
-      { metric: 'Leads calificados/mes', value: '3x más que antes' },
       { metric: 'Ahorro estimado en personal', value: '$1.200.000 COP/mes' }
     ],
-    channels: ['whatsapp', 'crm', 'n8n']
+    channels: ['whatsapp', 'instagram', 'facebook', 'crm', 'n8n']
   },
   {
     id: 'restaurante-zona',

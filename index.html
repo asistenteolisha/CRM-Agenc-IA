@@ -7,20 +7,26 @@
           content="Agenc-IA: Agentes IA para vender por WhatsApp, responder Instagram y cerrar más leads con tu equipo actual. Automatización conversacional para PYMES colombianas: WhatsApp Business API, Instagram DMs, Facebook Lead Ads, catálogos, CRM, n8n y seguimiento comercial." />
     <meta name="theme-color" content="#07110f" />
 
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://agenc-ia-topaz.vercel.app/" />
     <meta property="og:title" content="Agenc-IA | Agentes IA para vender por WhatsApp e Instagram" />
     <meta property="og:description" content="Automatización conversacional para PYMES colombianas. WhatsApp, Instagram, Facebook, CRM y n8n en un solo sistema." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://agenc-ia.com.co/" />
-    <meta property="og:image" content="https://agenc-ia.com.co/og-image.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <!-- TODO: Replace with proper 1200x630 OG image (og-image.png) -->
+    <meta property="og:image" content="https://agenc-ia-topaz.vercel.app/logo.svg" />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:alt" content="Agenc-IA — Agentes IA para PYMES colombianas" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Agenc-IA" />
 
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://agenc-ia-topaz.vercel.app/" />
     <meta name="twitter:title" content="Agenc-IA | Agentes IA para PYMES colombianas" />
     <meta name="twitter:description" content="Agentes IA para WhatsApp, Instagram y Facebook. Automatización, CRM y seguimiento comercial." />
-    <meta name="twitter:image" content="https://agenc-ia.com.co/og-image.png" />
+    <meta name="twitter:image" content="https://agenc-ia-topaz.vercel.app/logo.svg" />
 
-    <link rel="canonical" href="https://agenc-ia.com.co/" />
+    <link rel="canonical" href="https://agenc-ia-topaz.vercel.app/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Preconnect for performance -->
@@ -34,9 +40,9 @@
       "@type": "LocalBusiness",
       "name": "Agenc-IA",
       "description": "Agentes IA para vender por WhatsApp, Instagram y Facebook. Automatización conversacional para PYMES colombianas.",
-      "url": "https://agenc-ia.com.co",
+      "url": "https://agenc-ia-topaz.vercel.app",
       "email": "leinadgalaxy@gmail.com",
-      "telephone": "+573001234567",
+      "telephone": "+573012604061",
       "priceRange": "$$",
       "address": { "@type": "PostalAddress", "addressCountry": "CO" },
       "sameAs": [
@@ -51,16 +57,27 @@
       window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
 
-    <!-- Meta Pixel (placeholder — activar con ID real cuando haya) -->
-    <!-- <script>
+    <!-- Meta Pixel - Replace PIXEL_ID with actual ID -->
+    <script>
       !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', 'META_PIXEL_ID');
+      fbq('init', 'PIXEL_ID');
       fbq('track', 'PageView');
-    </script> -->
+    </script>
+
+    <!-- Google Analytics 4 - Replace GA_MEASUREMENT_ID with actual ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
 
     <title>Agenc-IA | Agentes IA para WhatsApp, Instagram y Facebook — PYMES Colombia</title>
   </head>
   <body>
+    <!-- Meta Pixel <noscript> fallback (must be in body, not head) -->
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=PIXEL_ID&ev=PageView&noscript=1" /></noscript>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>

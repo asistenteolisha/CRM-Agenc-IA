@@ -6,9 +6,11 @@ export const pricingPlans: PricingPlan[] = [
     name: 'Starter',
     setup: 900000,
     monthly: 390000,
+    annualDiscount: '20% de descuento pagando anual',
     description:
       'Ideal para negocios que quieren automatizar su primer canal y medir resultados.',
     includes: [
+      '1 canal + setup profesional + personalización básica',
       '1 agente IA en un canal (WhatsApp, Instagram o Facebook)',
       'Hasta 500 conversaciones al mes',
       '1 flujo n8n simple (ej: registro a Google Sheets)',
@@ -31,9 +33,12 @@ export const pricingPlans: PricingPlan[] = [
     setup: 1800000,
     monthly: 690000,
     recommended: true,
+    badge: 'MÁS POPULAR',
+    annualDiscount: '20% de descuento pagando anual',
     description:
       'Para PYMES que quieren agentes en todos los canales Meta + gestión de anuncios.',
     includes: [
+      'Todos los canales + Meta Ads + reportes semanales + CRM básico',
       'Agentes IA en todos los canales (WhatsApp + Instagram + Facebook + Messenger)',
       'Hasta 2,000 conversaciones al mes',
       '3 flujos n8n con manejo de errores',
@@ -56,9 +61,11 @@ export const pricingPlans: PricingPlan[] = [
     name: 'Pro',
     setup: 3500000,
     monthly: 1200000,
+    annualDiscount: '20% de descuento pagando anual',
     description:
       'Todo incluido: agentes ilimitados, integraciones profundas, reportes avanzados y personalización total.',
     includes: [
+      'Todo incluido + agente dedicado + soporte prioritario + integraciones custom',
       'Todo lo de Growth incluido',
       'Conversaciones sin límite',
       'Flujos n8n ilimitados',

@@ -9,6 +9,7 @@ export type ServiceCategory =
   | 'social'
   | 'automatizacion'
   | 'consultoria'
+  | 'premium'
 
 export interface Service {
   id: string
@@ -28,6 +29,8 @@ export interface PricingPlan {
   setup: number
   monthly: number
   recommended?: boolean
+  badge?: string
+  annualDiscount?: string
   description: string
   includes: string[]
   limits: string[]
