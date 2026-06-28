@@ -18,6 +18,17 @@ const chatBody = ref<HTMLElement | null>(null)
 const inputRef = ref<HTMLInputElement | null>(null)
 const isTyping = ref(false)
 
+// ── Rate limiting ────────────────────────────
+const MSG_LIMIT = 15
+function getMessageCount(): number {
+  return parseInt(localStorage.getItem('agencia_chat_msg_count') || '0', 10)
+}
+function incrementMessageCount(): void {
+  const count = getMessageCount() + 1
+  localStorage.setItem('agencia_chat_msg_count', String(count))
+}
+const isLimitReached = ref(getMessageCount() >= MSG_LIMIT)
+
 const quickActions: QuickAction[] = [
   { label: '¿Qué servicios ofrecen?', action: 'servicios' },
   { label: '¿Cuánto cuesta?', action: 'precios' },
@@ -69,8 +80,13 @@ async function fetchAgentReply(message: string): Promise<string | null> {
 }
 
 async function sendMessage(text?: string) {
+  if (isLimitReached.value) return
   const msg = text || input.value.trim()
   if (!msg) return
+  incrementMessageCount()
+  if (getMessageCount() >= MSG_LIMIT) {
+    isLimitReached.value = true
+  }
   messages.value.push({ role: 'user', text: msg })
   input.value = ''
 
@@ -180,7 +196,10 @@ watch(isOpen, async (open) => {
           </button>
         </div>
 
-        <div class="chat-widget__input">
+        <div v-if="isLimitReached" class="chat-widget__limit">
+          Has alcanzado el límite de mensajes. <a href="https://agenc-ia-topaz.vercel.app/#/contacto" target="_blank">Déjanos tu email para continuar.</a>
+        </div>
+        <div v-else class="chat-widget__input">
           <input ref="inputRef" v-model="input" type="text"
                  placeholder="Escribí tu mensaje..."
                  @keydown="handleKeydown" />
@@ -196,7 +215,14 @@ watch(isOpen, async (open) => {
 <script lang="ts">
 // Simple markdown-like formatter (inline, no dependency)
 function formatText(text: string): string {
-  return text
+  // Escape HTML entities BEFORE markdown conversion to prevent XSS
+  const escaped = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
+  return escaped
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\n/g, '<br>')
 }
@@ -288,6 +314,12 @@ export default {}
     &::placeholder { color: var(--text-muted); }
   }
 }
+.chat-widget__limit {
+  padding: 14px; text-align: center; font-size: 0.82rem; color: var(--text-muted);
+  border-top: 1px solid var(--border-light); background: var(--bg-primary);
+  a { color: var(--accent-amber); text-decoration: underline; }
+}
+
 .chat-send-btn {
   width: 38px; height: 38px; border-radius: 50%; border: none; background: var(--accent-amber); color: white;
   cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
