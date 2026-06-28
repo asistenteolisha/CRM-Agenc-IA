@@ -21,12 +21,14 @@ const pains = [
 ]
 
 const useCases = [
-  { icon: 'Car', title: 'Concesionarios y compraventas', desc: 'Califica compradores por WhatsApp. El vendedor recibe el lead caliente listo para cerrar.' },
-  { icon: 'UtensilsCrossed', title: 'Restaurantes y cafés', desc: 'Menú, horarios y reservas por Instagram DM y WhatsApp. Recordatorios automáticos.' },
-  { icon: 'Stethoscope', title: 'Clínicas y consultorios', desc: 'Agenda citas, confirma asistencia y reduce ausentismo con WhatsApp Flows.' },
-  { icon: 'Home', title: 'Inmobiliarias', desc: 'Lead Ads de Facebook → WhatsApp con catálogo de inmuebles y agenda de visitas.' },
-  { icon: 'ShoppingBag', title: 'E-commerce y marcas', desc: 'Catálogo WhatsApp + pedidos + seguimiento de envío. Todo en el chat.' },
-  { icon: 'Briefcase', title: 'Servicios profesionales', desc: 'Recibe documentos, resume, clasifica. Abogados, contadores, consultores.' }
+  { icon: 'Car', title: 'Venta de vehículos', desc: 'Califica compradores por WhatsApp. El vendedor recibe el lead caliente con presupuesto, ciudad y tipo de carro listo para cerrar.' },
+  { icon: 'UtensilsCrossed', title: 'Restaurantes', desc: 'Menú, horarios y reservas por Instagram DM y WhatsApp. Recordatorios automáticos que reducen no-shows.' },
+  { icon: 'Glasses', title: 'Ópticas', desc: 'Agenda exámenes de vista, responde sobre marcos y lentes, y gestiona pedidos por WhatsApp e Instagram.' },
+  { icon: 'ShoppingBag', title: 'Retail', desc: 'Catálogo WhatsApp + pedidos + seguimiento de envío. Atención al cliente y gestión de devoluciones.' },
+  { icon: 'Scissors', title: 'Salones de belleza', desc: 'Agenda citas, muestra servicios y precios, envía recordatorios y gestiona cancelaciones por WhatsApp.' },
+  { icon: 'Home', title: 'Bienes raíces', desc: 'Lead Ads de Facebook → WhatsApp con catálogo de inmuebles y agenda de visitas automáticas.' },
+  { icon: 'GraduationCap', title: 'Educación', desc: 'Responde sobre programas, admisiones y horarios. Agenda entrevistas y captura aspirantes por WhatsApp y Facebook.' },
+  { icon: 'Dumbbell', title: 'Fitness', desc: 'Gestiona membresías, agenda clases, responde precios y envía recordatorios de entrenamiento por WhatsApp.' }
 ]
 
 let lenis: Lenis | null = null
@@ -78,9 +80,9 @@ onUnmounted(() => {
 <template>
   <div class="page-home">
     <HeroSection
-      hero-badge="Agentes IA que venden, atienden y crecen con vos"
+      hero-badge="Agentes de IA para PYMEs colombianas"
       hero-title="Agentes IA para WhatsApp, Instagram y Facebook — sin contratar más equipo."
-      hero-lead="Implementamos automatización conversacional para PYMES colombianas. Diagnóstico gratis en 20 minutos."
+      hero-lead="Automatización conversacional desde $390.000/mes. Diagnóstico gratis en 20 minutos."
       primary-cta="Agendar diagnóstico"
       secondary-cta="Ver servicios"
     />

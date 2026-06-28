@@ -24,7 +24,7 @@ export const faqs: FaqItem[] = [
   {
     question: '¿Qué pasa si el agente no sabe responder algo?',
     answer:
-      'El agente escala al equipo humano por WhatsApp, Messenger o email según la urgencia. En el plan Business y Enterprise, configuramos reglas de escalamiento por palabras sensibles (ej: "cancelar", "abogado", "demanda", "urgencia", "queja"). El cliente nunca se queda sin respuesta: si el bot no puede, un humano toma el control.'
+      'El agente escala al equipo humano por WhatsApp, Messenger o email según la urgencia. En los planes Growth y Pro, configuramos reglas de escalamiento por palabras sensibles (ej: "cancelar", "abogado", "demanda", "urgencia", "queja"). El cliente nunca se queda sin respuesta: si el bot no puede, un humano toma el control.'
   },
   {
     question: '¿Puedo aprobar mensajes antes de que se envíen?',
@@ -39,12 +39,12 @@ export const faqs: FaqItem[] = [
   {
     question: '¿Cuánto tiempo toma tener el agente funcionando?',
     answer:
-      'Un agente básico (plan Starter) puede estar en producción en 5 a 7 días hábiles después del diagnóstico. Un sistema más completo (plan Business con múltiples canales y CRM) toma entre 2 y 3 semanas. El setup incluye: diagnóstico (día 1), blueprint del flujo (día 2-3), build y pruebas internas (día 4-6), y pruebas con datos reales antes del lanzamiento.'
+      'Un agente básico (plan Starter) puede estar en producción en 5 a 7 días hábiles después del diagnóstico. Un sistema más completo (plan Growth con múltiples canales y Meta Ads) toma entre 7 y 10 días. El setup incluye: diagnóstico (día 1), blueprint del flujo (día 2-3), build y pruebas internas (día 4-6), y pruebas con datos reales antes del lanzamiento.'
   },
   {
     question: '¿Cuánto cuesta mantener el agente al mes?',
     answer:
-      'El plan Starter cuesta $690.000 COP/mes + setup de $800.000 COP (una sola vez). El plan Business cuesta $1.200.000 COP/mes + setup de $1.500.000 COP. A esto se suman los costos de Meta Cloud API (aproximadamente $0.05 USD por conversación, Meta cobra por mensaje individual). Para un negocio con 500 conversaciones al mes, el costo de Meta ronda los $25-40 USD.'
+      'El plan Starter cuesta $390.000 COP/mes + setup de $900.000 COP (una sola vez). El plan Growth cuesta $690.000 COP/mes + setup de $1.800.000 COP. El plan Pro cuesta $1.200.000 COP/mes + setup de $3.500.000 COP. A esto se suman los costos de Meta Cloud API (aproximadamente $0.05 USD por conversación, Meta cobra por mensaje individual). Para un negocio con 500 conversaciones al mes, el costo de Meta ronda los $25-40 USD.'
   },
   {
     question: '¿Los costos de mensajes de Meta están incluidos en el plan?',
@@ -64,12 +64,12 @@ export const faqs: FaqItem[] = [
   {
     question: '¿Pueden crear contenido y publicarlo en redes sociales?',
     answer:
-      'Sí, el servicio de Social Media Agent (incluido en Business y Enterprise) cubre la programación y publicación de contenido en Facebook e Instagram: fotos, reels, carruseles y stories. También genera reportes de métricas. La creación del contenido (flyers, copies, videos) la hace nuestro equipo con asistencia de IA.'
+      'Sí, el servicio de publicación automática (incluido en Growth y Pro) cubre la programación y publicación de contenido en Facebook e Instagram: fotos, reels, carruseles y stories. También genera reportes de métricas. La creación del contenido (flyers, copies, videos) la hace nuestro equipo con asistencia de IA.'
   },
   {
     question: '¿Cómo mido si el agente está generando resultados?',
     answer:
-      'Cada mes recibís un dashboard (Google Sheets o Looker Studio) con: leads entrantes por canal, tasa de respuesta, leads calificados, conversiones, tiempo promedio de respuesta, temas más consultados y ROI estimado. En el plan Business y Enterprise el dashboard se actualiza automáticamente.'
+      'Cada mes recibís un dashboard (Google Sheets o Looker Studio) con: leads entrantes por canal, tasa de respuesta, leads calificados, conversiones, tiempo promedio de respuesta, temas más consultados y ROI estimado. En los planes Growth y Pro el dashboard se actualiza automáticamente.'
   },
   {
     question: '¿Qué pasa si quiero cancelar?',

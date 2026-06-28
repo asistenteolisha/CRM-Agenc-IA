@@ -1,43 +1,73 @@
 import type { Service } from './content'
 
 export const services: Service[] = [
-  // ─── VENTAS ───────────────────────────────────────
+  // ─── AGENTES IA ────────────────────────────────────
   {
-    id: 'whatsapp-sales-agent',
+    id: 'whatsapp-agent',
     category: 'ventas',
-    title: 'Agente de ventas por WhatsApp',
+    title: 'Agente de WhatsApp',
     short:
-      'Califica leads en segundos y avisa al vendedor cuando hay oportunidad real de cierre.',
+      'Agente IA completo para WhatsApp que califica leads, responde preguntas, muestra catálogo y agenda citas 24/7.',
     outcome:
-      'Menos leads perdidos y más conversaciones listas para cerrar.',
+      'Tus clientes reciben respuesta en menos de 30 segundos, cualquier hora del día.',
     channels: ['whatsapp', 'crm', 'n8n'],
     metaCapabilities: [
       'Botones rápidos',
       'Listas interactivas',
       'Templates HSM',
       'Webhooks en tiempo real',
-      'Estados de lectura y entrega'
+      'Estados de lectura y entrega',
+      'Catálogo de productos',
+      'Flows interactivos'
     ],
     deliverables: [
-      'Guion conversacional por negocio',
+      'Guion conversacional personalizado por negocio',
       'Flujo de calificación (presupuesto, urgencia, ubicación)',
       'Registro automático en CRM u hoja de cálculo',
       'Resumen de lead con puntaje',
-      'Secuencia de seguimiento automatizada'
+      'Secuencia de seguimiento automatizada',
+      'Integración con Google Calendar para citas'
     ],
-    startingAt: '$690.000 COP/mes'
+    startingAt: '$390.000 COP/mes'
   },
   {
-    id: 'instagram-dm-agent',
+    id: 'facebook-agent',
     category: 'ventas',
-    title: 'Agente de Instagram DMs',
+    title: 'Agente de Facebook',
     short:
-      'Responde DMs y stories con información útil, captura datos y deriva a WhatsApp cuando hay intención real de compra.',
+      'Agente IA que responde mensajes de Facebook Messenger, comentarios en posts y gestiona leads de Facebook Lead Ads.',
+    outcome:
+      'Cada lead de Facebook entra a un flujo medible de venta sin intervención manual.',
+    channels: ['facebook', 'whatsapp', 'crm'],
+    metaCapabilities: [
+      'Messenger automático',
+      'Lead Ads con webhook',
+      'Comentarios en posts',
+      'Respuestas citadas',
+      'Webhooks de moderación'
+    ],
+    deliverables: [
+      'Conexión Lead Ads → webhook → WhatsApp',
+      'Flujo de respuesta automática en Messenger',
+      'Etiquetado por origen de campaña',
+      'Registro en CRM',
+      'Reporte de conversión por campaña'
+    ],
+    startingAt: '$390.000 COP/mes'
+  },
+  {
+    id: 'instagram-agent',
+    category: 'ventas',
+    title: 'Agente de Instagram',
+    short:
+      'Responde DMs, comentarios en posts y stories con información útil, captura datos y deriva a WhatsApp cuando hay intención real.',
     outcome:
       'Cada mensaje de Instagram recibe respuesta útil en menos de un minuto.',
     channels: ['instagram', 'whatsapp', 'crm'],
     metaCapabilities: [
-      'DMs',
+      'DMs automáticos',
+      'Respuesta a comentarios en posts',
+      'Respuesta a comentarios en reels',
       'Story replies',
       'Multimedia',
       'Webhooks'
@@ -48,154 +78,66 @@ export const services: Service[] = [
       'Derivación a WhatsApp con contexto',
       'Reporte semanal de consultas frecuentes'
     ],
-    startingAt: '$550.000 COP/mes'
+    startingAt: '$390.000 COP/mes'
   },
   {
-    id: 'facebook-lead-ad-funnel',
+    id: 'messenger-agent',
     category: 'ventas',
-    title: 'Funnel Meta Completo',
+    title: 'Agente de Messenger',
     short:
-      'Lead Ads de Facebook que disparan WhatsApp en segundos. Comentario en post que abre DM con oferta y registro en CRM.',
+      'Agente IA para Facebook Messenger que atiende consultas, califica interesados y agenda citas directamente desde el chat.',
     outcome:
-      'Todo lead de Meta entra a un flujo medible de venta sin intervención manual.',
-    channels: ['facebook', 'whatsapp', 'instagram', 'crm', 'n8n'],
+      'Messenger se convierte en un canal de venta activo con respuesta instantánea.',
+    channels: ['facebook', 'messenger', 'crm'],
+    metaCapabilities: [
+      'Messenger API',
+      'Botones y plantillas',
+      'Compartir ubicación',
+      'Webhooks en tiempo real'
+    ],
+    deliverables: [
+      'Flujo conversacional personalizado',
+      'Calificación automática de leads',
+      'Agendamiento de citas',
+      'Integración con CRM'
+    ],
+    startingAt: '$390.000 COP/mes'
+  },
+
+  // ─── META ADS ──────────────────────────────────────
+  {
+    id: 'meta-ads-management',
+    category: 'ventas',
+    title: 'Gestión de Meta Ads',
+    short:
+      'Creación, optimización y reporte de campañas en Facebook e Instagram Ads enfocadas en capturar leads y generar ventas.',
+    outcome:
+      'Más leads calificados a menor costo por adquisición con campañas optimizadas.',
+    channels: ['facebook', 'instagram', 'crm', 'n8n'],
     metaCapabilities: [
       'Lead Ads con webhook',
-      'Comentarios FB/IG',
-      'Messenger',
-      'WhatsApp templates',
-      'CRM webhook'
+      'Campañas de conversación',
+      'Audiencias personalizadas',
+      'Pixel de Meta',
+      'API de Conversiones'
     ],
     deliverables: [
-      'Conexión Lead Ads → webhook → WhatsApp',
-      'Flujo DM desde comentario',
-      'Etiquetado por origen de campaña',
-      'Registro en CRM',
-      'Reporte de conversión por canal'
+      'Estrategia de campañas por industria',
+      'Creatividades y copies para anuncios',
+      'Configuración de audiencias',
+      'Optimización semanal de presupuesto',
+      'Reporte mensual de rendimiento'
     ],
-    startingAt: '$890.000 COP/mes'
-  },
-  {
-    id: 'cold-lead-recovery',
-    category: 'ventas',
-    title: 'Recuperación de leads fríos',
-    short:
-      'Secuencias automáticas por WhatsApp para leads que preguntaron y no compraron, con seguimiento inteligente sin saturar.',
-    outcome:
-      'Hasta 30% de leads fríos recuperados con mensajes en el momento adecuado.',
-    channels: ['whatsapp', 'crm'],
-    metaCapabilities: [
-      'Templates HSM',
-      'Estados de entrega',
-      'Programación de mensajes'
-    ],
-    deliverables: [
-      'Secuencias de seguimiento (3, 7, 14, 30 días)',
-      'Reglas de supresión',
-      'Reporte de tasa de recuperación'
-    ],
-    startingAt: '$450.000 COP/mes'
+    startingAt: '$690.000 COP/mes'
   },
 
-  // ─── SOPORTE ──────────────────────────────────────
+  // ─── SOCIAL MEDIA ──────────────────────────────────
   {
-    id: 'customer-support-agent',
-    category: 'soporte',
-    title: 'Agente de atención al cliente',
-    short:
-      'Responde preguntas frecuentes, envía documentos y escala casos sensibles a un humano. 24/7 sin dejar esperando a nadie.',
-    outcome:
-      '85% de consultas resueltas sin intervención humana. El equipo solo atiende lo que requiere criterio.',
-    channels: ['whatsapp', 'instagram', 'facebook'],
-    metaCapabilities: [
-      'Texto, multimedia, documentos, ubicación',
-      'Respuestas citadas',
-      'Listas y botones',
-      'Handoff a Messenger o WhatsApp humano'
-    ],
-    deliverables: [
-      'Base de conocimiento inicial',
-      'Flujo de escalamiento',
-      'Registro de casos',
-      'Medición de temas frecuentes'
-    ],
-    startingAt: '$550.000 COP/mes'
-  },
-  {
-    id: 'smart-moderation',
-    category: 'soporte',
-    title: 'Moderador inteligente de comunidad',
-    short:
-      'Filtra spam, oculta comentarios ofensivos y alerta sobre mensajes sensibles en Facebook e Instagram.',
-    outcome:
-      'Comunidad limpia y profesional sin un community manager revisando cada comentario.',
-    channels: ['facebook', 'instagram'],
-    metaCapabilities: [
-      'Ocultar / mostrar / eliminar comentarios',
-      'Detección de sentimiento',
-      'Webhooks de moderación'
-    ],
-    deliverables: [
-      'Reglas de moderación personalizadas',
-      'Panel de alertas',
-      'Reporte mensual de moderación'
-    ],
-    startingAt: '$390.000 COP/mes'
-  },
-
-  // ─── ECOMMERCE ────────────────────────────────────
-  {
-    id: 'conversational-ecommerce',
-    category: 'ecommerce',
-    title: 'E-commerce conversacional',
-    short:
-      'Convierte Instagram y WhatsApp en una tienda asistida por IA: catálogo, carrito, pedido y seguimiento.',
-    outcome:
-      'Ventas directas desde el chat sin sacar al cliente a otra app o página.',
-    channels: ['whatsapp', 'instagram'],
-    metaCapabilities: [
-      'Catálogo WhatsApp',
-      'Pedidos y carrito',
-      'Templates de confirmación',
-      'Links de pago'
-    ],
-    deliverables: [
-      'Catálogo sincronizado',
-      'Flujo de compra completo',
-      'Confirmación y seguimiento postventa',
-      'Integración con Shopify / WooCommerce (opcional)'
-    ],
-    startingAt: '$790.000 COP/mes'
-  },
-
-  // ─── SOCIAL ───────────────────────────────────────
-  {
-    id: 'social-comments-agent',
+    id: 'auto-publishing',
     category: 'social',
-    title: 'Agente de comentarios FB/IG',
+    title: 'Publicación automática',
     short:
-      'Responde automáticamente a comentarios "precio", "info" o "disponible" en posts y reels, y deriva al DM.',
-    outcome:
-      'Cero leads perdidos por comentarios sin respuesta.',
-    channels: ['facebook', 'instagram'],
-    metaCapabilities: [
-      'Comentarios en posts y reels',
-      'Respuesta pública y DM privado',
-      'Detección de intención'
-    ],
-    deliverables: [
-      'Script de respuestas',
-      'Reglas de respuesta pública vs. privada',
-      'Reporte de leads capturados desde comentarios'
-    ],
-    startingAt: '$390.000 COP/mes'
-  },
-  {
-    id: 'social-media-agent',
-    category: 'social',
-    title: 'Social Media Agent',
-    short:
-      'Publica, programa y mide contenido en Facebook e Instagram con rutina operativa, sin improvisación.',
+      'Publica y programa contenido en Facebook e Instagram de forma automática. Calendario editorial con métricas de rendimiento.',
     outcome:
       'Presencia constante en redes sin un community manager de tiempo completo.',
     channels: ['facebook', 'instagram'],
@@ -212,6 +154,103 @@ export const services: Service[] = [
       'Sugerencias de mejora basadas en datos'
     ],
     startingAt: '$590.000 COP/mes'
+  },
+  {
+    id: 'comment-response',
+    category: 'social',
+    title: 'Respuesta a comentarios',
+    short:
+      'Responde automáticamente a comentarios en posts y reels de Facebook e Instagram. Detecta intención y deriva al DM o WhatsApp.',
+    outcome:
+      'Cero leads perdidos por comentarios sin respuesta. Cada comentario se convierte en oportunidad.',
+    channels: ['facebook', 'instagram', 'whatsapp'],
+    metaCapabilities: [
+      'Comentarios en posts y reels',
+      'Respuesta pública y DM privado',
+      'Detección de intención',
+      'Moderación inteligente'
+    ],
+    deliverables: [
+      'Script de respuestas por tipo de comentario',
+      'Reglas de respuesta pública vs. privada',
+      'Derivación automática a WhatsApp',
+      'Reporte de leads capturados desde comentarios'
+    ],
+    startingAt: '$390.000 COP/mes'
+  },
+
+  // ─── CAPTURA Y LEADS ──────────────────────────────
+  {
+    id: 'lead-capture',
+    category: 'ventas',
+    title: 'Captura de leads',
+    short:
+      'Sistema completo de captura de leads desde todos los canales Meta: WhatsApp, Instagram DMs, Facebook comments y Lead Ads.',
+    outcome:
+      'Todos tus leads capturados en un solo lugar con clasificación automática por calidad.',
+    channels: ['whatsapp', 'instagram', 'facebook', 'crm', 'n8n'],
+    metaCapabilities: [
+      'Lead Ads con webhook',
+      'DMs automáticos',
+      'Comentarios con captura',
+      'Webhooks en tiempo real',
+      'CRM integration'
+    ],
+    deliverables: [
+      'Formularios de captura por canal',
+      'Clasificación automática de leads',
+      'Registro unificado en CRM',
+      'Notificación instantánea al equipo comercial',
+      'Dashboard de leads por origen'
+    ],
+    startingAt: '$390.000 COP/mes'
+  },
+
+  // ─── REPORTES ──────────────────────────────────────
+  {
+    id: 'performance-reports',
+    category: 'automatizacion',
+    title: 'Reportes de rendimiento',
+    short:
+      'Dashboard unificado con métricas de todos tus canales: conversaciones, leads, conversiones, engagement y ROI de campañas.',
+    outcome:
+      'Una sola pantalla para saber cuántos leads entraron, cuántos se convirtieron y qué canal rindió más.',
+    channels: ['whatsapp', 'instagram', 'facebook', 'crm'],
+    metaCapabilities: [
+      'Insights FB/IG',
+      'Métricas de WhatsApp',
+      'Datos de CRM',
+      'Métricas de campañas Ads'
+    ],
+    deliverables: [
+      'Dashboard en Google Sheets o Looker Studio',
+      'KPIs principales por canal',
+      'Actualización automática semanal',
+      'Reporte ejecutivo mensual PDF'
+    ],
+    startingAt: '$390.000 COP/mes'
+  },
+
+  // ─── ONBOARDING ────────────────────────────────────
+  {
+    id: 'automated-onboarding',
+    category: 'automatizacion',
+    title: 'Onboarding automatizado',
+    short:
+      'Proceso de implementación guiado y automatizado: diagnóstico, configuración, pruebas y lanzamiento en 7-10 días.',
+    outcome:
+      'Tu agente IA está funcionando con clientes reales en menos de 10 días.',
+    channels: ['whatsapp', 'n8n'],
+    metaCapabilities: [],
+    deliverables: [
+      'Diagnóstico de canales y procesos (20 min)',
+      'Blueprint de flujos conversacionales',
+      'Configuración de agentes en canales elegidos',
+      'Pruebas internas y validación',
+      'Lanzamiento con monitoreo en tiempo real',
+      'Capacitación básica del equipo'
+    ],
+    startingAt: 'Incluido en setup'
   },
 
   // ─── AUTOMATIZACIÓN ───────────────────────────────
@@ -274,51 +313,8 @@ export const services: Service[] = [
     ],
     startingAt: '$490.000 COP/mes'
   },
-  {
-    id: 'commercial-dashboard',
-    category: 'automatizacion',
-    title: 'Dashboard comercial y social',
-    short:
-      'Panel unificado de leads, conversiones, respuesta y métricas sociales. Todo lo que necesitas para decidir.',
-    outcome:
-      'Una sola pantalla para saber cuántos leads entraron, cuántos se convirtieron y qué canal rindió más.',
-    channels: ['whatsapp', 'instagram', 'facebook', 'crm'],
-    metaCapabilities: [
-      'Insights FB/IG',
-      'Métricas de WhatsApp',
-      'Datos de CRM'
-    ],
-    deliverables: [
-      'Dashboard en Google Sheets o Looker Studio',
-      'KPIs principales',
-      'Actualización automática semanal'
-    ],
-    startingAt: '$390.000 COP/mes'
-  },
 
   // ─── CONSULTORÍA ──────────────────────────────────
-  {
-    id: 'document-backoffice-agent',
-    category: 'consultoria',
-    title: 'Agente documental / backoffice',
-    short:
-      'Recibe documentos por WhatsApp, los resume, clasifica y prepara para revisión humana. Ideal para abogados y consultores.',
-    outcome:
-      'Menos horas perdidas organizando papeles. Todo llega clasificado y resumido.',
-    channels: ['whatsapp', 'n8n'],
-    metaCapabilities: [
-      'Documentos y adjuntos',
-      'Multimedia',
-      'Webhooks'
-    ],
-    deliverables: [
-      'Clasificación automática',
-      'Resúmenes de documentos',
-      'Registro en sistema de tareas',
-      'Alerta cuando hay algo urgente'
-    ],
-    startingAt: '$590.000 COP/mes'
-  },
   {
     id: 'ia-consulting-roadmap',
     category: 'consultoria',

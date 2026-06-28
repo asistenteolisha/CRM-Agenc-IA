@@ -30,7 +30,7 @@ export const integrationGroups: IntegrationGroup[] = [
       { name: 'HubSpot', description: 'CRM completo con seguimiento de leads y pipeline de ventas.' },
       { name: 'Zoho CRM', description: 'CRM popular en PYMES colombianas.' },
       { name: 'Pipedrive', description: 'Pipeline de ventas visual y seguimiento de oportunidades.' },
-      { name: 'Salesforce', description: 'CRM enterprise (disponible en plan Enterprise).' },
+      { name: 'Salesforce', description: 'CRM enterprise (disponible en plan Pro).' },
       { name: 'Airtable', description: 'Base de datos flexible con vistas personalizables.' },
       { name: 'Google Sheets', description: 'Perfecto para arrancar sin invertir en CRM.' },
       { name: 'Notion', description: 'Gestión de leads y tareas en un solo lugar.' }

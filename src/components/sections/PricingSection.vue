@@ -9,8 +9,8 @@ gsap.registerPlugin(ScrollTrigger)
 
 const planIcons: Record<string, string> = {
   starter: 'Zap',
-  business: 'Rocket',
-  enterprise: 'Building2'
+  growth: 'Rocket',
+  pro: 'Building2'
 }
 
 onMounted(() => {
@@ -42,16 +42,11 @@ onMounted(() => {
             <span class="pricing-prefix">Desde</span>
             <strong>${{ p.monthly.toLocaleString('es-CO') }}</strong><span class="pricing-period">/mes</span>
           </div>
-          <div v-else class="pricing-monthly">
-            <span class="pricing-prefix">Desde</span>
-            <strong>$2.500.000</strong><span class="pricing-period">/mes</span>
-          </div>
           <div v-if="p.setup > 0" class="pricing-setup">Setup único: ${{ p.setup.toLocaleString('es-CO') }}</div>
-          <div v-else class="pricing-setup">Setup: incluido en cotización</div>
         </div>
         <div class="pricing-value">
           <IconInline name="TrendingUp" :size="14" />
-          {{ p.id === 'enterprise' ? 'Incluye setup, soporte y ajustes mensuales' : 'Ahorra ~$2M/mes vs contratar un asistente' }}
+          {{ p.id === 'pro' ? 'Incluye setup, soporte y ajustes mensuales' : 'Ahorra ~$2M/mes vs contratar un asistente' }}
         </div>
         <ul class="pricing-features">
           <li v-for="inc in p.includes" :key="inc">
@@ -62,7 +57,7 @@ onMounted(() => {
           <li v-for="lim in p.limits" :key="lim">• {{ lim }}</li>
         </ul>
         <a href="/#/contacto" class="btn pricing-cta" :class="p.recommended ? 'btn--primary' : 'btn--secondary'">
-          {{ p.id === 'enterprise' ? 'Solicitar cotización' : 'Empezar diagnóstico' }}
+          {{ p.id === 'pro' ? 'Solicitar cotización' : 'Empezar diagnóstico' }}
         </a>
       </article>
     </div>

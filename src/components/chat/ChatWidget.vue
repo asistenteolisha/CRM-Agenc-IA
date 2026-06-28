@@ -31,7 +31,7 @@ function getResponse(msg: string): string {
   if (q.includes('servicio') || q.includes('ofrecen') || q.includes('hacen'))
     return '🔧 Ofrecemos 15 agentes IA para PYMES:\n\n📱 **Ventas:** WhatsApp, Instagram DMs, Funnel Meta completo\n💬 **Atención:** Soporte 24/7, Moderador de comunidad\n🛒 **E-commerce:** Catálogo WhatsApp + pedidos\n📊 **Automatización:** n8n + CRM, Web funnel, Agendamiento, Dashboard\n💡 **Consultoría:** Documental, Roadmap IA\n\n¿Querés que te cuente de alguno en detalle?'
   if (q.includes('precio') || q.includes('cuesta') || q.includes('costo') || q.includes('plan') || q.includes('vale'))
-    return '💰 Tenemos 3 planes:\n\n⭐ **Starter** — $690.000/mes (1 agente, 500 conv/mes)\n🚀 **Business** — $1.200.000/mes (2 agentes, CRM, dashboard)\n🏢 **Enterprise** — Cotización personalizada\n\nSetup único desde $800.000. Diagnóstico inicial SIN COSTO.\n\n¿Querés que agendemos una llamada de 20 min?'
+    return '💰 Tenemos 3 planes:\n\n⭐ **Starter** — $390.000/mes (1 canal, 500 conv/mes)\n🚀 **Growth** — $690.000/mes (todos los canales + Meta Ads)\n🏢 **Pro** — $1.200.000/mes (todo incluido + personalización)\n\nSetup único desde $900.000. Diagnóstico SIN COSTO.\n\n¿Querés que agendemos una llamada de 20 min?'
   if (q.includes('diagnóstico') || q.includes('diagnostico') || q.includes('agendar') || q.includes('contacto') || q.includes('hablar') || q.includes('llamada'))
     return '✅ ¡Perfecto! Dejame tus datos y te contacto:\n\n📝 Nombre:\n📱 WhatsApp:\n📧 Email:\n🏢 Tipo de negocio:\n\nO si preferís, agendá vos mismo: https://agenc-ia-topaz.vercel.app/#/contacto'
   if (q.includes('cómo funciona') || q.includes('como funciona') || q.includes('funciona') || q.includes('proceso'))

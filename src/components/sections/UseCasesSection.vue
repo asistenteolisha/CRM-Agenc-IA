@@ -1,19 +1,21 @@
 <script setup lang="ts">
 const useCases = [
-  { title: 'Concesionarios y compraventas', desc: 'Califica compradores, presupuesto y urgencia por WhatsApp. Avisa al vendedor cuando hay lead caliente con todos los datos listos para cerrar.', emoji: '🚗' },
-  { title: 'Restaurantes y cafés', desc: 'Responde menú, horarios, ubicación y toma reservas por Instagram DM y WhatsApp 24/7. Recordatorios automáticos que reducen no-shows.', emoji: '🍽️' },
-  { title: 'Clínicas y consultorios', desc: 'Agenda citas, confirma asistencia y reduce ausentismo con recordatorios por WhatsApp. Captura datos del paciente antes de la consulta.', emoji: '🏥' },
-  { title: 'Inmobiliarias', desc: 'Lead Ads de Facebook → WhatsApp con catálogo de inmuebles actualizado. Califica presupuesto, zona y agenda visita automáticamente.', emoji: '🏠' },
-  { title: 'E-commerce y marcas D2C', desc: 'Catálogo WhatsApp, pedidos, carrito y seguimiento de envío. Todo en el chat sin sacar al cliente a otra app o página.', emoji: '🛍️' },
-  { title: 'Servicios profesionales', desc: 'Recibe documentos por WhatsApp, resume, clasifica y prepara para revisión del profesional. Ideal para abogados, contadores y consultores.', emoji: '📋' }
+  { title: 'Venta de vehículos', desc: 'Califica compradores, presupuesto y urgencia por WhatsApp. El vendedor recibe el lead caliente con todos los datos listos para cerrar.', emoji: '🚗' },
+  { title: 'Restaurantes', desc: 'Responde menú, horarios, ubicación y toma reservas por Instagram DM y WhatsApp 24/7. Recordatorios automáticos que reducen no-shows.', emoji: '🍽️' },
+  { title: 'Ópticas', desc: 'Agenda exámenes de vista, responde sobre marcos y lentes, gestiona pedidos y envía recordatorios de revisión por WhatsApp.', emoji: '👓' },
+  { title: 'Retail', desc: 'Catálogo WhatsApp, pedidos, seguimiento de envío y atención al cliente. Todo en el chat sin sacar al cliente a otra app.', emoji: '🛍️' },
+  { title: 'Salones de belleza', desc: 'Agenda citas, muestra servicios y precios, envía recordatorios y gestiona cancelaciones por WhatsApp e Instagram.', emoji: '💇' },
+  { title: 'Bienes raíces', desc: 'Lead Ads de Facebook → WhatsApp con catálogo de inmuebles actualizado. Califica presupuesto, zona y agenda visita automáticamente.', emoji: '🏠' },
+  { title: 'Educación', desc: 'Responde sobre programas, admisiones y horarios. Agenda entrevistas y captura aspirantes por WhatsApp y Facebook.', emoji: '🎓' },
+  { title: 'Fitness', desc: 'Gestiona membresías, agenda clases, responde precios y envía recordatorios de entrenamiento por WhatsApp.', emoji: '💪' }
 ]
 </script>
 
 <template>
   <section id="casos" class="section">
     <div class="section__head" data-reveal>
-      <p class="eyebrow">Casos de uso</p>
-      <h2>Agentes IA para cada tipo de negocio en Colombia.</h2>
+      <p class="eyebrow">Industrias</p>
+      <h2>Agentes de IA para cada tipo de negocio en Colombia.</h2>
       <p>No importa tu industria: si recibís mensajes de clientes, podemos automatizar la conversación.</p>
     </div>
     <div class="usecase-grid">
