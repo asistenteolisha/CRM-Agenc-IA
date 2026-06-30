@@ -80,9 +80,9 @@ onUnmounted(() => {
 <template>
   <div class="page-home">
     <HeroSection
-      hero-badge="Agentes de IA para PYMEs colombianas"
+      hero-badge="Servicio Premium de Agentes IA"
       hero-title="Agentes IA para WhatsApp, Instagram y Facebook — sin contratar más equipo."
-      hero-lead="Automatización conversacional desde $390.000/mes. Diagnóstico gratis en 20 minutos."
+      hero-lead="No vendemos herramientas. Entregamos resultados."
       primary-cta="Agendar diagnóstico"
       secondary-cta="Ver servicios"
     />

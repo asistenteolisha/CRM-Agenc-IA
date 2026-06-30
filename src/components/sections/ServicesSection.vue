@@ -2,8 +2,9 @@
 import { ref } from 'vue'
 import { services } from '../../data/services'
 import IconInline from '../IconInline.vue'
+import { trackEvent } from '../../utils/analytics'
 
-type Cat = 'todas' | 'ventas' | 'soporte' | 'ecommerce' | 'social' | 'automatizacion' | 'consultoria'
+type Cat = 'todas' | 'ventas' | 'soporte' | 'ecommerce' | 'social' | 'automatizacion' | 'consultoria' | 'premium'
 const cats: { key: Cat; label: string }[] = [
   { key: 'todas', label: 'Todas' },
   { key: 'ventas', label: 'Ventas' },
@@ -12,9 +13,11 @@ const cats: { key: Cat; label: string }[] = [
   { key: 'social', label: 'Social' },
   { key: 'automatizacion', label: 'Automatización' },
   { key: 'consultoria', label: 'Consultoría' },
+  { key: 'premium', label: 'Premium' },
 ]
 
 const activeFilter = ref<Cat>('todas')
+type Service = (typeof services)[number]
 
 // Map each service to its Lucide icon
 const serviceIcons: Record<string, string> = {
@@ -33,6 +36,19 @@ const serviceIcons: Record<string, string> = {
   'commercial-dashboard':      'ChartColumnIncreasing',
   'document-backoffice-agent': 'FileSearch',
   'ia-consulting-roadmap':     'Lightbulb',
+  'managed-service':           'ConciergeBell',
+  'trained-agents':            'Brain',
+  'monitoring-247':            'Eye',
+  'weekly-reports':            'BarChart3',
+  'ai-optimization':           'Sparkles',
+}
+
+function trackServiceClick(service: Service) {
+  trackEvent('service_click', {
+    service_id: service.id,
+    service_name: service.title,
+    service_category: service.category
+  })
 }
 </script>
 
@@ -49,7 +65,7 @@ const serviceIcons: Record<string, string> = {
     </div>
     <div class="service-grid">
       <article v-for="s in services.filter(x => activeFilter === 'todas' || x.category === activeFilter)"
-               :key="s.id" class="service-card" data-reveal>
+               :key="s.id" class="service-card" data-reveal @click="trackServiceClick(s)">
         <div class="service-card__icon">
           <IconInline :name="serviceIcons[s.id] ?? 'Bot'" :size="18" />
         </div>

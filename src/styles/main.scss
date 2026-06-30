@@ -392,6 +392,7 @@ h3 { margin: 0; color: var(--text-primary); font-weight: 700; }
 .pricing-monthly strong { font-size: 2rem; color: var(--text-primary); }
 .pricing-period { color: var(--text-muted); font-size: 0.88rem; }
 .pricing-setup { color: var(--text-muted); font-size: 0.8rem; margin-top: 4px; }
+.pricing-annual { color: var(--accent-teal); font-size: 0.78rem; font-weight: 600; margin-top: 4px; background: rgba(13,148,136,0.08); padding: 4px 10px; border-radius: 6px; display: inline-block; }
 .pricing-value { display: inline-flex; align-items: center; gap: 6px; background: rgba(13,148,136,0.06);
   color: var(--accent-teal); padding: 6px 12px; border-radius: 8px; font-size: 0.78rem; font-weight: 600; }
 .pricing-features, .pricing-limits { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
@@ -455,6 +456,34 @@ h3 { margin: 0; color: var(--text-primary); font-weight: 700; }
   }
   select { appearance: none; }
   textarea { resize: vertical; min-height: 132px; }
+  &__consent {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    align-items: start;
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    input {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      padding: 0;
+    }
+    a {
+      color: var(--accent-blue);
+      text-decoration: underline;
+    }
+  }
+  &__privacy {
+    margin: -4px 0 4px;
+    padding: 14px;
+    border-radius: var(--radius);
+    background: rgba(30, 111, 140, 0.05);
+    color: var(--text-secondary);
+    font-size: 0.86rem;
+    line-height: 1.6;
+  }
 }
 
 /* ── Stats ──────────────────────────────────── */

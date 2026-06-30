@@ -10,6 +10,7 @@ const ALLOWED_ORIGINS = [
 
 function parseBody(req) {
   if (typeof req.body !== 'string') return req.body || {}
+
   try {
     return JSON.parse(req.body || '{}')
   } catch {
@@ -21,13 +22,17 @@ function clean(value, max = MAX_FIELD_LENGTH) {
   return String(value || '').trim().slice(0, max)
 }
 
+function hasDataConsent(value) {
+  return value === true || value === 'true'
+}
+
 async function sendTelegramNotification(data) {
   const botToken = process.env.TELEGRAM_BOT_TOKEN
   const chatId = process.env.TELEGRAM_CHAT_ID
 
   if (!botToken || !chatId) return
 
-  const text = `🆕 *Nuevo Lead — Agenc-IA*\n\n👤 *Nombre:* ${data.name}\n📧 *Email:* ${data.email}\n📱 *Teléfono:* ${data.phone}\n🏢 *Negocio:* ${data.business_type || 'No especificado'}\n🎯 *Servicio:* ${data.service_interest || 'No especificado'}\n💬 *Necesidad:* ${data.need || 'No especificado'}\n\n🔗 Fuente: ${data.source || 'website'}`
+  const text = `ðŸ†• *Nuevo Lead â€” Agenc-IA*\n\nðŸ‘¤ *Nombre:* ${data.name}\nðŸ“§ *Email:* ${data.email}\nðŸ“± *TelÃ©fono:* ${data.phone}\nðŸ¢ *Negocio:* ${data.business_type || 'No especificado'}\nðŸŽ¯ *Servicio:* ${data.service_interest || 'No especificado'}\nðŸ’¬ *Necesidad:* ${data.need || 'No especificado'}\n\nðŸ”— Fuente: ${data.source || 'website'}`
 
   try {
     await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -46,7 +51,6 @@ async function sendTelegramNotification(data) {
 }
 
 export default async function handler(req, res) {
-  // CORS headers
   const origin = req.headers.origin || ''
   if (ALLOWED_ORIGINS.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin)
@@ -63,7 +67,6 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  // Honeypot: if the hidden field is filled, silently accept
   const body = parseBody(req)
   if (!body) {
     return res.status(400).json({ error: 'Invalid JSON body' })
@@ -73,13 +76,15 @@ export default async function handler(req, res) {
     return res.status(202).json({ status: 'accepted' })
   }
 
-  // Validate required fields
   const missing = REQUIRED_FIELDS.filter((field) => !clean(body[field]))
   if (missing.length > 0) {
     return res.status(400).json({ error: 'Missing required fields', fields: missing })
   }
 
-  // Validate email format
+  if (!hasDataConsent(body.data_consent)) {
+    return res.status(400).json({ error: 'Data consent is required' })
+  }
+
   if (!EMAIL_RE.test(clean(body.email))) {
     return res.status(400).json({ error: 'Invalid email format' })
   }
@@ -91,19 +96,20 @@ export default async function handler(req, res) {
     email: clean(body.email),
     need: clean(body.need),
     service_interest: clean(body.service_interest) || 'custom-ai-agent',
+    data_consent: true,
     source: 'agenc-ia-site',
     created_at: new Date().toISOString(),
     user_agent: String(req.headers['user-agent'] || '').slice(0, 500),
     referer: String(req.headers.referer || req.headers.referrer || '').slice(0, 500),
     utm_source: clean(body.utm_source),
     utm_campaign: clean(body.utm_campaign),
-    utm_medium: clean(body.utm_medium)
+    utm_medium: clean(body.utm_medium),
+    utm_term: clean(body.utm_term),
+    utm_content: clean(body.utm_content)
   }
 
-  // Send Telegram notification (non-blocking)
   sendTelegramNotification(payload)
 
-  // Try n8n webhook
   const webhookUrl = process.env.AGENCIA_IA_N8N_LEAD_WEBHOOK_URL
   const webhookToken = process.env.AGENCIA_IA_N8N_WEBHOOK_TOKEN
 
@@ -126,11 +132,9 @@ export default async function handler(req, res) {
 
       if (!upstream.ok) {
         console.error(`Lead webhook failed: ${upstream.status} ${await upstream.text().catch(() => '')}`)
-        // Don't fail — Telegram already notified
       }
     } catch (err) {
       console.error('Lead webhook error:', err.message)
-      // Don't fail — Telegram already notified
     }
   }
 

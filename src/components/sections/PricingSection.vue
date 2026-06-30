@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { pricingPlans } from '../../data/pricing'
 import IconInline from '../IconInline.vue'
-import { onMounted } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { trackEvent } from '../../utils/analytics'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -13,17 +14,33 @@ const planIcons: Record<string, string> = {
   pro: 'Building2'
 }
 
+const pricingSection = ref<HTMLElement | null>(null)
+let pricingViewTrigger: ScrollTrigger | null = null
+
 onMounted(() => {
   gsap.from('.pricing-card', {
     y: 50, autoAlpha: 0, duration: 0.6, ease: 'power3.out',
     stagger: 0.15,
     scrollTrigger: { trigger: '.pricing-grid', start: 'top 82%' }
   })
+
+  if (pricingSection.value) {
+    pricingViewTrigger = ScrollTrigger.create({
+      trigger: pricingSection.value,
+      start: 'top 75%',
+      once: true,
+      onEnter: () => trackEvent('pricing_view', { section: 'pricing' })
+    })
+  }
+})
+
+onBeforeUnmount(() => {
+  pricingViewTrigger?.kill()
 })
 </script>
 
 <template>
-  <section id="precios" class="section">
+  <section id="precios" ref="pricingSection" class="section">
     <div class="section__head" data-reveal>
       <p class="eyebrow">Planes</p>
       <h2>Arrancá con un flujo rentable, medí resultados y escalá cuando el negocio crezca.</h2>
@@ -31,7 +48,7 @@ onMounted(() => {
     </div>
     <div class="pricing-grid">
       <article v-for="p in pricingPlans" :key="p.id" class="pricing-card" :class="{ recommended: p.recommended }" data-reveal>
-        <div v-if="p.recommended" class="pricing-badge">⭐ Más popular</div>
+        <div v-if="p.badge" class="pricing-badge">⭐ {{ p.badge }}</div>
         <div class="pricing-icon">
           <IconInline :name="planIcons[p.id] || 'Zap'" :size="24" />
         </div>
@@ -43,6 +60,7 @@ onMounted(() => {
             <strong>${{ p.monthly.toLocaleString('es-CO') }}</strong><span class="pricing-period">/mes</span>
           </div>
           <div v-if="p.setup > 0" class="pricing-setup">Setup único: ${{ p.setup.toLocaleString('es-CO') }}</div>
+          <div v-if="p.annualDiscount" class="pricing-annual">{{ p.annualDiscount }}</div>
         </div>
         <div class="pricing-value">
           <IconInline name="TrendingUp" :size="14" />
