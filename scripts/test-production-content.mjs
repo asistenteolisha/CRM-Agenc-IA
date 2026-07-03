@@ -15,6 +15,20 @@ for (const [id, ...needles] of expectedPlans) {
   assert.match(pricing, new RegExp(`id: '${id}'[\\s\\S]+?${needles.join('[\\s\\S]+?')}`))
 }
 
+const pricingSection = read('src/components/sections/PricingSection.vue')
+const homeFaq = read('src/components/sections/HomeFaqSection.vue')
+const fullFaq = read('src/data/faq.ts')
+const policyViolations = []
+
+if (pricing.includes('~$0.05/msg')) policyViolations.push('fixed Meta message-cost estimate')
+if (/(?:15|30) días/.test(homeFaq)) policyViolations.push('Home FAQ cancellation-day promise')
+if (/(?:15|30) días/.test(fullFaq)) policyViolations.push('FAQ cancellation-day promise')
+if (!pricingSection.includes("p.id === 'web' ? 'Incluye entrega, 2 rondas de revisión y hosting por 1 año' : 'Incluye setup, soporte y ajustes mensuales'")) {
+  policyViolations.push('Web Profesional uses recurring-plan value copy')
+}
+
+assert.deepEqual(policyViolations, [], `pricing/policy claims need correction: ${policyViolations.join(', ')}`)
+
 const activeText = [
   'api/chat.js',
   'api/lead.js',

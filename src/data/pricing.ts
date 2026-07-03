@@ -22,7 +22,7 @@ export const pricingPlans: PricingPlan[] = [
       'Ajustes mensuales del guion conversacional',
     ],
     limits: [
-      'Costos de Meta (Cloud API) no incluidos (~$0.05/msg)',
+      'Costos de Meta (Cloud API) no incluidos; se facturan según la tarifa vigente del proveedor',
       'Handoff humano manual',
       'Canales adicionales requieren upgrade a Growth',
       'Setup se paga una sola vez al inicio',

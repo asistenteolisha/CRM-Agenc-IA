@@ -79,7 +79,7 @@ onBeforeUnmount(() => {
         </div>
         <div class="pricing-value">
           <IconInline name="TrendingUp" :size="14" />
-          Incluye setup, soporte y ajustes mensuales
+          {{ p.id === 'web' ? 'Incluye entrega, 2 rondas de revisión y hosting por 1 año' : 'Incluye setup, soporte y ajustes mensuales' }}
         </div>
         <ul class="pricing-features">
           <li v-for="inc in p.includes" :key="inc">

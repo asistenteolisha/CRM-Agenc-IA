@@ -74,6 +74,6 @@ export const faqs: FaqItem[] = [
   {
     question: '¿Qué pasa si quiero cancelar?',
     answer:
-      'No hay permanencia forzosa. Los planes son mensuales y podés cancelar con 15 días de anticipación. El setup inicial no es reembolsable porque cubre el trabajo de diagnóstico, configuración e implementación. Si cancelás, te entregamos todos los flujos, guiones y credenciales para que puedas mantener el sistema por tu cuenta o con otro proveedor.'
+      'Podés cancelar antes de la próxima renovación y coordinamos la transición del servicio.'
   }
 ]
