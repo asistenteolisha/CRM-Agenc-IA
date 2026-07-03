@@ -49,24 +49,24 @@ const missionCards = [
       </div>
     </section>
 
-    <!-- Caso destacado -->
+    <!-- Demo destacada -->
     <section class="section">
       <div class="section__head" data-reveal>
-        <p class="eyebrow">Caso Destacado</p>
-        <h2>Auto Sales AI OS — nuestro proyecto insignia.</h2>
-        <p>El sistema completo de ventas para concesionarios que demuestra todo lo que podemos hacer.</p>
+        <p class="eyebrow">Demo sectorial</p>
+        <h2>Flujo de atención para concesionarios.</h2>
+        <p>Una referencia para explicar cómo se conectan la conversación, la calificación y el seguimiento comercial.</p>
       </div>
       <div class="case-grid" data-reveal>
         <article class="case-card">
-          <div class="case-card__industry">Automotriz — Bucaramanga</div>
-          <h3>Concesionario de vehículos usados</h3>
-          <p class="case-card__problem"><strong>Problema:</strong> 60% de consultas por WhatsApp sin respuesta en menos de 4 horas.</p>
-          <p class="case-card__solution"><strong>Solución:</strong> Agente IA que califica presupuesto, ciudad, tipo de carro y urgencia en segundos.</p>
+          <div class="case-card__industry">Demo sectorial · Automotriz</div>
+          <h3>Conversación conectada con el equipo comercial</h3>
+          <p class="case-card__problem"><strong>Escenario:</strong> Las consultas llegan por mensajería y necesitan contexto antes de pasar a ventas.</p>
+          <p class="case-card__solution"><strong>Flujo:</strong> El agente recopila los datos acordados, registra el lead y deriva la conversación.</p>
           <div class="case-results">
-            <div class="case-result"><strong>&lt;30s</strong><span>Tiempo de respuesta</span></div>
-            <div class="case-result"><strong>85%</strong><span>Consultas 24/7</span></div>
-            <div class="case-result"><strong>3×</strong><span>Leads calificados</span></div>
-            <div class="case-result"><strong>$1.2M COP</strong><span>Ahorro/mes</span></div>
+            <div class="case-result"><strong>WhatsApp</strong><span>Consulta inicial</span></div>
+            <div class="case-result"><strong>Datos clave</strong><span>Calificación</span></div>
+            <div class="case-result"><strong>CRM</strong><span>Registro</span></div>
+            <div class="case-result"><strong>Equipo humano</strong><span>Escalamiento</span></div>
           </div>
         </article>
       </div>

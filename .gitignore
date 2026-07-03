@@ -6,3 +6,5 @@ dist
 *.log
 tsconfig.tsbuildinfo
 .env*.local
+/WHATSAPP-TOKEN.md
+/workflows/*.json

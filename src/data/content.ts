@@ -27,7 +27,9 @@ export interface PricingPlan {
   id: string
   name: string
   setup: number
+  setupUsd?: number
   monthly: number
+  monthlyUsd?: number
   recommended?: boolean
   badge?: string
   annualDiscount?: string
@@ -38,6 +40,7 @@ export interface PricingPlan {
 
 export interface CaseStudy {
   id: string
+  label: 'Demo sectorial' | 'Caso proyectado'
   client: string
   industry: string
   problem: string

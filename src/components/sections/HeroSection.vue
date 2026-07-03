@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { gsap } from 'gsap'
 import IconInline from '../IconInline.vue'
+import { trackEvent } from '../../utils/analytics'
 
 defineProps<{
   heroBadge: string
@@ -12,6 +13,10 @@ defineProps<{
 }>()
 
 const titleRef = ref<HTMLElement | null>(null)
+
+function trackHeroCta(label: string) {
+  trackEvent('cta_click', { location: 'hero', label })
+}
 
 onMounted(() => {
   if (!titleRef.value) return
@@ -46,22 +51,22 @@ onMounted(() => {
         </h1>
         <p class="hero__lead">{{ heroLead }}</p>
         <div class="hero__actions">
-          <RouterLink to="/contacto" class="btn btn--primary">
+          <RouterLink to="/contacto" class="btn btn--primary" @click="trackHeroCta(primaryCta)">
             <IconInline name="Zap" :size="16" /> {{ primaryCta }}
           </RouterLink>
-          <RouterLink to="/servicios" class="btn btn--secondary">
+          <RouterLink to="/precios" class="btn btn--secondary" @click="trackHeroCta(secondaryCta)">
             <IconInline name="Rocket" :size="16" /> {{ secondaryCta }}
           </RouterLink>
         </div>
         <div class="hero__metrics">
           <div class="hero__metric">
-            <IconInline name="Check" :size="14" class="metric-check" /> <strong>85%</strong> consultas 24/7
+            <IconInline name="Check" :size="14" class="metric-check" /> <strong>WhatsApp</strong> canal conectado
           </div>
           <div class="hero__metric">
-            <IconInline name="Check" :size="14" class="metric-check" /> <strong>&lt;30s</strong> tiempo de respuesta
+            <IconInline name="Check" :size="14" class="metric-check" /> <strong>CRM</strong> leads organizados
           </div>
           <div class="hero__metric">
-            <IconInline name="Check" :size="14" class="metric-check" /> <strong>15</strong> agentes IA listos
+            <IconInline name="Check" :size="14" class="metric-check" /> <strong>Humano</strong> escalamiento disponible
           </div>
         </div>
       </div>

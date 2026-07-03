@@ -28,7 +28,7 @@ export const services: Service[] = [
       'Secuencia de seguimiento automatizada',
       'Integración con Google Calendar para citas'
     ],
-    startingAt: '$390.000 COP/mes'
+    startingAt: 'Disponible desde Starter'
   },
   {
     id: 'facebook-agent',
@@ -53,7 +53,7 @@ export const services: Service[] = [
       'Registro en CRM',
       'Reporte de conversión por campaña'
     ],
-    startingAt: '$390.000 COP/mes'
+    startingAt: 'Disponible desde Starter'
   },
   {
     id: 'instagram-agent',
@@ -78,7 +78,7 @@ export const services: Service[] = [
       'Derivación a WhatsApp con contexto',
       'Reporte semanal de consultas frecuentes'
     ],
-    startingAt: '$390.000 COP/mes'
+    startingAt: 'Disponible desde Starter'
   },
   {
     id: 'messenger-agent',
@@ -101,7 +101,7 @@ export const services: Service[] = [
       'Agendamiento de citas',
       'Integración con CRM'
     ],
-    startingAt: '$390.000 COP/mes'
+    startingAt: 'Disponible desde Starter'
   },
 
   // ─── META ADS ──────────────────────────────────────
@@ -128,7 +128,7 @@ export const services: Service[] = [
       'Optimización semanal de presupuesto',
       'Reporte mensual de rendimiento'
     ],
-    startingAt: '$690.000 COP/mes'
+    startingAt: 'Incluido en Growth'
   },
 
   // ─── SOCIAL MEDIA ──────────────────────────────────
@@ -153,7 +153,7 @@ export const services: Service[] = [
       'Reporte mensual de métricas',
       'Sugerencias de mejora basadas en datos'
     ],
-    startingAt: '$590.000 COP/mes'
+    startingAt: 'Incluido en Growth'
   },
   {
     id: 'comment-response',
@@ -176,7 +176,7 @@ export const services: Service[] = [
       'Derivación automática a WhatsApp',
       'Reporte de leads capturados desde comentarios'
     ],
-    startingAt: '$390.000 COP/mes'
+    startingAt: 'Disponible desde Starter'
   },
 
   // ─── CAPTURA Y LEADS ──────────────────────────────
@@ -203,7 +203,7 @@ export const services: Service[] = [
       'Notificación instantánea al equipo comercial',
       'Dashboard de leads por origen'
     ],
-    startingAt: '$390.000 COP/mes'
+    startingAt: 'Disponible desde Starter'
   },
 
   // ─── REPORTES ──────────────────────────────────────
@@ -228,7 +228,7 @@ export const services: Service[] = [
       'Actualización automática semanal',
       'Reporte ejecutivo mensual PDF'
     ],
-    startingAt: '$390.000 COP/mes'
+    startingAt: 'Incluido desde Starter'
   },
 
   // ─── ONBOARDING ────────────────────────────────────
@@ -270,25 +270,25 @@ export const services: Service[] = [
       'Panel de monitoreo',
       'Integración con herramientas del cliente'
     ],
-    startingAt: '$550.000 COP/mes'
+    startingAt: 'Incluido en Growth y Pro'
   },
   {
     id: 'web-funnel-ai',
     category: 'automatizacion',
-    title: 'Web funnel listo para IA',
+    title: 'Web Profesional',
     short:
-      'Landing profesional con formulario inteligente, WhatsApp CTA, tracking y SEO básico para vender una oferta concreta.',
+      'Sitio profesional de hasta 6 páginas con SEO, WhatsApp CTA, tracking y formulario de contacto para capturar leads.',
     outcome:
       'Web que no solo se ve bien, sino que captura leads y los conecta con tu agente IA.',
     channels: ['web', 'whatsapp', 'crm', 'n8n'],
     metaCapabilities: [],
     deliverables: [
-      'Landing page responsive',
+      'Sitio responsive de hasta 6 páginas',
       'Formulario → webhook → WhatsApp',
       'SEO técnico básico',
       'Tracking con Meta Pixel / GA4'
     ],
-    startingAt: '$890.000 COP (una vez)'
+    startingAt: '$2.499.000 COP / $620 USD'
   },
   {
     id: 'auto-scheduling',
@@ -297,7 +297,7 @@ export const services: Service[] = [
     short:
       'Reserva, confirma y recuerda citas por WhatsApp con Flows interactivos. Ideal para clínicas, consultorios y servicios.',
     outcome:
-      'Hasta 40% menos ausentismo con recordatorios automáticos y confirmación en dos toques.',
+      'Recordatorios automáticos y confirmación en dos toques para facilitar la gestión de asistencia.',
     channels: ['whatsapp', 'crm'],
     metaCapabilities: [
       'Flows interactivos',
@@ -311,7 +311,7 @@ export const services: Service[] = [
       'Recordatorios 24h y 1h antes',
       'Integración con Google Calendar'
     ],
-    startingAt: '$490.000 COP/mes'
+    startingAt: 'Cotización según flujo'
   },
 
   // ─── CONSULTORÍA ──────────────────────────────────
@@ -331,7 +331,7 @@ export const services: Service[] = [
       'Recomendación de primer agente',
       'Estimación de ROI proyectado'
     ],
-    startingAt: '$290.000 COP (diagnóstico)'
+    startingAt: 'Diagnóstico gratuito'
   },
 
   // ─── DIFERENCIADORES PREMIUM ──────────────────────

@@ -7,7 +7,6 @@ import HeroSection from '../components/sections/HeroSection.vue'
 import TrustBar from '../components/sections/TrustBar.vue'
 import StatsSection from '../components/sections/StatsSection.vue'
 import ProcessSection from '../components/sections/ProcessSection.vue'
-import TestimonialsSection from '../components/sections/TestimonialsSection.vue'
 import TechStackSection from '../components/sections/TechStackSection.vue'
 import HomeFaqSection from '../components/sections/HomeFaqSection.vue'
 import IconInline from '../components/IconInline.vue'
@@ -15,7 +14,7 @@ import IconInline from '../components/IconInline.vue'
 gsap.registerPlugin(ScrollTrigger)
 
 const pains = [
-  { title: 'Leads sin respuesta', text: 'Tus clientes escriben por WhatsApp, Instagram y Facebook. El 60% no recibe respuesta en menos de 4 horas y se va con la competencia.' },
+  { title: 'Leads sin respuesta', text: 'Tus clientes escriben por WhatsApp, Instagram y Facebook. Cuando la respuesta tarda, la conversación pierde impulso.' },
   { title: 'Operaciones manuales', text: 'Tu equipo copia datos, persigue conversaciones y pierde contexto entre canales. Horas que podrían dedicarse a cerrar ventas.' },
   { title: 'IA sin operación real', text: 'Probaste chatbots pero no conectan con tu CRM, no hacen seguimiento y no miden resultados de negocio.' }
 ]
@@ -81,10 +80,10 @@ onUnmounted(() => {
   <div class="page-home">
     <HeroSection
       hero-badge="Servicio Premium de Agentes IA"
-      hero-title="Agentes IA para WhatsApp, Instagram y Facebook — sin contratar más equipo."
-      hero-lead="No vendemos herramientas. Entregamos resultados."
-      primary-cta="Agendar diagnóstico"
-      secondary-cta="Ver servicios"
+      hero-title="Agentes IA que venden por ti 24/7"
+      hero-lead="Automatiza WhatsApp, Instagram y Facebook con IA personalizada. Setup done-for-you."
+      primary-cta="Diagnóstico gratuito"
+      secondary-cta="Ver precios"
     />
     <TrustBar />
 
@@ -94,7 +93,7 @@ onUnmounted(() => {
         <h2>Tus clientes ya te están escribiendo. El problema es que nadie alcanza a responder a tiempo.</h2>
       </div>
       <div class="signal-list" data-reveal>
-        <p>El 60% de los mensajes de WhatsApp e Instagram no reciben respuesta en menos de 4 horas.</p>
+        <p>Los mensajes de WhatsApp e Instagram se acumulan cuando el equipo está atendiendo otras tareas.</p>
         <p>Cada conversación vive en un canal distinto y tu equipo no tiene el contexto unificado.</p>
         <p>Los leads de Facebook Ads llegan a un Excel que nadie revisa.</p>
       </div>
@@ -131,15 +130,13 @@ onUnmounted(() => {
         </article>
       </div>
       <div class="section-cta">
-        <RouterLink to="/servicios" class="btn btn--primary">Ver los 15 servicios →</RouterLink>
+        <RouterLink to="/servicios" class="btn btn--primary">Ver servicios →</RouterLink>
       </div>
     </section>
 
     <StatsSection />
 
     <ProcessSection />
-
-    <TestimonialsSection />
 
     <TechStackSection />
 

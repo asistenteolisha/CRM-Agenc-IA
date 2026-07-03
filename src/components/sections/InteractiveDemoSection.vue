@@ -68,7 +68,7 @@ watch(activeTab, () => {
     <div class="demo__content" data-reveal>
       <p class="eyebrow">Demo interactiva</p>
       <h2>Así se ve un agente Agenc-IA en acción.</h2>
-      <p>Conversaciones reales en diferentes industrias, atendidas automáticamente 24/7.</p>
+      <p>Conversaciones de demostración para explorar distintos flujos de atención.</p>
       <div class="demo-tabs">
         <button v-for="tab in tabLabels" :key="tab.key"
                 :class="{ active: activeTab === tab.key }"

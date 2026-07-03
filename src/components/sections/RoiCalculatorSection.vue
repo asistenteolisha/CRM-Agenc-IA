@@ -12,8 +12,8 @@ const roiInput = ref<RoiInput>({
   expectedLiftRate: 0.5,
   weeklyManualHours: 5,
   hourlyCost: 12000,
-  monthlyPlanCost: 390000,
-  setupCost: 900000
+  monthlyPlanCost: 399000,
+  setupCost: 999000
 })
 
 const roiResult = computed(() => calculateRoi(roiInput.value))
