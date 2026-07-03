@@ -35,29 +35,29 @@ function incrementMessageCount(): void {
 const isLimitReached = ref(getMessageCount() >= MSG_LIMIT)
 
 const quickActions: QuickAction[] = [
-  { label: 'Â¿QuÃ© servicios ofrecen?', action: 'servicios' },
-  { label: 'Â¿CuÃ¡nto cuesta?', action: 'precios' },
-  { label: 'Quiero un diagnÃ³stico', action: 'diagnostico' },
+  { label: '¿Qué servicios ofrecen?', action: 'servicios' },
+  { label: '¿Cuánto cuesta?', action: 'precios' },
+  { label: 'Quiero un diagnóstico', action: 'diagnostico' },
   { label: 'Hablar por WhatsApp', action: 'whatsapp' }
 ]
 
 function getResponse(msg: string): string {
   const q = msg.toLowerCase()
   if (q.includes('servicio') || q.includes('ofrecen') || q.includes('hacen'))
-    return 'ðŸ”§ Ofrecemos 15 agentes IA para PYMES:\n\nðŸ“± **Ventas:** WhatsApp, Instagram DMs, Funnel Meta completo\nðŸ’¬ **AtenciÃ³n:** Soporte 24/7, Moderador de comunidad\nðŸ›’ **E-commerce:** CatÃ¡logo WhatsApp + pedidos\nðŸ“Š **AutomatizaciÃ³n:** n8n + CRM, Web funnel, Agendamiento, Dashboard\nðŸ’¡ **ConsultorÃ­a:** Documental, Roadmap IA\n\nÂ¿QuerÃ©s que te cuente de alguno en detalle?'
+    return 'Ofrecemos agentes IA para WhatsApp, Instagram, Facebook y Messenger; automatización n8n + CRM; Meta Ads; dashboard de leads; y Web Profesional con SEO y WhatsApp. ¿Qué canal te duele más hoy?'
   if (q.includes('precio') || q.includes('cuesta') || q.includes('costo') || q.includes('plan') || q.includes('vale'))
-    return 'ðŸ’° Tenemos 3 planes:\n\nâ­ **Starter** â€” $390.000/mes (1 canal, 500 conv/mes)\nðŸš€ **Growth** â€” $690.000/mes (todos los canales + Meta Ads)\nðŸ¢ **Pro** â€” $1.200.000/mes (todo incluido + personalizaciÃ³n)\n\nSetup Ãºnico desde $900.000. DiagnÃ³stico SIN COSTO.\n\nÂ¿QuerÃ©s que agendemos una llamada de 20 min?'
-  if (q.includes('diagnÃ³stico') || q.includes('diagnostico') || q.includes('agendar') || q.includes('contacto') || q.includes('hablar') || q.includes('llamada'))
-    return 'âœ… Â¡Perfecto! Dejame tus datos y te contacto:\n\nðŸ“ Nombre:\nðŸ“± WhatsApp:\nðŸ“§ Email:\nðŸ¢ Tipo de negocio:\n\nO si preferÃ­s, agendÃ¡ vos mismo: https://agenc-ia-topaz.vercel.app/#/contacto'
-  if (q.includes('cÃ³mo funciona') || q.includes('como funciona') || q.includes('funciona') || q.includes('proceso'))
-    return 'âš™ï¸ AsÃ­ trabajamos:\n\n1ï¸âƒ£ **DiagnÃ³stico** â€” Identificamos el canal de mayor impacto\n2ï¸âƒ£ **Blueprint** â€” DiseÃ±amos guion, integraciones y reglas\n3ï¸âƒ£ **Build** â€” Construimos el agente y flujos n8n\n4ï¸âƒ£ **Prueba** â€” Simulamos casos reales antes de lanzar\n5ï¸âƒ£ **OperaciÃ³n** â€” Monitoreamos y mejoramos cada mes\n\nâ±ï¸ Tiempo: 5-15 dÃ­as segÃºn complejidad.'
+    return 'Tenemos cuatro opciones:\n\n**Starter** — $399.000 COP / $99 USD al mes + setup $999.000 COP / $249 USD.\n**Growth** — $799.000 COP / $199 USD al mes + setup $1.999.000 COP / $499 USD.\n**Pro** — $1.399.000 COP / $349 USD al mes + setup $3.999.000 COP / $999 USD.\n**Web Profesional** — $2.499.000 COP / $620 USD pago único.\n\n¿Quieres un diagnóstico gratuito de 20 minutos?'
+  if (q.includes('diagnóstico') || q.includes('diagnostico') || q.includes('agendar') || q.includes('contacto') || q.includes('hablar') || q.includes('llamada'))
+    return 'Perfecto. Déjame nombre, WhatsApp, email y tipo de negocio. También puedes agendar desde https://www.agenciadia.tech/#/contacto'
+  if (q.includes('cómo funciona') || q.includes('como funciona') || q.includes('funciona') || q.includes('proceso'))
+    return 'Así trabajamos:\n\n1. Diagnóstico: revisamos canales, oferta y cuellos de botella.\n2. Setup done-for-you: configuramos agente, flujos, CRM y tracking.\n3. Optimización: medimos leads, conversaciones y ajustes mensuales.\n\nTiempo típico: 5 a 10 días hábiles según el plan.'
   if (q.includes('whatsapp') || q.includes('humano'))
-    return 'ðŸ“± Claro, hablÃ¡ con nosotros directamente por WhatsApp:\n\nðŸ‘‰ https://wa.me/573012604061\n\nO dejame tus datos y te escribimos nosotros.'
+    return 'Claro, habla con nosotros por WhatsApp: https://wa.me/573012604061. Si prefieres, déjame tus datos y te escribimos.'
   if (q.includes('hola') || q.includes('buenas') || q.includes('buenos'))
-    return 'Â¡Hola! ðŸ‘‹ Soy LÃ­a, tu asesora de Agenc-IA. Estoy aquÃ­ para ayudarte a descubrir cÃ³mo la inteligencia artificial puede transformar tu negocio. Â¿En quÃ© te puedo ayudar?'
-  if (q.includes('quiÃ©nes') || q.includes('quienes') || q.includes('son') || q.includes('agenc') || q.includes('nosotros'))
-    return 'ðŸ§  Â¡Con gusto te cuento! **Agenc-IA** somos una agencia colombiana especializada en automatizaciÃ³n conversacional para PYMES.\n\nCreamos agentes IA que venden, atienden y hacen crecer tu negocio en WhatsApp, Instagram y Facebook, sin que necesites contratar mÃ¡s equipo. ðŸš€\n\nðŸ“ Colombia | âœ‰ï¸ leinadgalaxy@gmail.com\n\nÂ¿QuerÃ©s saber cÃ³mo podrÃ­amos ayudar a tu negocio especÃ­fico?'
-  return 'Gracias por tu mensaje. Para darte la mejor respuesta, Â¿podrÃ­as contarme un poco mÃ¡s sobre tu negocio y quÃ© te gustarÃ­a automatizar? O si preferÃ­s, te paso con un humano por WhatsApp ðŸ‘‰ https://wa.me/573012604061'
+    return 'Hola, soy Lía, tu asesora de Agenc-IA. Te ayudo a automatizar WhatsApp, Instagram y Facebook con IA personalizada. ¿Qué canal quieres mejorar primero?'
+  if (q.includes('quiénes') || q.includes('quienes') || q.includes('son') || q.includes('agenc') || q.includes('nosotros'))
+    return 'Agenc-IA es una agencia colombiana de automatización conversacional para PYMES. Creamos agentes IA que venden, atienden y registran leads en WhatsApp, Instagram y Facebook, sin contratar más equipo.'
+  return 'Gracias por tu mensaje. Para responderte bien, cuéntame qué negocio tienes y qué proceso quieres automatizar. También puedes hablar con un humano por WhatsApp: https://wa.me/573012604061'
 }
 
 function toggle() {
@@ -122,22 +122,22 @@ function handleAction(action: string) {
   if (action === 'whatsapp') {
     trackEvent('whatsapp_click', { location: 'chat_widget' })
     window.open('https://wa.me/573012604061', '_blank')
-    sendSystem('ðŸ“± Abriendo WhatsApp...')
+    sendSystem('Abriendo WhatsApp...')
     return
   }
 
   if (action === 'diagnostico') {
-    sendMessage('Quiero un diagnÃ³stico gratis')
+    sendMessage('Quiero un diagnóstico gratis')
     return
   }
 
   if (action === 'servicios') {
-    sendMessage('Â¿QuÃ© servicios ofrecen?')
+    sendMessage('¿Qué servicios ofrecen?')
     return
   }
 
   if (action === 'precios') {
-    sendMessage('Â¿CuÃ¡nto cuesta?')
+    sendMessage('¿Cuánto cuesta?')
   }
 }
 
@@ -163,7 +163,7 @@ watch(isOpen, async (open) => {
   if (messages.value.length === 0) {
     messages.value.push({
       role: 'agent',
-      text: 'Â¡Hola! ðŸ‘‹ Soy LÃ­a, tu asesora de Agenc-IA. Estoy aquÃ­ para ayudarte a descubrir cÃ³mo la inteligencia artificial puede transformar tu negocio. Â¿En quÃ© te puedo ayudar?'
+      text: 'Hola, soy Lía, tu asesora de Agenc-IA. Te ayudo a automatizar WhatsApp, Instagram y Facebook con IA personalizada. ¿Qué canal quieres mejorar primero?'
     })
   }
 
@@ -208,8 +208,8 @@ onBeforeUnmount(() => {
             <img src="/logo.svg" alt="Agenc-IA" style="height:20px" />
           </div>
           <div>
-            <strong>LÃ­a</strong>
-            <small>Asesora Agenc-IA Â· En lÃ­nea ahora</small>
+            <strong>Lía</strong>
+            <small>Asesora Agenc-IA · En línea ahora</small>
           </div>
         </div>
 
@@ -244,14 +244,14 @@ onBeforeUnmount(() => {
         </div>
 
         <div v-if="isLimitReached" class="chat-widget__limit">
-          Has alcanzado el lÃ­mite de mensajes. <a href="https://agenc-ia-topaz.vercel.app/#/contacto" target="_blank">DÃ©janos tu email para continuar.</a>
+          Has alcanzado el límite de mensajes. <a href="https://www.agenciadia.tech/#/contacto" target="_blank">Déjanos tu email para continuar.</a>
         </div>
         <div v-else class="chat-widget__input">
           <input
             ref="inputRef"
             v-model="input"
             type="text"
-            placeholder="EscribÃ­ tu mensaje..."
+            placeholder="Escribe tu mensaje..."
             @keydown="handleKeydown"
           />
           <button class="chat-send-btn" @click="sendMessage()" :disabled="!input.trim()">
@@ -285,7 +285,7 @@ export default {}
 
 .chat-widget__btn {
   width: 56px; height: 56px; border-radius: 50%; border: none;
-  background: var(--accent-amber); color: white; cursor: pointer;
+  background: var(--accent-amber); color: var(--text-inverse); cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 24px rgba(212,144,11,0.35);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -316,7 +316,7 @@ export default {}
 
 .chat-widget__body {
   flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px;
-  background: #F5F0E9;
+  background: var(--bg-secondary);
 }
 .chat-widget__body::-webkit-scrollbar { width: 4px; }
 .chat-widget__body::-webkit-scrollbar-thumb { background: var(--border-medium); border-radius: 4px; }
@@ -329,7 +329,7 @@ export default {}
   :deep(strong) { font-weight: 700; }
 }
 .chat-msg--agent .chat-msg__bubble { background: var(--bg-surface); color: var(--text-primary); border-top-left-radius: 4px; box-shadow: var(--shadow-sm); }
-.chat-msg--user .chat-msg__bubble { background: var(--accent-amber); color: white; border-top-right-radius: 4px; }
+.chat-msg--user .chat-msg__bubble { background: var(--accent-amber); color: var(--text-inverse); border-top-right-radius: 4px; }
 .chat-msg--system .chat-msg__bubble { background: transparent; color: var(--text-muted); font-size: 0.78rem; text-align: center; max-width: 100%; }
 
 .chat-msg__bubble.typing {
@@ -367,7 +367,7 @@ export default {}
 }
 
 .chat-send-btn {
-  width: 38px; height: 38px; border-radius: 50%; border: none; background: var(--accent-amber); color: white;
+  width: 38px; height: 38px; border-radius: 50%; border: none; background: var(--accent-amber); color: var(--text-inverse);
   cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   transition: opacity 0.15s;
   &:disabled { opacity: 0.4; cursor: default; }

@@ -11,7 +11,7 @@ const faqs = [
   { q: '¿Funciona con mi número de WhatsApp actual?', a: 'Sí, usamos la API oficial de WhatsApp Business. Podemos usar tu número actual o configurar uno nuevo.' },
   { q: '¿Qué pasa si el agente no sabe responder?', a: 'El agente escala la conversación a un humano automáticamente y aprende para la próxima vez. Nunca deja a un cliente sin respuesta.' },
   { q: '¿Puedo cancelar cuando quiera?', a: 'Sí, sin permanencia. Solo pedimos 30 días de anticipación para la transición.' },
-  { q: '¿Cuánto cuesta?', a: 'Desde $690.000 COP/mes dependiendo del plan. Todos incluyen diagnóstico inicial sin costo y soporte.' },
+  { q: '¿Cuánto cuesta?', a: 'Starter cuesta $399.000 COP / $99 USD al mes, Growth $799.000 COP / $199 USD, Pro $1.399.000 COP / $349 USD, y Web Profesional $2.499.000 COP / $620 USD pago único. El diagnóstico inicial no tiene costo.' },
 ]
 
 const openIndex = ref<number | null>(null)

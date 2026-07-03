@@ -44,7 +44,7 @@ export const faqs: FaqItem[] = [
   {
     question: '¿Cuánto cuesta mantener el agente al mes?',
     answer:
-      'El plan Starter cuesta $390.000 COP/mes + setup de $900.000 COP (una sola vez). El plan Growth cuesta $690.000 COP/mes + setup de $1.800.000 COP. El plan Pro cuesta $1.200.000 COP/mes + setup de $3.500.000 COP. A esto se suman los costos de Meta Cloud API (aproximadamente $0.05 USD por conversación, Meta cobra por mensaje individual). Para un negocio con 500 conversaciones al mes, el costo de Meta ronda los $25-40 USD.'
+      'El plan Starter cuesta $399.000 COP / $99 USD al mes + setup de $999.000 COP / $249 USD. Growth cuesta $799.000 COP / $199 USD al mes + setup de $1.999.000 COP / $499 USD. Pro cuesta $1.399.000 COP / $349 USD al mes + setup de $3.999.000 COP / $999 USD. Web Profesional es pago único de $2.499.000 COP / $620 USD. A esto se suman los costos de Meta Cloud API, que se facturan directamente a tu cuenta de Meta según volumen.'
   },
   {
     question: '¿Los costos de mensajes de Meta están incluidos en el plan?',

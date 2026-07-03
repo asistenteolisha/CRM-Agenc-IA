@@ -33,6 +33,7 @@ const activeText = [
 ].map((path) => `${path}\n${read(path)}`).join('\n')
 
 for (const claim of [
+  'menos de 30 segundos',
   'Resultados reales',
   'Conversaciones reales',
   'El 60%',

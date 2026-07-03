@@ -9,7 +9,7 @@ export const services: Service[] = [
     short:
       'Agente IA completo para WhatsApp que califica leads, responde preguntas, muestra catálogo y agenda citas 24/7.',
     outcome:
-      'Tus clientes reciben respuesta en menos de 30 segundos, cualquier hora del día.',
+      'Tus clientes pueden consultar información y dejar sus datos en cualquier momento del día.',
     channels: ['whatsapp', 'crm', 'n8n'],
     metaCapabilities: [
       'Botones rápidos',
