@@ -116,11 +116,13 @@ function animate() {
   // Float
   bot.position.y = Math.sin(Date.now() * 0.001) * 0.08
 
-  // Blink
-  const t = Date.now() * 0.003
-  const blink = Math.sin(t) > 0.97 ? 0.1 : 1
-  eyeL.scale.y = blink
-  eyeR.scale.y = blink
+  // Blink - more natural with random intervals
+  const t = Date.now() * 0.001
+  const blinkCycle = Math.sin(t * 2) > 0.98
+  const doubleBlink = Math.sin(t * 4) > 0.99
+  const blink = (blinkCycle || doubleBlink) ? 0.05 : 1
+  eyeL.scale.y += (blink - eyeL.scale.y) * 0.3
+  eyeR.scale.y += (blink - eyeR.scale.y) * 0.3
 
   renderer.render(scene, camera)
 }
