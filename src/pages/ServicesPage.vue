@@ -6,7 +6,7 @@ import ServicesSection from '../components/sections/ServicesSection.vue'
   <div class="page-services">
     <section class="page-hero">
       <p class="eyebrow">Servicios</p>
-      <h1>15 agentes IA. Un solo sistema.</h1>
+      <h1>Agentes IA y web profesional. Un solo sistema.</h1>
       <p class="page-hero__sub">No comprás un bot. Comprás un flujo que atiende, vende, registra y avisa cuando toca intervenir.</p>
     </section>
     <ServicesSection />

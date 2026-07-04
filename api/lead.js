@@ -5,7 +5,8 @@ const UPSTREAM_TIMEOUT_MS = 8000
 
 const ALLOWED_ORIGINS = [
   'https://agenc-ia-topaz.vercel.app',
-  'https://agenc-ia.co'
+  'https://agenciadia.tech',
+  'https://www.agenciadia.tech'
 ]
 
 function parseBody(req) {
@@ -47,6 +48,49 @@ async function sendTelegramNotification(data) {
     })
   } catch {
     // Don't fail the request if Telegram notification fails
+  }
+}
+
+async function saveLeadToSupabase(data) {
+  const url = String(process.env.SUPABASE_URL || '').replace(/\/$/, '')
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+  if (!url || !key) return
+
+  try {
+    const response = await fetch(`${url}/rest/v1/leads`, {
+      method: 'POST',
+      headers: {
+        apikey: key,
+        Authorization: `Bearer ${key}`,
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal'
+      },
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        business_type: data.business_type,
+        service_interest: data.service_interest,
+        need: data.need,
+        source: data.source,
+        data_consent: data.data_consent,
+        utm: {
+          source: data.utm_source,
+          medium: data.utm_medium,
+          campaign: data.utm_campaign,
+          term: data.utm_term,
+          content: data.utm_content
+        }
+      }),
+      signal: AbortSignal.timeout(5000)
+    })
+
+    if (!response.ok) {
+      console.error(`Supabase lead insert failed: ${response.status} ${await response.text().catch(() => '')}`)
+    }
+  } catch (err) {
+    console.error('Supabase lead insert error:', err.message)
   }
 }
 
@@ -109,6 +153,7 @@ export default async function handler(req, res) {
   }
 
   sendTelegramNotification(payload)
+  saveLeadToSupabase(payload)
 
   const webhookUrl = process.env.AGENCIA_IA_N8N_LEAD_WEBHOOK_URL
   const webhookToken = process.env.AGENCIA_IA_N8N_WEBHOOK_TOKEN

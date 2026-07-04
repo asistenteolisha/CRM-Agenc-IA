@@ -58,22 +58,22 @@ onBeforeUnmount(() => {
         <div class="pricing-icon">
           <IconInline :name="planIcons[p.id] || 'Zap'" :size="24" />
         </div>
-        <h3>{{ p.name }}</h3>
+        <h3 class="pricing-name">{{ p.name }}</h3>
         <p class="pricing-desc">{{ p.description }}</p>
-        <div class="pricing-numbers">
+        <div class="pricing-amount">
           <div v-if="p.monthly > 0" class="pricing-monthly">
             <span class="pricing-prefix">Mensual</span>
-            <strong>${{ p.monthly.toLocaleString('es-CO') }}</strong><span class="pricing-period"> COP/mes</span>
-            <span v-if="p.monthlyUsd" class="pricing-usd">${{ p.monthlyUsd }} USD/mes</span>
+            <strong class="amount-main">${{ p.monthly.toLocaleString('es-CO') }}</strong><span class="amount-period"> COP/mes</span>
+            <span v-if="p.monthlyUsd" class="amount-usd">${{ p.monthlyUsd }} USD/mes</span>
           </div>
           <div v-else class="pricing-monthly">
             <span class="pricing-prefix">Pago único</span>
-            <strong>${{ p.setup.toLocaleString('es-CO') }}</strong><span class="pricing-period"> COP</span>
-            <span v-if="p.setupUsd" class="pricing-usd">${{ p.setupUsd }} USD</span>
+            <strong class="amount-main">${{ p.setup.toLocaleString('es-CO') }}</strong><span class="amount-period"> COP</span>
+            <span v-if="p.setupUsd" class="amount-usd">${{ p.setupUsd }} USD</span>
           </div>
           <div v-if="p.setup > 0 && p.monthly > 0" class="pricing-setup">
             Setup único: ${{ p.setup.toLocaleString('es-CO') }} COP
-            <span v-if="p.setupUsd" class="pricing-usd">${{ p.setupUsd }} USD</span>
+            <span v-if="p.setupUsd" class="amount-usd">${{ p.setupUsd }} USD</span>
           </div>
           <div v-if="p.annualDiscount" class="pricing-annual">{{ p.annualDiscount }}</div>
         </div>
@@ -89,7 +89,12 @@ onBeforeUnmount(() => {
         <ul class="pricing-limits">
           <li v-for="lim in p.limits" :key="lim">• {{ lim }}</li>
         </ul>
-        <a href="/#/contacto" class="btn pricing-cta" :class="p.recommended ? 'btn--primary' : 'btn--secondary'" @click="trackPricingCta(p)">
+        <a
+          href="/#/contacto"
+          class="pricing-cta"
+          :class="p.recommended ? 'pricing-cta--primary' : 'pricing-cta--secondary'"
+          @click="trackPricingCta(p)"
+        >
           {{ p.id === 'pro' ? 'Solicitar cotización' : 'Diagnóstico gratuito' }}
         </a>
       </article>

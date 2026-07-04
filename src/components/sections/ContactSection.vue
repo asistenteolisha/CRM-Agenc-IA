@@ -64,40 +64,40 @@ function trackWhatsAppClick() {
   <section id="contacto" class="contact">
     <div class="contact__copy" data-reveal>
       <p class="eyebrow">Contacto</p>
-      <h2>Contanos quÃ© canal te duele mÃ¡s.</h2>
-      <p>WhatsApp, Instagram, Facebook, e-commerce o seguimiento comercial. Te devolvemos un diagnÃ³stico corto con el primer flujo recomendado.</p>
+      <h2>Cuéntanos qué canal te duele más.</h2>
+      <p>WhatsApp, Instagram, Facebook, e-commerce o seguimiento comercial. Te devolvemos un diagnóstico corto con el primer flujo recomendado.</p>
       <a href="mailto:leinadgalaxy@gmail.com">leinadgalaxy@gmail.com</a>
       <div class="contact__whatsapp">
-        <a href="https://wa.me/573012604061" class="btn btn--secondary" @click="trackWhatsAppClick">Hablar por WhatsApp â†’</a>
+        <a href="https://wa.me/573012604061" class="btn btn--secondary" @click="trackWhatsAppClick">Hablar por WhatsApp →</a>
       </div>
     </div>
     <form class="lead-form" @submit.prevent="submitLead" data-reveal>
       <input v-model="form.name" name="name" placeholder="Nombre" required autocomplete="name" />
       <input v-model="form.business_type" name="business_type" placeholder="Tipo de negocio" required />
       <div class="lead-form__split">
-        <input v-model="form.phone" name="phone" placeholder="WhatsApp / telÃ©fono" required autocomplete="tel" />
+        <input v-model="form.phone" name="phone" placeholder="WhatsApp / teléfono" required autocomplete="tel" />
         <input v-model="form.email" name="email" type="email" placeholder="Email" required autocomplete="email" />
       </div>
       <select v-model="form.service_interest" name="service_interest">
         <option v-for="s in services" :key="s.id" :value="s.title">{{ s.title }}</option>
-        <option>No estoy seguro, quiero diagnÃ³stico</option>
+        <option>No estoy seguro, quiero diagnóstico</option>
       </select>
       <textarea
         v-model="form.need"
         name="need"
         rows="5"
-        placeholder="Â¿QuÃ© problema querÃ©s resolver o quÃ© proceso querÃ©s automatizar?"
+        placeholder="¿Qué problema quieres resolver o qué proceso quieres automatizar?"
         required
       ></textarea>
       <label class="lead-form__consent">
         <input v-model="form.data_consent" name="data_consent" type="checkbox" required />
         <span>
-          Acepto la polÃ­tica de tratamiento de datos personales de Agenc-IA. Mis datos serÃ¡n utilizados para contactarme y brindar informaciÃ³n sobre servicios.
-          <a href="#politica-privacidad" @click.prevent="showPrivacyPolicy = !showPrivacyPolicy">Ver polÃ­tica de privacidad</a>
+          Acepto la política de tratamiento de datos personales de Agenc-IA. Mis datos serán utilizados para contactarme y brindar información sobre servicios.
+          <a href="#politica-privacidad" @click.prevent="showPrivacyPolicy = !showPrivacyPolicy">Ver política de privacidad</a>
         </span>
       </label>
       <p v-if="showPrivacyPolicy" id="politica-privacidad" class="lead-form__privacy">
-        Usamos tus datos para responder tu solicitud, ofrecerte informaciÃ³n sobre nuestros servicios y hacer seguimiento comercial relacionado con Agenc-IA. No vendemos tus datos a terceros.
+        Usamos tus datos para responder tu solicitud, ofrecerte información sobre nuestros servicios y hacer seguimiento comercial relacionado con Agenc-IA. No vendemos tus datos a terceros.
       </p>
       <input type="text" name="company_website" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" />
       <button
@@ -105,10 +105,10 @@ function trackWhatsAppClick() {
         type="submit"
         :disabled="formState === 'sending' || formState === 'sent' || !form.data_consent"
       >
-        <span v-if="formState === 'idle'">Enviar diagnÃ³stico</span>
+        <span v-if="formState === 'idle'">Enviar diagnóstico</span>
         <span v-else-if="formState === 'sending'">Enviando...</span>
-        <span v-else-if="formState === 'sent'">âœ… Recibido. Te contactamos pronto.</span>
-        <span v-else>âŒ Error. IntentÃ¡ por email o WhatsApp.</span>
+        <span v-else-if="formState === 'sent'">Recibido. Te contactamos pronto.</span>
+        <span v-else>Error. Intenta por email o WhatsApp.</span>
       </button>
     </form>
   </section>

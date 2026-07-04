@@ -38,13 +38,6 @@ onMounted(() => {
   gsap.ticker.add((time) => lenis?.raf(time * 1000))
   gsap.ticker.lagSmoothing(0)
 
-  // TrustBar chips — staggered fade in
-  gsap.from('.trust-chip', {
-    y: 16, autoAlpha: 0, duration: 0.4, ease: 'power2.out',
-    stagger: 0.04,
-    scrollTrigger: { trigger: '.trust-bar', start: 'top 90%' }
-  })
-
   // Problem cards — slide from alternating sides
   gsap.from('.problem-card:nth-child(odd)', {
     x: -30, autoAlpha: 0, duration: 0.55, ease: 'power3.out',
@@ -55,9 +48,9 @@ onMounted(() => {
     scrollTrigger: { trigger: '.problem-grid', start: 'top 82%' }
   })
 
-  // Meta cards pop-in with spring
+  // Meta cards pop in without extra motion.
   gsap.from('.meta-card', {
-    y: 60, autoAlpha: 0, scale: 0.85, duration: 0.65, ease: 'back.out(1.3)',
+    y: 40, autoAlpha: 0, duration: 0.55, ease: 'power3.out',
     stagger: 0.1,
     scrollTrigger: { trigger: '.meta-grid', start: 'top 82%' }
   })
@@ -79,7 +72,7 @@ onUnmounted(() => {
 <template>
   <div class="page-home">
     <HeroSection
-      hero-badge="Servicio Premium de Agentes IA"
+      hero-badge="Agenc-IA | Agentes IA para PYMES"
       hero-title="Agentes IA que venden por ti 24/7"
       hero-lead="Automatiza WhatsApp, Instagram y Facebook con IA personalizada. Setup done-for-you."
       primary-cta="Diagnóstico gratuito"

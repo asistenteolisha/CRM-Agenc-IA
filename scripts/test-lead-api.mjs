@@ -30,7 +30,7 @@ async function runCase(body) {
   const req = {
     method: 'POST',
     headers: {
-      origin: 'https://agenc-ia.co',
+      origin: 'https://www.agenciadia.tech',
       'user-agent': 'lead-smoke-test',
       referer: 'http://localhost/?utm_source=google&utm_medium=cpc&utm_campaign=dia-2'
     },

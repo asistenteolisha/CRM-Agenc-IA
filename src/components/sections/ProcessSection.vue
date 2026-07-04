@@ -7,11 +7,9 @@ import IconInline from '../IconInline.vue'
 gsap.registerPlugin(ScrollTrigger)
 
 const steps = [
-  { num: '01', icon: 'Search', title: 'Diagnóstico', desc: 'Analizamos tu negocio, procesos actuales y puntos de fricción. Identificamos dónde la IA genera más impacto.' },
-  { num: '02', icon: 'Palette', title: 'Diseño', desc: 'Diseñamos el flujo conversacional de tu agente. Definimos personalidad, respuestas e integraciones.' },
-  { num: '03', icon: 'Rocket', title: 'Implementación', desc: 'Conectamos tu agente con WhatsApp, Instagram y Facebook. Configuramos todas las integraciones.' },
-  { num: '04', icon: 'BarChart3', title: 'Medición', desc: 'Monitoreamos métricas clave: tasa de respuesta, satisfacción, conversiones y tiempo de atención.' },
-  { num: '05', icon: 'RefreshCw', title: 'Optimización', desc: 'Mejoramos continuamente el agente basándonos en datos reales. Tu agente aprende y mejora cada mes.' },
+  { num: '01', icon: 'Search', title: 'Diagnóstico gratuito', desc: 'Revisamos tus canales, oferta y cuellos de botella para elegir el flujo con mayor impacto.' },
+  { num: '02', icon: 'Wrench', title: 'Setup done-for-you', desc: 'Configuramos agente, guion, integraciones, tracking y pruebas con casos reales de tu negocio.' },
+  { num: '03', icon: 'BarChart3', title: 'Lanzamiento y mejora', desc: 'Publicamos, medimos conversaciones y leads, y ajustamos el agente cada mes según datos reales.' },
 ]
 
 onMounted(() => {
@@ -27,8 +25,8 @@ onMounted(() => {
   <section class="section process-section">
     <div class="section__head" data-reveal>
       <p class="eyebrow">Nuestro proceso</p>
-      <h2>Así activamos tu agente IA en 5 pasos.</h2>
-      <p class="section-sub">Una metodología colaborativa para un despliegue rápido y resultados medibles desde el primer mes.</p>
+      <h2>Cómo funciona en 3 pasos.</h2>
+      <p class="section-sub">Un despliegue corto, medible y sin carga técnica para tu equipo.</p>
     </div>
     <div class="process-timeline">
       <div v-for="step in steps" :key="step.num" class="process-step">
