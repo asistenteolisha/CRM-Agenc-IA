@@ -1,19 +1,50 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const emit = defineEmits<{ click: [] }>()
 const showBubble = ref(true)
 const isLoaded = ref(false)
+const mouseX = ref(0)
+const mouseY = ref(0)
+
+let bubbleInterval: number
+let modelViewer: any = null
 
 // Toggle bubble every 4 seconds
 onMounted(() => {
-  setInterval(() => {
+  bubbleInterval = window.setInterval(() => {
     showBubble.value = !showBubble.value
   }, 4000)
+  
+  // Track mouse
+  window.addEventListener('mousemove', onMouseMove)
 })
 
-function onModelLoad() {
+onUnmounted(() => {
+  clearInterval(bubbleInterval)
+  window.removeEventListener('mousemove', onMouseMove)
+})
+
+function onMouseMove(e: MouseEvent) {
+  mouseX.value = (e.clientX / window.innerWidth) * 2 - 1
+  mouseY.value = -(e.clientY / window.innerHeight) * 2 + 1
+  
+  // Rotate model slightly toward cursor
+  if (modelViewer) {
+    const yaw = mouseX.value * 15  // -15 to +15 degrees
+    const pitch = mouseY.value * 5  // -5 to +5 degrees
+    modelViewer.orientation = `${pitch}deg ${yaw}deg 0deg`
+  }
+}
+
+function onModelLoad(e: any) {
   isLoaded.value = true
+  modelViewer = e.target
+  
+  // Set initial orientation
+  if (modelViewer) {
+    modelViewer.orientation = '0deg 0deg 0deg'
+  }
 }
 </script>
 
@@ -32,9 +63,7 @@ function onModelLoad() {
       <model-viewer
         src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb"
         alt="Agenc-IA Robot Assistant"
-        auto-rotate
-        auto-rotate-delay="0"
-        rotation-per-second="30deg"
+        orientation="0deg 0deg 0deg"
         camera-controls
         disable-zoom
         disable-pan
@@ -60,8 +89,8 @@ function onModelLoad() {
 <style scoped>
 .mascot-container {
   position: relative;
-  width: 180px;
-  height: 220px;
+  width: 160px;
+  height: 200px;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
@@ -116,7 +145,7 @@ function onModelLoad() {
 .model-wrapper {
   position: relative;
   width: 100%;
-  height: 180px;
+  height: 160px;
   opacity: 0;
   transition: opacity 0.5s ease;
 }
@@ -153,8 +182,8 @@ function onModelLoad() {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px;
-  height: 60px;
+  width: 100px;
+  height: 50px;
   background: radial-gradient(ellipse, rgba(0, 212, 255, 0.3) 0%, transparent 70%);
   opacity: 0.4;
   transition: all 0.3s ease;
