@@ -189,7 +189,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="chat-widget" :class="{ open: isOpen }">
-    <button class="chat-widget__btn" @click="toggle" :aria-label="isOpen ? 'Cerrar chat' : 'Abrir chat'">
+    <button class="chat-widget__btn" @click="toggle" :aria-label="isOpen ? 'Cerrar chat' : 'Abrir chat'" style="display: none;">
       <template v-if="!isOpen">
         <IconInline name="MessageCircle" :size="22" />
       </template>
