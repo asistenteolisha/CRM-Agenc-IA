@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { services } from '../../data/services'
 import IconInline from '../IconInline.vue'
 import { trackEvent } from '../../utils/analytics'
+
+gsap.registerPlugin(ScrollTrigger)
 
 type Cat = 'todas' | 'ventas' | 'soporte' | 'ecommerce' | 'social' | 'automatizacion' | 'consultoria' | 'premium'
 const cats: { key: Cat; label: string }[] = [
@@ -11,36 +15,35 @@ const cats: { key: Cat; label: string }[] = [
   { key: 'soporte', label: 'Soporte' },
   { key: 'ecommerce', label: 'E-commerce' },
   { key: 'social', label: 'Social' },
-  { key: 'automatizacion', label: 'Automatización' },
-  { key: 'consultoria', label: 'Consultoría' },
+  { key: 'automatizacion', label: 'Automatizacion' },
+  { key: 'consultoria', label: 'Consultoria' },
   { key: 'premium', label: 'Premium' },
 ]
 
 const activeFilter = ref<Cat>('todas')
 type Service = (typeof services)[number]
 
-// Map each service to its Lucide icon
 const serviceIcons: Record<string, string> = {
-  'whatsapp-sales-agent':     'MessageCircle',
-  'instagram-dm-agent':        'Instagram',
-  'facebook-lead-ad-funnel':   'Facebook',
-  'cold-lead-recovery':        'RefreshCw',
-  'customer-support-agent':    'MessageCircle',
-  'smart-moderation':          'Shield',
-  'conversational-ecommerce':  'ShoppingCart',
-  'social-comments-agent':     'MessageCircle',
-  'social-media-agent':        'Users',
-  'n8n-crm-automation':        'Workflow',
-  'web-funnel-ai':             'Globe',
-  'auto-scheduling':           'CalendarCheck',
-  'commercial-dashboard':      'ChartColumnIncreasing',
+  'whatsapp-sales-agent': 'MessageCircle',
+  'instagram-dm-agent': 'Instagram',
+  'facebook-lead-ad-funnel': 'Facebook',
+  'cold-lead-recovery': 'RefreshCw',
+  'customer-support-agent': 'MessageCircle',
+  'smart-moderation': 'Shield',
+  'conversational-ecommerce': 'ShoppingCart',
+  'social-comments-agent': 'MessageCircle',
+  'social-media-agent': 'Users',
+  'n8n-crm-automation': 'Workflow',
+  'web-funnel-ai': 'Globe',
+  'auto-scheduling': 'CalendarCheck',
+  'commercial-dashboard': 'ChartColumnIncreasing',
   'document-backoffice-agent': 'FileSearch',
-  'ia-consulting-roadmap':     'Lightbulb',
-  'managed-service':           'ConciergeBell',
-  'trained-agents':            'Brain',
-  'monitoring-247':            'Eye',
-  'weekly-reports':            'BarChart3',
-  'ai-optimization':           'Sparkles',
+  'ia-consulting-roadmap': 'Lightbulb',
+  'managed-service': 'Users',
+  'trained-agents': 'Bot',
+  'monitoring-247': 'Eye',
+  'weekly-reports': 'BarChart3',
+  'ai-optimization': 'Zap',
 }
 
 function trackServiceClick(service: Service) {
@@ -50,22 +53,44 @@ function trackServiceClick(service: Service) {
     service_category: service.category
   })
 }
+
+onMounted(() => {
+  gsap.from('.service-card', {
+    y: 40,
+    autoAlpha: 0,
+    duration: 0.55,
+    ease: 'power3.out',
+    stagger: 0.06,
+    scrollTrigger: { trigger: '.service-grid', start: 'top 82%' }
+  })
+})
 </script>
 
 <template>
-  <section id="servicios" class="section">
+  <section id="servicios" class="section services-section">
     <div class="section__head" data-reveal>
       <p class="eyebrow">Servicios</p>
-      <h2>No comprás un bot. Comprás un flujo que atiende, vende, registra y avisa cuando toca intervenir.</h2>
+      <h2>No compras un bot. Compras un flujo que atiende, vende, registra y avisa cuando toca intervenir.</h2>
     </div>
     <div class="service-filters" data-reveal>
-      <button v-for="cat in cats" :key="cat.key"
-              class="filter-chip" :class="{ active: activeFilter === cat.key }"
-              @click="activeFilter = cat.key">{{ cat.label }}</button>
+      <button
+        v-for="cat in cats"
+        :key="cat.key"
+        class="filter-chip"
+        :class="{ active: activeFilter === cat.key }"
+        @click="activeFilter = cat.key"
+      >
+        {{ cat.label }}
+      </button>
     </div>
     <div class="service-grid">
-      <article v-for="s in services.filter(x => activeFilter === 'todas' || x.category === activeFilter)"
-               :key="s.id" class="service-card" data-reveal @click="trackServiceClick(s)">
+      <article
+        v-for="s in services.filter(x => activeFilter === 'todas' || x.category === activeFilter)"
+        :key="s.id"
+        class="service-card"
+        data-reveal
+        @click="trackServiceClick(s)"
+      >
         <div class="service-card__glow"></div>
         <div class="service-card__icon">
           <IconInline :name="serviceIcons[s.id] ?? 'Bot'" :size="18" />
