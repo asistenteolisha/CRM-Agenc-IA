@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
+import { computed, defineAsyncComponent } from 'vue'
+import { useRoute } from 'vue-router'
 import AppLayout from './components/layout/AppLayout.vue'
 
 const StarField = defineAsyncComponent(() => import('./components/three/StarField.vue'))
 const RobotMascot = defineAsyncComponent(() => import('./components/three/RobotMascot.vue'))
+const route = useRoute()
+const isDashboard = computed(() => route.path.startsWith('/dashboard'))
 
 function openChat() {
   const chatBtn = document.querySelector('.chat-widget__btn') as HTMLElement
@@ -13,7 +16,8 @@ function openChat() {
 
 <template>
   <StarField />
-  <AppLayout>
+  <router-view v-if="isDashboard" />
+  <AppLayout v-else>
     <router-view v-slot="{ Component }">
       <transition name="page" mode="out-in">
         <component :is="Component" />
@@ -22,7 +26,7 @@ function openChat() {
   </AppLayout>
   
   <!-- 3D Robot Mascot with speech bubble -->
-  <div class="mascot-float">
+  <div v-if="!isDashboard" class="mascot-float">
     <RobotMascot @click="openChat" />
   </div>
 </template>
