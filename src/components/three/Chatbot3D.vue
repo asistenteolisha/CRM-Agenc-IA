@@ -10,14 +10,35 @@ let renderer: THREE.WebGLRenderer
 let bot: THREE.Group
 let eyeL: THREE.Mesh
 let eyeR: THREE.Mesh
+let mouth: THREE.Mesh
+let ring: THREE.Mesh
 let animationId: number
 let mouseX = 0
 let mouseY = 0
 
+function createGlowTexture(): THREE.Texture {
+  const canvas = document.createElement('canvas')
+  canvas.width = 128
+  canvas.height = 128
+  const ctx = canvas.getContext('2d')!
+  
+  const gradient = ctx.createRadialGradient(64, 64, 0, 64, 64, 64)
+  gradient.addColorStop(0, 'rgba(0, 212, 255, 0.4)')
+  gradient.addColorStop(0.5, 'rgba(0, 212, 255, 0.1)')
+  gradient.addColorStop(1, 'rgba(0, 212, 255, 0)')
+  
+  ctx.fillStyle = gradient
+  ctx.fillRect(0, 0, 128, 128)
+  
+  const texture = new THREE.CanvasTexture(canvas)
+  texture.needsUpdate = true
+  return texture
+}
+
 function init() {
   if (!container.value) return
 
-  const size = 160
+  const size = 140
 
   scene = new THREE.Scene()
   camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100)
@@ -29,61 +50,72 @@ function init() {
   renderer.setClearColor(0x000000, 0)
   container.value.appendChild(renderer.domElement)
 
-  // Bot group
   bot = new THREE.Group()
 
-  // Body
-  const bodyGeo = new THREE.SphereGeometry(0.7, 32, 32)
+  // Body - main sphere
+  const bodyGeo = new THREE.SphereGeometry(0.65, 32, 32)
   const bodyMat = new THREE.MeshPhongMaterial({
     color: 0x0A0E1A,
     emissive: 0x00D4FF,
-    emissiveIntensity: 0.15,
+    emissiveIntensity: 0.12,
     shininess: 80,
     transparent: true,
-    opacity: 0.9,
+    opacity: 0.95,
   })
   const body = new THREE.Mesh(bodyGeo, bodyMat)
   bot.add(body)
 
-  // Eyes
-  const eyeGeo = new THREE.SphereGeometry(0.12, 16, 16)
+  // Eyes - larger, more expressive
+  const eyeGeo = new THREE.SphereGeometry(0.13, 16, 16)
   const eyeMat = new THREE.MeshPhongMaterial({
     color: 0x00D4FF,
     emissive: 0x00D4FF,
-    emissiveIntensity: 1,
+    emissiveIntensity: 1.2,
   })
 
   eyeL = new THREE.Mesh(eyeGeo, eyeMat)
-  eyeL.position.set(-0.2, 0.15, 0.65)
+  eyeL.position.set(-0.22, 0.18, 0.6)
   bot.add(eyeL)
 
   eyeR = new THREE.Mesh(eyeGeo, eyeMat)
-  eyeR.position.set(0.2, 0.15, 0.65)
+  eyeR.position.set(0.22, 0.18, 0.6)
   bot.add(eyeR)
 
-  // Smile
-  const smileGeo = new THREE.TorusGeometry(0.15, 0.02, 8, 16, Math.PI)
+  // Mouth - smile
+  const smileGeo = new THREE.TorusGeometry(0.14, 0.025, 8, 16, Math.PI)
   const smileMat = new THREE.MeshPhongMaterial({
     color: 0x00D4FF,
     emissive: 0x00D4FF,
-    emissiveIntensity: 0.5,
+    emissiveIntensity: 0.6,
   })
-  const smile = new THREE.Mesh(smileGeo, smileMat)
-  smile.position.set(0, -0.1, 0.65)
-  smile.rotation.x = Math.PI
-  bot.add(smile)
+  mouth = new THREE.Mesh(smileGeo, smileMat)
+  mouth.position.set(0, -0.08, 0.6)
+  mouth.rotation.x = Math.PI
+  bot.add(mouth)
 
   // Glow ring
-  const ringGeo = new THREE.TorusGeometry(0.85, 0.02, 8, 64)
+  const ringGeo = new THREE.TorusGeometry(0.8, 0.015, 8, 64)
   const ringMat = new THREE.MeshPhongMaterial({
     color: 0x00D4FF,
     emissive: 0x00D4FF,
-    emissiveIntensity: 0.5,
+    emissiveIntensity: 0.4,
+    transparent: true,
+    opacity: 0.5,
+  })
+  ring = new THREE.Mesh(ringGeo, ringMat)
+  bot.add(ring)
+
+  // Glow sprite behind
+  const glowTexture = createGlowTexture()
+  const glowMat = new THREE.SpriteMaterial({
+    map: glowTexture,
     transparent: true,
     opacity: 0.6,
+    blending: THREE.AdditiveBlending,
   })
-  const ring = new THREE.Mesh(ringGeo, ringMat)
-  bot.add(ring)
+  const glow = new THREE.Sprite(glowMat)
+  glow.scale.set(2.5, 2.5, 1)
+  bot.add(glow)
 
   scene.add(bot)
 
@@ -92,7 +124,7 @@ function init() {
   light.position.set(0, 2, 3)
   scene.add(light)
 
-  const ambient = new THREE.AmbientLight(0xffffff, 0.4)
+  const ambient = new THREE.AmbientLight(0xffffff, 0.5)
   scene.add(ambient)
 
   window.addEventListener('mousemove', onMouseMove)
@@ -108,21 +140,24 @@ function animate() {
   animationId = requestAnimationFrame(animate)
 
   // Smooth follow
-  const targetRotX = mouseY * 0.3
-  const targetRotY = mouseX * 0.5
-  bot.rotation.x += (targetRotX - bot.rotation.x) * 0.05
-  bot.rotation.y += (targetRotY - bot.rotation.y) * 0.05
+  const targetRotX = mouseY * 0.25
+  const targetRotY = mouseX * 0.4
+  bot.rotation.x += (targetRotX - bot.rotation.x) * 0.04
+  bot.rotation.y += (targetRotY - bot.rotation.y) * 0.04
 
   // Float
-  bot.position.y = Math.sin(Date.now() * 0.001) * 0.08
+  bot.position.y = Math.sin(Date.now() * 0.0012) * 0.06
 
-  // Blink - more natural with random intervals
+  // Blink - natural with lerp
   const t = Date.now() * 0.001
-  const blinkCycle = Math.sin(t * 2) > 0.98
-  const doubleBlink = Math.sin(t * 4) > 0.99
+  const blinkCycle = Math.sin(t * 1.8) > 0.97
+  const doubleBlink = Math.sin(t * 3.5) > 0.995
   const blink = (blinkCycle || doubleBlink) ? 0.05 : 1
-  eyeL.scale.y += (blink - eyeL.scale.y) * 0.3
-  eyeR.scale.y += (blink - eyeR.scale.y) * 0.3
+  eyeL.scale.y += (blink - eyeL.scale.y) * 0.25
+  eyeR.scale.y += (blink - eyeR.scale.y) * 0.25
+
+  // Ring rotation
+  ring.rotation.z += 0.003
 
   renderer.render(scene, camera)
 }
@@ -142,15 +177,15 @@ onUnmounted(() => {
 
 <style scoped>
 .chatbot-3d {
-  width: 160px;
-  height: 160px;
+  width: 140px;
+  height: 140px;
   cursor: pointer;
   transition: transform 0.3s ease;
-  filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.3));
+  filter: drop-shadow(0 0 25px rgba(0, 212, 255, 0.35));
 }
 
 .chatbot-3d:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.5));
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 35px rgba(0, 212, 255, 0.5));
 }
 </style>

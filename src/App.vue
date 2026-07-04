@@ -6,7 +6,6 @@ const StarField = defineAsyncComponent(() => import('./components/three/StarFiel
 const Chatbot3D = defineAsyncComponent(() => import('./components/three/Chatbot3D.vue'))
 
 function openChat() {
-  // Trigger chat widget open
   const chatBtn = document.querySelector('.chat-widget__btn') as HTMLElement
   chatBtn?.click()
 }
@@ -21,14 +20,26 @@ function openChat() {
       </transition>
     </router-view>
   </AppLayout>
-  <Chatbot3D class="chatbot-float" @click="openChat" />
+  
+  <!-- Chatbot 3D floating above chat button -->
+  <div class="chatbot-float-container">
+    <Chatbot3D @click="openChat" />
+  </div>
 </template>
 
 <style>
-.chatbot-float {
+.chatbot-float-container {
   position: fixed;
   bottom: 100px;
-  right: 24px;
+  right: 12px;
   z-index: 49;
+  pointer-events: auto;
+}
+
+/* Mobile: hide 3D bot to save performance */
+@media (max-width: 768px) {
+  .chatbot-float-container {
+    display: none;
+  }
 }
 </style>
