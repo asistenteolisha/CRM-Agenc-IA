@@ -281,19 +281,19 @@ export default {}
 </script>
 
 <style scoped>
-.chat-widget { position: fixed; bottom: calc(24px + env(safe-area-inset-bottom)); right: 24px; z-index: 50; font-family: var(--font-sans); }
+.chat-widget { position: fixed; bottom: calc(24px + env(safe-area-inset-bottom)); right: 24px; z-index: 50; font-family: var(--font-body); }
 
 .chat-widget__btn {
-  width: 56px; height: 56px; border-radius: 50%; border: none;
-  background: var(--accent-gold); color: var(--text-inverse); cursor: pointer;
+  width: 60px; height: 60px; border-radius: 50%; border: none;
+  background: var(--gradient-neon); color: white; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 24px rgba(212,165,116,0.35);
+  box-shadow: var(--glow-blue);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  animation: pulse-glow 2.5s ease-in-out infinite;
+  animation: neonPulse 2.5s ease-in-out infinite;
 }
-.chat-widget__btn:hover { transform: scale(1.08); box-shadow: 0 6px 32px rgba(212,165,116,0.45); }
+.chat-widget__btn:hover { transform: scale(1.1); box-shadow: var(--glow-blue-strong); }
 .chat-widget.open .chat-widget__btn { animation: none; }
-@keyframes pulse-glow { 0%, 100% { box-shadow: 0 4px 24px rgba(212,165,116,0.35); } 50% { box-shadow: 0 4px 36px rgba(212,165,116,0.55); } }
+@keyframes neonPulse { 0%, 100% { box-shadow: var(--glow-blue); } 50% { box-shadow: var(--glow-blue-strong); } }
 
 .chat-widget__panel {
   position: absolute; bottom: 72px; right: 0; width: min(460px, calc(100vw - 32px));
