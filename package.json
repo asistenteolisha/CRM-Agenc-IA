@@ -9,8 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/three": "^0.185.0",
     "gsap": "^3.12.5",
     "lenis": "^1.1.9",
+    "three": "^0.185.1",
     "vue": "^3.5.13",
     "vue-router": "^4.6.4"
   },
