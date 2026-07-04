@@ -504,6 +504,11 @@ h3 { margin: 0; color: var(--text-primary); font-weight: 700; }
   transition: all var(--transition-normal);
   &:hover { border-color: var(--border-gold); transform: translateY(-3px); box-shadow: var(--shadow-gold); }
 }
+.service-card {
+  &::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--gradient-gold); opacity: 0; transition: opacity 0.3s; }
+  &:hover::before { opacity: 1; }
+}
 .problem-card { min-height: 200px; padding: 28px;
   span { display: block; width: 32px; height: 3px; background: var(--accent-gold); margin-bottom: 20px; border-radius: 2px; }
 }
@@ -529,7 +534,11 @@ h3 { margin: 0; color: var(--text-primary); font-weight: 700; }
 }
 
 .service-grid { grid-template-columns: repeat(3, 1fr); }
-.service-card { min-height: 260px; padding: 28px; display: flex; flex-direction: column; gap: 10px;
+.service-card { min-height: 260px; padding: 28px; display: flex; flex-direction: column; gap: 10px; position: relative; overflow: hidden;
+  &__glow { position: absolute; top: -50%; right: -50%; width: 100%; height: 100%;
+    background: radial-gradient(circle, rgba(212,165,116,0.08) 0%, transparent 70%);
+    pointer-events: none; transition: opacity 0.3s; opacity: 0; }
+  &:hover &__glow { opacity: 1; }
   &__cat { font-size: 0.68rem; color: var(--accent-gold); text-transform: uppercase; font-weight: 750; letter-spacing: 0.05em; }
   &__icon { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(212,165,116,0.12); color: var(--accent-gold); margin-bottom: 4px; }
   &__outcome { font-size: 0.86rem; color: var(--accent-gold); margin: 0; font-weight: 600; }

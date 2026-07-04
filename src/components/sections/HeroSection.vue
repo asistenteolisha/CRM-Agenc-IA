@@ -81,7 +81,13 @@ onMounted(() => {
           <div class="phone-notch"></div>
           <div class="phone-header">
             <div class="phone-header__left">
-              <span class="phone-avatar">🤖</span>
+              <div class="phone-avatar">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
+                  <path d="M18 13a6 6 0 0 1-12 0"/>
+                  <circle cx="12" cy="8" r="2"/>
+                </svg>
+              </div>
               <div>
                 <span class="phone-name">Lía - Agenc-IA</span>
                 <span class="phone-status">en línea</span>
@@ -212,7 +218,13 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  color: var(--text-inverse);
+}
+
+.phone-avatar svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--text-inverse);
 }
 
 .phone-name {

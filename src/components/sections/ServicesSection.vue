@@ -66,6 +66,7 @@ function trackServiceClick(service: Service) {
     <div class="service-grid">
       <article v-for="s in services.filter(x => activeFilter === 'todas' || x.category === activeFilter)"
                :key="s.id" class="service-card" data-reveal @click="trackServiceClick(s)">
+        <div class="service-card__glow"></div>
         <div class="service-card__icon">
           <IconInline :name="serviceIcons[s.id] ?? 'Bot'" :size="18" />
         </div>
