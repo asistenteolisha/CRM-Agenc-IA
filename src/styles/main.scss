@@ -441,6 +441,19 @@ p { line-height: 1.7; }
   overflow: hidden;
   background: var(--bg-dark);
 
+  // Gradient transition to pearl white
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to bottom, transparent, var(--bg-pearl));
+    z-index: 1;
+    pointer-events: none;
+  }
+
   &__grid {
     position: absolute;
     inset: 0;
@@ -968,8 +981,23 @@ p { line-height: 1.7; }
   padding: 100px max(20px, calc((100% - var(--max-width)) / 2));
   overflow: hidden;
   background: var(--bg-dark);
+  position: relative;
 
+  // Gradient transition from pearl
   &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to bottom, var(--bg-pearl), transparent);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  // Grid pattern
+  &::after {
     content: '';
     position: absolute;
     inset: 0;
