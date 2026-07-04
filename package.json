@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@splinetool/runtime": "^1.12.98",
     "@types/three": "^0.185.0",
     "gsap": "^3.12.5",
     "lenis": "^1.1.9",
