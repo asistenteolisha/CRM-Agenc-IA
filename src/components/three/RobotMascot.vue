@@ -56,7 +56,6 @@ function onModelLoad(e: any) {
         src="/drone.glb"
         alt="Agenc-IA Robot Assistant"
         orientation="0deg 0deg 0deg"
-        camera-controls
         disable-zoom
         disable-pan
         interaction-prompt="none"
@@ -140,6 +139,16 @@ function onModelLoad(e: any) {
 
 .model-wrapper.loaded {
   opacity: 1;
+}
+
+/* Hide model-viewer default button */
+.model-wrapper::part(default-progress-bar) {
+  display: none;
+}
+
+model-viewer {
+  --progress-bar-color: transparent;
+  --poster-color: transparent;
 }
 
 .model-loading {
