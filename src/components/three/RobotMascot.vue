@@ -2,43 +2,41 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const emit = defineEmits<{ click: [] }>()
-const canvasRef = ref<HTMLCanvasElement | null>(null)
-const isLoading = ref(true)
 const showBubble = ref(true)
+const mouseX = ref(0)
+const mouseY = ref(0)
+const isHovered = ref(false)
 
-let app: any = null
-let animationId: number
+let bubbleInterval: number
 
-// Spline scene URL - cute robot mascot
-const SPLINE_URL = 'https://prod.spline.design/6Wq1Q7YGyM-iAcL2/scene.splinecode'
-
-onMounted(async () => {
-  if (!canvasRef.value) return
+onMounted(() => {
+  // Toggle bubble
+  bubbleInterval = window.setInterval(() => {
+    showBubble.value = !showBubble.value
+  }, 4000)
   
-  try {
-    const { Application } = await import('@splinetool/runtime')
-    app = new Application(canvasRef.value)
-    await app.load(SPLINE_URL)
-    isLoading.value = false
-    
-    // Pulse the speech bubble
-    setInterval(() => {
-      showBubble.value = !showBubble.value
-    }, 5000)
-  } catch (e) {
-    console.warn('Spline load failed:', e)
-    isLoading.value = false
-  }
+  // Track mouse for eye movement
+  window.addEventListener('mousemove', onMouseMove)
 })
 
 onUnmounted(() => {
-  app?.dispose()
-  cancelAnimationFrame(animationId)
+  clearInterval(bubbleInterval)
+  window.removeEventListener('mousemove', onMouseMove)
 })
+
+function onMouseMove(e: MouseEvent) {
+  mouseX.value = (e.clientX / window.innerWidth) * 2 - 1
+  mouseY.value = -(e.clientY / window.innerHeight) * 2 + 1
+}
 </script>
 
 <template>
-  <div class="mascot-container" @click="emit('click')">
+  <div 
+    class="robot-mascot" 
+    @click="emit('click')"
+    @mouseenter="isHovered = true"
+    @mouseleave="isHovered = false"
+  >
     <!-- Speech bubble -->
     <Transition name="bubble">
       <div v-if="showBubble" class="speech-bubble">
@@ -47,48 +45,80 @@ onUnmounted(() => {
       </div>
     </Transition>
     
-    <!-- 3D Robot -->
-    <div class="robot-wrapper">
-      <canvas ref="canvasRef" class="robot-canvas" />
-      <div v-if="isLoading" class="robot-loading">
-        <div class="loading-spinner" />
+    <!-- Robot body -->
+    <div class="robot" :class="{ hovered: isHovered }">
+      <!-- Glow behind -->
+      <div class="robot-glow" />
+      
+      <!-- Head -->
+      <div class="robot-head">
+        <!-- Visor -->
+        <div class="robot-visor">
+          <!-- Eyes -->
+          <div class="robot-eyes">
+            <div 
+              class="robot-eye left"
+              :style="{ transform: `translate(${mouseX * 3}px, ${mouseY * 3}px)` }"
+            />
+            <div 
+              class="robot-eye right"
+              :style="{ transform: `translate(${mouseX * 3}px, ${mouseY * 3}px)` }"
+            />
+          </div>
+          <!-- Mouth -->
+          <div class="robot-mouth" />
+        </div>
+        <!-- Antenna -->
+        <div class="robot-antenna">
+          <div class="antenna-ball" />
+        </div>
+      </div>
+      
+      <!-- Body -->
+      <div class="robot-body">
+        <div class="body-light" />
+        <div class="body-light" />
+      </div>
+      
+      <!-- Arms -->
+      <div class="robot-arm left" />
+      <div class="robot-arm right" />
+      
+      <!-- Propellers -->
+      <div class="propeller left">
+        <div class="propeller-blade" />
+      </div>
+      <div class="propeller right">
+        <div class="propeller-blade" />
       </div>
     </div>
-    
-    <!-- Glow effect -->
-    <div class="glow-effect" />
   </div>
 </template>
 
 <style scoped>
-.mascot-container {
+.robot-mascot {
   position: relative;
-  width: 200px;
-  height: 240px;
+  width: 160px;
+  height: 200px;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
 
-.mascot-container:hover {
+.robot-mascot:hover {
   transform: scale(1.05);
-}
-
-.mascot-container:hover .glow-effect {
-  opacity: 0.6;
-  transform: scale(1.2);
 }
 
 /* Speech bubble */
 .speech-bubble {
   position: absolute;
-  top: -10px;
+  top: -5px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   border: 2px solid rgba(0, 212, 255, 0.4);
-  border-radius: 20px;
-  padding: 10px 18px;
+  border-radius: 18px;
+  padding: 8px 16px;
   white-space: nowrap;
   z-index: 10;
   box-shadow: 0 4px 20px rgba(0, 212, 255, 0.2);
@@ -96,9 +126,8 @@ onUnmounted(() => {
 
 .speech-bubble span {
   font-family: 'Inter', sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  color: #1E293B;
   background: linear-gradient(135deg, #00D4FF, #8B5CF6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -106,62 +135,209 @@ onUnmounted(() => {
 
 .bubble-tail {
   position: absolute;
-  bottom: -8px;
+  bottom: -7px;
   left: 50%;
   transform: translateX(-50%);
   width: 0;
   height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 8px solid rgba(255, 255, 255, 0.95);
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid rgba(255, 255, 255, 0.95);
 }
 
 /* Robot */
-.robot-wrapper {
+.robot {
   position: relative;
   width: 100%;
-  height: 200px;
-}
-
-.robot-canvas {
-  width: 100%;
   height: 100%;
+  transition: transform 0.3s ease;
 }
 
-.robot-loading {
+.robot.hovered {
+  transform: translateY(-5px);
+}
+
+.robot-glow {
   position: absolute;
-  inset: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* Head */
+.robot-head {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #1A2340, #0F1629);
+  border-radius: 50%;
+  border: 3px solid rgba(0, 212, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+}
+
+.robot-visor {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  background: radial-gradient(circle, #0A0E1A 0%, #0F1629 100%);
+  border-radius: 50%;
+  border: 2px solid rgba(0, 212, 255, 0.4);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+  gap: 8px;
 }
 
-.loading-spinner {
-  width: 30px;
-  height: 30px;
-  border: 3px solid rgba(0, 212, 255, 0.2);
-  border-top-color: #00D4FF;
+.robot-eyes {
+  display: flex;
+  gap: 14px;
+}
+
+.robot-eye {
+  width: 10px;
+  height: 10px;
+  background: #00D4FF;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.8);
+  transition: transform 0.1s ease;
+}
+
+.robot-mouth {
+  width: 20px;
+  height: 10px;
+  border: 2px solid #00D4FF;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
+}
+
+.robot-antenna {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 15px;
+  background: linear-gradient(to top, rgba(0, 212, 255, 0.5), #00D4FF);
+}
+
+.antenna-ball {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background: #00D4FF;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+  animation: antennaGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes antennaGlow {
+  0%, 100% { box-shadow: 0 0 10px rgba(0, 212, 255, 0.8); }
+  50% { box-shadow: 0 0 20px rgba(0, 212, 255, 1); }
+}
+
+/* Body */
+.robot-body {
+  position: absolute;
+  top: 95px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 50px;
+  background: linear-gradient(135deg, #1A2340, #0F1629);
+  border-radius: 10px;
+  border: 2px solid rgba(0, 212, 255, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.body-light {
+  width: 8px;
+  height: 8px;
+  background: #00D4FF;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
+  animation: bodyLight 2s ease-in-out infinite;
+}
+
+.body-light:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+@keyframes bodyLight {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Arms */
+.robot-arm {
+  position: absolute;
+  top: 100px;
+  width: 20px;
+  height: 40px;
+  background: linear-gradient(135deg, #1A2340, #0F1629);
+  border-radius: 5px;
+  border: 2px solid rgba(0, 212, 255, 0.3);
+}
+
+.robot-arm.left {
+  left: 25px;
+  transform: rotate(10deg);
+}
+
+.robot-arm.right {
+  right: 25px;
+  transform: rotate(-10deg);
+}
+
+/* Propellers */
+.propeller {
+  position: absolute;
+  bottom: 30px;
+  width: 40px;
+  height: 10px;
+}
+
+.propeller.left {
+  left: 20px;
+}
+
+.propeller.right {
+  right: 20px;
+}
+
+.propeller-blade {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 212, 255, 0.3);
+  border-radius: 5px;
+  animation: spin 0.2s linear infinite;
 }
 
 @keyframes spin {
   to { transform: rotate(360deg); }
-}
-
-/* Glow */
-.glow-effect {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 60px;
-  background: radial-gradient(ellipse, rgba(0, 212, 255, 0.3) 0%, transparent 70%);
-  opacity: 0.4;
-  transition: all 0.3s ease;
-  pointer-events: none;
 }
 
 /* Bubble animation */
@@ -174,30 +350,12 @@ onUnmounted(() => {
 }
 
 @keyframes bubbleIn {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(10px) scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateX(-50%) translateY(10px) scale(0.8); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
 }
 
 @keyframes bubbleOut {
-  from {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0) scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-10px) scale(0.8);
-  }
-}
-
-/* Hover effects */
-.mascot-container:hover .speech-bubble {
-  border-color: #00D4FF;
-  box-shadow: 0 4px 25px rgba(0, 212, 255, 0.3);
+  from { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+  to { opacity: 0; transform: translateX(-50%) translateY(-10px) scale(0.8); }
 }
 </style>
