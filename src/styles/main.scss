@@ -550,16 +550,14 @@ p { line-height: 1.7; }
   -webkit-text-fill-color: transparent;
 
   &::after {
-    content: attr(data-text);
+    content: '';
     position: absolute;
     inset: 0;
     background: var(--gradient-neon);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: blur(28px);
-    opacity: 0.5;
+    filter: blur(30px);
+    opacity: 0.4;
     z-index: -1;
+    border-radius: 50%;
   }
 }
 

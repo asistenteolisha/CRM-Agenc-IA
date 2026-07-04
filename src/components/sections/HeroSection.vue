@@ -54,7 +54,7 @@ onBeforeUnmount(() => {
 
         <h1 class="hero__title">
           <span class="title-line">Agentes IA que</span>
-          <span class="title-line title-neon" data-text="venden por ti 24/7">venden por ti 24/7</span>
+          <span class="title-line title-neon">venden por ti 24/7</span>
         </h1>
 
         <p class="hero__lead">{{ heroLead }}</p>
