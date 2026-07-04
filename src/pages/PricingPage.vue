@@ -1,7 +1,21 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import RoiCalculatorSection from '../components/sections/RoiCalculatorSection.vue'
 import PricingSection from '../components/sections/PricingSection.vue'
 import ComparisonSection from '../components/sections/ComparisonSection.vue'
+
+gsap.registerPlugin(ScrollTrigger)
+
+onMounted(() => {
+  gsap.from('.page-hero h1', {
+    y: 30, autoAlpha: 0, duration: 0.8, ease: 'power3.out'
+  })
+  gsap.from('.page-hero__sub', {
+    y: 20, autoAlpha: 0, duration: 0.6, delay: 0.2, ease: 'power3.out'
+  })
+})
 </script>
 
 <template>

@@ -1,9 +1,22 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
 const missionCards = [
   { icon: '🎯', title: 'Misión', text: 'Convertir la IA en sistemas operativos reales para PYMES colombianas, no en promesas. Implementamos agentes que responden, venden, registran y hacen seguimiento.' },
   { icon: '🔭', title: 'Visión', text: 'Ser la agencia líder en automatización conversacional Meta para el mercado PYME latinoamericano, combinando tecnología de punta con cercanía humana.' },
   { icon: '✨', title: 'Valores', text: 'Transparencia en precios, human-in-the-loop donde importa, mejora continua mes a mes, y cero vendor lock-in.' }
 ]
+
+onMounted(() => {
+  gsap.from('.page-hero h1', { y: 30, autoAlpha: 0, duration: 0.8, ease: 'power3.out' })
+  gsap.from('.page-hero__sub', { y: 20, autoAlpha: 0, duration: 0.6, delay: 0.2, ease: 'power3.out' })
+  gsap.from('.about-card', { y: 40, autoAlpha: 0, duration: 0.6, stagger: 0.15, ease: 'power3.out', scrollTrigger: { trigger: '.about-grid', start: 'top 82%' } })
+  gsap.from('.stack-chip', { y: 20, autoAlpha: 0, duration: 0.4, stagger: 0.05, ease: 'power3.out', scrollTrigger: { trigger: '.stack-grid', start: 'top 82%' } })
+})
 </script>
 
 <template>
@@ -34,22 +47,20 @@ const missionCards = [
       <div class="stack-grid" data-reveal>
         <span class="stack-chip">Vue 3 + TypeScript</span>
         <span class="stack-chip">GSAP</span>
-        <span class="stack-chip">n8n</span>
+        <span class="stack-chip">Three.js</span>
         <span class="stack-chip">WhatsApp Business API</span>
         <span class="stack-chip">Meta Graph API</span>
-        <span class="stack-chip">Facebook Lead Ads</span>
         <span class="stack-chip">Instagram API</span>
+        <span class="stack-chip">DeepSeek AI</span>
         <span class="stack-chip">Vercel</span>
-        <span class="stack-chip">Hermes Agent</span>
-        <span class="stack-chip">HubSpot</span>
-        <span class="stack-chip">Google Sheets</span>
         <span class="stack-chip">Supabase</span>
-        <span class="stack-chip">PostgreSQL</span>
-        <span class="stack-chip">CSS + SCSS</span>
+        <span class="stack-chip">Redis</span>
+        <span class="stack-chip">Docker</span>
+        <span class="stack-chip">Cloudflare</span>
       </div>
     </section>
 
-    <!-- Demo destacada -->
+    <!-- Demo -->
     <section class="section">
       <div class="section__head" data-reveal>
         <p class="eyebrow">Demo sectorial</p>
@@ -69,9 +80,6 @@ const missionCards = [
             <div class="case-result"><strong>Equipo humano</strong><span>Escalamiento</span></div>
           </div>
         </article>
-      </div>
-      <div class="section-cta" data-reveal>
-        <RouterLink to="/casos" class="btn btn--primary">Ver más casos →</RouterLink>
       </div>
     </section>
 
