@@ -53,7 +53,7 @@ function onModelLoad(e: any) {
     
     <div class="model-wrapper" :class="{ loaded: isLoaded }">
       <model-viewer
-        src="/antaxia.glb"
+        src="/drone.glb"
         alt="Agenc-IA Robot Assistant"
         orientation="0deg 0deg 0deg"
         camera-controls
